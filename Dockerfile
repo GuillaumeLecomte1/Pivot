@@ -21,6 +21,13 @@ RUN docker-php-ext-install pdo pdo_mysql bcmath zip gd
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Create necessary directories
+RUN mkdir -p /var/log/supervisor \
+    && mkdir -p /etc/supervisor/conf.d \
+    && mkdir -p /var/www/html/storage/framework/sessions \
+    && mkdir -p /var/www/html/storage/framework/views \
+    && mkdir -p /var/www/html/storage/framework/cache
+
 # Copy application files
 COPY . .
 
