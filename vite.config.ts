@@ -23,7 +23,6 @@ export default defineConfig({
         },
     },
     server: {
-        https: true,
         host: 'pivot.guillaume-lcte.fr',
     },
 });
