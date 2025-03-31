@@ -58,13 +58,21 @@ VITE_PUSHER_APP_CLUSTER="\${PUSHER_APP_CLUSTER}"
 EOL
 
 # Mettre à jour le fichier .env avec les variables d'environnement de Dokploy
-env | grep -E '^(APP_|DB_|MAIL_|QUEUE_|SESSION_|CACHE_|REDIS_|VITE_)' | while read -r line; do
-    key=$(echo "$line" | cut -d= -f1)
-    value=$(echo "$line" | cut -d= -f2-)
-    if [ ! -z "$value" ]; then
-        sed -i "s|^$key=.*|$key=$value|g" .env
-    fi
-done
+if [ -n "$APP_URL" ]; then
+    sed -i "s|^APP_URL=.*|APP_URL=$APP_URL|g" .env
+fi
+
+if [ -n "$APP_ENV" ]; then
+    sed -i "s|^APP_ENV=.*|APP_ENV=$APP_ENV|g" .env
+fi
+
+if [ -n "$APP_DEBUG" ]; then
+    sed -i "s|^APP_DEBUG=.*|APP_DEBUG=$APP_DEBUG|g" .env
+fi
+
+if [ -n "$SESSION_DOMAIN" ]; then
+    sed -i "s|^SESSION_DOMAIN=.*|SESSION_DOMAIN=$SESSION_DOMAIN|g" .env
+fi
 
 # Generate app key if not set
 if [ -z "$(grep -E '^APP_KEY=' .env | grep -v '=$')" ]; then
