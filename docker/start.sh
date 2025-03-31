@@ -10,6 +10,10 @@ APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://pivot.guillaume-lcte.fr
 ASSET_URL=https://pivot.guillaume-lcte.fr
+FORCE_HTTPS=true
+SESSION_SECURE_COOKIE=true
+SESSION_SAME_SITE=lax
+SESSION_DOMAIN=.guillaume-lcte.fr
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
@@ -28,9 +32,6 @@ FILESYSTEM_DISK=local
 QUEUE_CONNECTION=sync
 SESSION_DRIVER=file
 SESSION_LIFETIME=120
-SESSION_SECURE_COOKIE=true
-SESSION_SAME_SITE=lax
-SESSION_DOMAIN=.guillaume-lcte.fr
 
 MEMCACHED_HOST=127.0.0.1
 
