@@ -4,6 +4,8 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { initializeTheme } from './hooks/use-appearance';
+
+// Import our Axios configuration
 import './axios';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -19,8 +21,6 @@ createInertiaApp({
     progress: {
         color: '#4B5563',
     },
-    // Force HTTPS for all Inertia requests
-    baseURL: 'https://pivot.guillaume-lcte.fr',
 });
 
 // This will set light / dark mode on load...
