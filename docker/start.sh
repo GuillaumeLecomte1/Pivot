@@ -13,7 +13,7 @@ ASSET_URL=https://pivot.guillaume-lcte.fr
 FORCE_HTTPS=true
 SESSION_SECURE_COOKIE=true
 SESSION_SAME_SITE=lax
-SESSION_DOMAIN=.guillaume-lcte.fr
+SESSION_DOMAIN=pivot.guillaume-lcte.fr
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null

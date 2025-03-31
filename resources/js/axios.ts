@@ -5,16 +5,18 @@ if (window.location.protocol === 'https:') {
     axios.defaults.baseURL = window.location.origin;
 }
 
-// Set CSRF token
-const csrfToken = document.head.querySelector('meta[name="csrf-token"]');
-if (csrfToken) {
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = (csrfToken as HTMLMetaElement).content;
+// Get the CSRF token from the meta tag
+const token = document.head.querySelector('meta[name="csrf-token"]');
+
+if (token) {
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = (token as HTMLMetaElement).content;
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
-// Enable credentials
+// Also add XSRF-TOKEN cookie to requests
 axios.defaults.withCredentials = true;
-
-// Set Accept header
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 axios.defaults.headers.common['Accept'] = 'application/json';
 
 export default axios; 
