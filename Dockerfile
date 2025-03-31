@@ -26,8 +26,7 @@ RUN mkdir -p /var/log/supervisor \
     && mkdir -p /etc/supervisor/conf.d \
     && mkdir -p /var/www/html/storage/framework/sessions \
     && mkdir -p /var/www/html/storage/framework/views \
-    && mkdir -p /var/www/html/storage/framework/cache \
-    && mkdir -p /etc/nginx/ssl/live/pivot.guillaume-lcte.fr
+    && mkdir -p /var/www/html/storage/framework/cache
 
 # Copy application files
 COPY . .
@@ -53,7 +52,7 @@ COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN chmod +x /var/www/html/docker/start.sh
 
 # Expose ports
-EXPOSE 80 4004
+EXPOSE 4004
 
 # Run start script
 CMD ["/var/www/html/docker/start.sh"] 
