@@ -22,4 +22,8 @@ export default defineConfig({
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
         },
     },
+    server: {
+        https: true,
+        host: 'pivot.guillaume-lcte.fr',
+    },
 });

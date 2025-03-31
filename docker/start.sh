@@ -9,6 +9,7 @@ APP_NAME=Pivot
 APP_ENV=production
 APP_DEBUG=false
 APP_URL=https://pivot.guillaume-lcte.fr
+ASSET_URL=https://pivot.guillaume-lcte.fr
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
@@ -45,6 +46,11 @@ MAIL_FROM_NAME="\${APP_NAME}"
 
 VITE_APP_NAME="\${APP_NAME}"
 VITE_APP_URL="\${APP_URL}"
+VITE_PUSHER_APP_KEY="\${PUSHER_APP_KEY}"
+VITE_PUSHER_HOST="\${PUSHER_HOST}"
+VITE_PUSHER_PORT="\${PUSHER_PORT}"
+VITE_PUSHER_SCHEME="\${PUSHER_SCHEME}"
+VITE_PUSHER_APP_CLUSTER="\${PUSHER_APP_CLUSTER}"
 EOL
 
 # Mettre à jour le fichier .env avec les variables d'environnement de Dokploy
