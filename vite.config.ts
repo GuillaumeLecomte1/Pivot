@@ -35,7 +35,6 @@ export default defineConfig({
     },
     esbuild: {
         jsx: 'automatic',
-        jsxInject: `import React from 'react'`,
     },
     resolve: {
         alias: {
