@@ -74,10 +74,8 @@ if [ -n "$SESSION_DOMAIN" ]; then
     sed -i "s|^SESSION_DOMAIN=.*|SESSION_DOMAIN=$SESSION_DOMAIN|g" .env
 fi
 
-# Generate app key if not set
-if [ -z "$(grep -E '^APP_KEY=' .env | grep -v '=$')" ]; then
-    php artisan key:generate
-fi
+# Generate app key
+php artisan key:generate --force
 
 # Create supervisor log directory if it doesn't exist
 mkdir -p /var/log/supervisor
