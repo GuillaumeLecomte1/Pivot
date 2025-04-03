@@ -4,6 +4,27 @@ import { Head, Link, usePage } from '@inertiajs/react';
 export default function HomePage() {
     const { auth } = usePage<SharedData>().props;
 
+    const LogoItem = () => (
+        <div className="bg-white p-3 sm:p-4 rounded-md flex items-center justify-center h-14 sm:h-16 shadow-sm">
+            <img 
+                src="/images/logoPivot.png" 
+                alt="Logo Pivot" 
+                className="h-6 sm:h-8 w-auto"
+                onError={(e) => {
+                    console.error("Erreur de chargement du logo");
+                    const imgElement = e.currentTarget;
+                    imgElement.style.display = 'none';
+                    const textFallback = document.createElement('span');
+                    textFallback.className = 'text-gray-300 font-bold text-sm sm:text-base';
+                    textFallback.textContent = 'LOGO';
+                    if (imgElement.parentElement) {
+                        imgElement.parentElement.appendChild(textFallback);
+                    }
+                }}
+            />
+        </div>
+    );
+
     return (
         <>
             <Head title="Pivot - La marketplace des ressourceries françaises">
@@ -12,129 +33,131 @@ export default function HomePage() {
             </Head>
             <div className="min-h-screen bg-[#F7F7F7] text-gray-900">
                 {/* Header/Navigation */}
-                <header className="container mx-auto px-12 py-6 flex items-center justify-between ">
-                    {/* Logo */}
-                    <div className="flex items-center">
-                        <Link href="/" className="flex items-center">
-                            <img 
-                                src="/images/logoPivot.png" 
-                                alt="Logo Pivot" 
-                                className="h-8"
-                                onError={(e) => {
-                                    console.error("Erreur de chargement du logo");
-                                    const imgElement = e.currentTarget;
-                                    imgElement.style.display = 'none';
-                                    const textFallback = document.createElement('span');
-                                    textFallback.className = 'text-[#6ED47C] font-bold text-3xl';
-                                    textFallback.textContent = 'pivot';
-                                    if (imgElement.parentElement) {
-                                        imgElement.parentElement.appendChild(textFallback);
-                                    }
-                                }}
-                            />
-                        </Link>
-                    </div>
-                    
-                    {/* Navigation */}
-                    <nav className="hidden md:flex items-center space-x-8">
-                        <Link href="/" className="text-gray-800 hover:text-gray-600">
-                            Accueil
-                        </Link>
-                        <Link href="/categorie" className="text-gray-800 hover:text-gray-600">
-                            Catégorie
-                        </Link>
-                        <Link href="/ressourcerie" className="text-gray-800 hover:text-gray-600">
-                            Ressourcerie
-                        </Link>
-                        <Link href="/notre-histoire" className="text-gray-800 hover:text-gray-600">
-                            Notre histoire
-                        </Link>
-                    </nav>
-                    
-                    {/* Action buttons */}
-                    <div className="flex items-center space-x-6">
-                        <Link href="/pivot-pro" className="px-4 py-2 bg-black text-white rounded">
-                            Pivot Pro
-                        </Link>
+                <header className="container mx-auto px-4 sm:px-6 lg:px-12 py-6">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
+                        {/* Logo */}
+                        <div className="flex items-center justify-between">
+                            <Link href="/" className="flex items-center">
+                                <img 
+                                    src="/images/logoPivot.png" 
+                                    alt="Logo Pivot" 
+                                    className="h-8"
+                                    onError={(e) => {
+                                        console.error("Erreur de chargement du logo");
+                                        const imgElement = e.currentTarget;
+                                        imgElement.style.display = 'none';
+                                        const textFallback = document.createElement('span');
+                                        textFallback.className = 'text-[#6ED47C] font-bold text-3xl';
+                                        textFallback.textContent = 'pivot';
+                                        if (imgElement.parentElement) {
+                                            imgElement.parentElement.appendChild(textFallback);
+                                        }
+                                    }}
+                                />
+                            </Link>
+                            {/* Mobile menu button */}
+                            <button className="md:hidden p-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                        </div>
                         
-                        {/* User nav icons */}
-                        <div className="flex items-center space-x-4">
-                            <Link href="/angers" className="flex items-center text-gray-700">
-                                <span>Angers</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                                </svg>
+                        {/* Navigation */}
+                        <nav className="hidden md:flex items-center space-x-8">
+                            <Link href="/" className="text-gray-800 hover:text-gray-600">Accueil</Link>
+                            <Link href="/categorie" className="text-gray-800 hover:text-gray-600">Catégorie</Link>
+                            <Link href="/ressourcerie" className="text-gray-800 hover:text-gray-600">Ressourcerie</Link>
+                            <Link href="/notre-histoire" className="text-gray-800 hover:text-gray-600">Notre histoire</Link>
+                        </nav>
+                        
+                        {/* Action buttons */}
+                        <div className="flex items-center justify-between md:justify-end space-x-6">
+                            <Link href="/pivot-pro" className="px-4 py-2 bg-black text-white rounded text-sm md:text-base">
+                                Pivot Pro
                             </Link>
-                            <Link href="/favoris">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                            </Link>
-                            <Link href="/panier">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                            </Link>
-                            {auth.user ? (
-                                <Link href="/dashboard">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            
+                            {/* User nav icons */}
+                            <div className="flex items-center space-x-4">
+                                <Link href="/angers" className="hidden md:flex items-center text-gray-700">
+                                    <span>Angers</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                     </svg>
                                 </Link>
-                            ) : (
-                                <Link 
-                                    href="/login" 
-                                    className="px-4 py-2 bg-[#6ED47C] text-white rounded hover:bg-[#5CBD6A] transition-colors"
-                                >
-                                    Se connecter
-                                </Link>
-                            )}
+                                <div className="flex space-x-4">
+                                    <Link href="/favoris">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                        </svg>
+                                    </Link>
+                                    <Link href="/panier">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                    </Link>
+                                    {auth.user ? (
+                                        <Link href="/dashboard">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg>
+                                        </Link>
+                                    ) : (
+                                        <Link 
+                                            href="/login" 
+                                            className="px-4 py-2 bg-[#6ED47C] text-white rounded hover:bg-[#5CBD6A] transition-colors text-sm md:text-base"
+                                        >
+                                            Se connecter
+                                        </Link>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </header>
 
-                {/* Hero section - gray background */}
-                <section className="py-12">
-                    <div className="container mx-auto px-12">
-                        <div className="bg-[#E7E7E7] rounded-3xl p-12">
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                {/* Hero section */}
+                <section className="py-8 md:py-12">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+                        <div className="bg-[#E7E7E7] rounded-3xl p-6 md:p-12">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
                                 <div className="space-y-6">
-                                    <h1 className="text-5xl font-bold leading-tight">
+                                    <h1 className="text-4xl md:text-5xl font-bold leading-tight">
                                         La marketplace<br />
                                         <span className="text-[#FF7961]">des ressourceries</span><br />
                                         françaises
                                     </h1>
-                                    <p className="text-lg">
+                                    <p className="text-base md:text-lg">
                                         Donner une seconde vie aux produits dénichés, ça vaut le coût ! Pivot, est 
                                         la première plateforme de <span className="text-[#6ED47C] font-medium">click-and-collect</span> dédiée aux ressourceries en 
                                         France !
                                     </p>
                                     
-                                    <div className="flex border-t border-b border-gray-300 py-5">
-                                        <div className="pr-12 border-r border-gray-300">
-                                            <div className="text-3xl font-bold text-[#6ED47C]">1050+</div>
+                                    <div className="flex flex-col sm:flex-row border-t border-b border-gray-300 py-5 space-y-4 sm:space-y-0">
+                                        <div className="sm:pr-12 sm:border-r border-gray-300">
+                                            <div className="text-2xl md:text-3xl font-bold text-[#6ED47C]">1050+</div>
                                             <div className="text-sm">Produits dénichés</div>
                                         </div>
-                                        <div className="pl-12">
-                                            <div className="text-3xl font-bold text-[#6ED47C]">100+</div>
+                                        <div className="sm:pl-12">
+                                            <div className="text-2xl md:text-3xl font-bold text-[#6ED47C]">100+</div>
                                             <div className="text-sm">Ressourceries</div>
                                         </div>
                                     </div>
                                     
                                     {/* Search box */}
-                                    <div className="flex w-full max-w-md bg-white border rounded-lg overflow-hidden">
+                                    <div className="flex w-full max-w-md bg-white rounded-lg overflow-hidden border border-gray-300">
                                         <input 
                                             type="text" 
                                             placeholder="Que recherchez-vous ?" 
                                             className="flex-1 px-4 py-3 focus:outline-none"
                                         />
-                                        <div className="px-3 py-3 border-l flex items-center bg-white">
+                                        <div className="px-3 py-3 border-l border-gray-300 hidden sm:flex items-center">
                                             <span>Angers</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
                                                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                                             </svg>
                                         </div>
-                                        <button className="bg-white px-4">
+                                        <button className="px-4 border-l border-gray-300">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                             </svg>
@@ -143,8 +166,8 @@ export default function HomePage() {
                                 </div>
                                 
                                 {/* Hero image */}
-                                <div className="border-4 border-[#6ED47C] rounded-lg overflow-hidden">
-                                    <div className="bg-yellow-100 h-[400px] flex items-center justify-center">
+                                <div className="border-4 border-[#6ED47C] rounded-lg overflow-hidden mt-6 lg:mt-0 h-[400px] lg:h-[500px]">
+                                    <div className="bg-yellow-100 w-full h-full">
                                         <img 
                                             src="/images/heroes/HeroAccueilImage.png" 
                                             alt="Objets vintage de seconde main" 
@@ -167,9 +190,11 @@ export default function HomePage() {
                         </div>
                     </div>
                 </section>
- {/* Ressourceries section */}
-                <section className="py-12 ">
-                    <div className="container mx-auto px-12">
+
+
+                {/* Ressourceries section */}
+                <section className="py-12">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-12">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                             <div>
                                 <h2 className="text-2xl font-bold">Les ressourceries digitalisées</h2>
@@ -183,37 +208,33 @@ export default function HomePage() {
                             </button>
                         </div>
                         
-                        {/* Logo grid */}
-                        <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-9 gap-4 mt-8">
-                            {[...Array(9)].map((_, i) => (
-                                <div key={i} className="bg-white p-4 rounded-md flex items-center justify-center h-16 shadow-sm">
-                                    <img 
-                                        src="/images/logoPivot.png" 
-                                        alt="Logo Pivot" 
-                                        className="h-8 w-auto"
-                                        onError={(e) => {
-                                            console.error("Erreur de chargement du logo");
-                                            const imgElement = e.currentTarget;
-                                            imgElement.style.display = 'none';
-                                            const textFallback = document.createElement('span');
-                                            textFallback.className = 'text-gray-300 font-bold';
-                                            textFallback.textContent = 'LOGO';
-                                            if (imgElement.parentElement) {
-                                                imgElement.parentElement.appendChild(textFallback);
-                                            }
-                                        }}
-                                    />
+                        {/* Logo line */}
+                        <div className="mt-8">
+                            <div className="flex justify-between items-center">
+                                <div className="hidden lg:block">
+                                    <LogoItem />
                                 </div>
-                            ))}
+                                <div className="hidden md:block">
+                                    <LogoItem />
+                                </div>
+                                <div className="hidden sm:block">
+                                    <LogoItem />
+                                </div>
+                                <LogoItem />
+                                <LogoItem />
+                                <LogoItem />
+                            </div>
                         </div>
                     </div>
                 </section>
                 {/* Nos coups de coeur section */}
-                <section className="py-12">
-                    <div className="container mx-auto px-12">
-                        <div className="flex gap-12">
+                
+                {/* Nos coups de coeur section */}
+                <section className="py-8 md:py-12">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+                        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
                             {/* Left side - Text content */}
-                            <div className="w-1/4">
+                            <div className="w-full lg:w-1/4">
                                 <h2 className="text-3xl font-bold">Nos coups<br />de coeur</h2>
                                 <p className="text-gray-700 mt-2">
                                     Allongez la durée de vie des objets tout en faisant croître de nouvelles interactions !
@@ -228,7 +249,7 @@ export default function HomePage() {
                             </div>
                             
                             {/* Right side - Product grid */}
-                            <div className="w-3/4 grid grid-cols-3 gap-12">
+                            <div className="w-full lg:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
                                 {/* Produit 1 */}
                                 <div className="bg-white rounded-lg overflow-hidden border border-gray-100">
                                     <div className="relative">
@@ -400,8 +421,8 @@ export default function HomePage() {
                 </section>
 
                 {/* Les derniers arrivages section */}
-                <section className="py-12 ">
-                    <div className="container mx-auto px-12">
+                <section className="py-12">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-12">
                         <div className="flex items-center justify-between mb-12">
                             <div>
                                 <h2 className="text-3xl font-bold">Les derniers arrivages</h2>
@@ -415,9 +436,46 @@ export default function HomePage() {
                             </Link>
                         </div>
                         
-                        <div className="grid grid-cols-2 gap-12">
-                            {/* Première colonne avec les 4 articles en grille 2x2 */}
-                            <div className="grid grid-cols-2 gap-12">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
+                            {/* Pluie de couleurs card - order-first sur mobile, order-last sur desktop */}
+                            <div className="rounded-lg overflow-hidden relative h-[400px] lg:h-full order-first lg:order-last">
+                                <img 
+                                    src="/images/heroes/plusDeCouleur.png" 
+                                    alt="Formes géométriques colorées en 3D" 
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                    onError={(e) => {
+                                        console.error("Erreur de chargement de l'image de fond");
+                                        const imgElement = e.currentTarget;
+                                        imgElement.style.display = 'none';
+                                        const parentElement = imgElement.parentElement;
+                                        if (parentElement && parentElement instanceof HTMLElement) {
+                                            parentElement.style.background = 'linear-gradient(to bottom right, var(--tw-gradient-from), var(--tw-gradient-to))';
+                                            parentElement.style.setProperty('--tw-gradient-from', '#fef9c3');
+                                            parentElement.style.setProperty('--tw-gradient-to', '#dcfce7');
+                                        }
+                                    }}
+                                />
+                                
+                                {/* Contenu centré avec fond blanc */}
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="w-full max-w-[280px] bg-white rounded-lg p-6 mx-4">
+                                        <h3 className="text-2xl font-bold mb-2">Pluie de couleurs</h3>
+                                        <p className="text-[#6ED47C] text-sm mb-6">Découvrez nos produits colorés déstockés</p>
+                                        <Link 
+                                            href="/selection" 
+                                            className="inline-flex items-center px-4 py-2 bg-[#13111A] text-white rounded-md text-sm"
+                                        >
+                                            voir la sélection
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Première colonne avec les 4 articles en grille - order-last sur mobile, order-first sur desktop */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-12 order-last lg:order-first">
                                 {/* Article 1 */}
                                 <div className="bg-white rounded-lg overflow-hidden border border-gray-100">
                                     <div className="relative">
@@ -515,44 +573,6 @@ export default function HomePage() {
                                         <div className="uppercase text-xs font-semibold text-[#6ED47C] mt-1">MOBILIER</div>
                                         <h3 className="font-semibold text-gray-900 mt-1">Chaise</h3>
                                         <div className="font-bold mt-2">15 €</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Pluie de couleurs card */}
-                            <div className="rounded-lg overflow-hidden relative h-full">
-                                {/* Image de fond */}
-                                <img 
-                                    src="/images/heroes/plusDeCouleur.png" 
-                                    alt="Formes géométriques colorées en 3D" 
-                                    className="absolute inset-0 w-full h-full object-cover"
-                                    onError={(e) => {
-                                        console.error("Erreur de chargement de l'image de fond");
-                                        const imgElement = e.currentTarget;
-                                        imgElement.style.display = 'none';
-                                        const parentElement = imgElement.parentElement;
-                                        if (parentElement && parentElement instanceof HTMLElement) {
-                                            parentElement.style.background = 'linear-gradient(to bottom right, var(--tw-gradient-from), var(--tw-gradient-to))';
-                                            parentElement.style.setProperty('--tw-gradient-from', '#fef9c3');
-                                            parentElement.style.setProperty('--tw-gradient-to', '#dcfce7');
-                                        }
-                                    }}
-                                />
-                                
-                                {/* Contenu centré avec fond blanc */}
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="w-full max-w-[280px] bg-white rounded-lg p-6 mx-4">
-                                        <h3 className="text-2xl font-bold mb-2">Pluie de couleurs</h3>
-                                        <p className="text-[#6ED47C] text-sm mb-6">Découvrez nos produits colorés déstockés</p>
-                                        <Link 
-                                            href="/selection" 
-                                            className="inline-flex items-center px-4 py-2 bg-[#13111A] text-white rounded-md text-sm"
-                                        >
-                                            voir la sélection
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                                            </svg>
-                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -737,29 +757,31 @@ export default function HomePage() {
                 </section>
 
                 {/* La sélection du mois section */}
-                <section className="py-12 bg-[#E0E1FF]">
-                    <div className="container mx-auto px-12">
-                        <div className="flex flex-col md:flex-row items-center gap-12">
-                            <div className="text-white text-8xl">
-                                ⟳
-                            </div>
-                            <div className="flex-1 text-center md:text-left">
-                                <h2 className="text-3xl font-bold">La sélection du mois</h2>
-                                <p className="text-gray-700 mt-2">
-                                    Pivot rassemble l'ensemble de l'actualité de chaque ressourceries.<br />
-                                    Inscrivez-vous à notre newsletter pour découvrir les pépites de nos boutiques.
-                                </p>
-                            </div>
-                            <div className="w-full max-w-md">
-                                <div className="flex">
-                                    <input 
-                                        type="email"
-                                        placeholder="Votre adresse mail"
-                                        className="flex-1 px-4 py-3 rounded-l-md focus:outline-none border-t border-b border-l border-gray-300"
-                                    />
-                                    <button className="bg-gray-100 px-4 py-3 border border-gray-300 rounded-r-md">
-                                        OK
-                                    </button>
+                <section className="py-12">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+                        <div className="bg-[#E0E1FF] rounded-3xl p-8 sm:p-12">
+                            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                                <div className="text-white text-8xl">
+                                    ⟳
+                                </div>
+                                <div className="flex-1 text-center md:text-left">
+                                    <h2 className="text-3xl font-bold text-gray-900">La sélection du mois</h2>
+                                    <p className="text-gray-700 mt-4 max-w-2xl">
+                                        Pivot rassemble l'ensemble de l'actualité de chaque ressourceries.<br />
+                                        Inscrivez-vous à notre newsletter pour découvrir les pépites de nos boutiques.
+                                    </p>
+                                </div>
+                                <div className="w-full max-w-md">
+                                    <div className="flex">
+                                        <input 
+                                            type="email"
+                                            placeholder="Votre adresse mail"
+                                            className="flex-1 px-6 py-3 bg-white rounded-l-lg focus:outline-none border-0"
+                                        />
+                                        <button className="bg-gray-100 px-6 py-3 rounded-r-lg font-medium">
+                                            OK
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
