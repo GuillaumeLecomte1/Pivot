@@ -4,6 +4,9 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'node:path';
 
+// Détecte si on est en environnement de production 
+const isProd = process.env.NODE_ENV === 'production';
+
 export default defineConfig({
     plugins: [
         laravel({
@@ -17,17 +20,9 @@ export default defineConfig({
         react(),
         tailwindcss(),
     ],
-    css: {
-        postcss: {
-            plugins: [
-                tailwindcss,
-            ],
-        },
-    },
-    server: {
-        host: 'pivot.guillaume-lcte.fr',
-        https: false,
-    },
+    server: isProd 
+        ? { host: 'pivot.guillaume-lcte.fr' } 
+        : { host: 'localhost', port: 5173 },
     build: {
         target: 'esnext',
         outDir: 'public/build',

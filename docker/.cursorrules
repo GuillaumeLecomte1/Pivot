@@ -1,0 +1,106 @@
+# .cursorrules pour projet Laravel 12 + React + shadcn/ui
+
+# =============================================
+# Règles générales de structure
+# =============================================
+*.php -> Laravel
+resources/js/**/*.{js,jsx,ts,tsx} -> React
+resources/css/**/*.css -> TailwindCSS
+tailwind.config.js -> TailwindConfig
+vite.config.js -> ViteConfig
+resources/views/**/*.blade.php -> Blade
+
+# =============================================
+# Règles spécifiques Laravel 12
+# =============================================
+app/Models/*.php -> LaravelModel
+app/Http/Controllers/*.php -> LaravelController
+app/Http/Requests/*.php -> LaravelFormRequest
+app/Providers/*.php -> LaravelProvider
+database/migrations/*.php -> LaravelMigration
+routes/*.php -> LaravelRoutes
+tests/*.php -> LaravelTests
+
+# =============================================
+# Règles spécifiques React + shadcn/ui
+# =============================================
+resources/js/components/ui/*.{js,jsx,ts,tsx} -> ShadcnComponent
+resources/js/components/*.{js,jsx,ts,tsx} -> ReactComponent
+resources/js/layouts/*.{js,jsx,ts,tsx} -> ReactLayout
+resources/js/pages/*.{js,jsx,ts,tsx} -> ReactPage
+resources/js/hooks/*.{js,jsx,ts,tsx} -> ReactHook
+resources/js/lib/*.{js,jsx,ts,tsx} -> ReactLib
+resources/js/providers/*.{js,jsx,ts,tsx} -> ReactProvider
+resources/js/types/*.{js,jsx,ts,tsx} -> TypeScriptTypes
+
+# =============================================
+# Règles d'optimisation des imports
+# =============================================
+@/components/* -> AutoImportComponents
+@/lib/* -> AutoImportLib
+@/hooks/* -> AutoImportHooks
+react -> ReactImport
+next/* -> NextImport (si utilisé)
+@radix-ui/* -> RadixImport
+lucide-react -> LucideImport
+axios -> AxiosImport
+@headlessui/react -> HeadlessUiImport
+
+# =============================================
+# Règles de styles
+# =============================================
+*.css -> TailwindCSS
+className="*" -> TailwindClass
+@apply -> TailwindApply
+var(--*) -> CSSVariable
+<h1> -> Heading
+<p> -> Paragraph
+<div className="container"> -> Container
+
+# =============================================
+# Règles de qualité de code
+# =============================================
+TODO: -> TodoWarning
+FIXME: -> FixmeWarning
+NOTE: -> NoteWarning
+console.log -> ConsoleWarning
+alert( -> AlertWarning
+any -> TypeScriptAnyWarning
+
+# =============================================
+# Règles de sécurité
+# =============================================
+process.env -> EnvWarning
+localStorage -> StorageWarning
+eval( -> EvalWarning
+innerHTML -> InnerHtmlWarning
+
+# =============================================
+# Règles de performance
+# =============================================
+useEffect(*, []) -> UseEffectWarning
+useMemo -> UseMemoNote
+useCallback -> UseCallbackNote
+React.memo -> ReactMemoNote
+
+# =============================================
+# Règles spécifiques shadcn/ui
+# =============================================
+<Button -> ShadcnButton
+<Card -> ShadcnCard
+<Dropdown -> ShadcnDropdown
+<Input -> ShadcnInput
+<Label -> ShadcnLabel
+<Table -> ShadcnTable
+variant=* -> ShadcnVariant
+size=* -> ShadcnSize
+
+# =============================================
+# Règles de formatage
+# =============================================
+" => PrettierQuote
+' => PrettierQuote
+; => PrettierSemicolon
+,\n => PrettierTrailingComma
+\t => PrettierIndent
+\n\n\n => MultipleNewlines
