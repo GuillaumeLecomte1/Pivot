@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Copier le fichier .env.production vers .env
-cp .env.production .env
-
 # Mettre à jour le fichier .env avec les variables d'environnement de Dokploy
 if [ -n "$APP_URL" ]; then
     sed -i "s|^APP_URL=.*|APP_URL=$APP_URL|g" .env

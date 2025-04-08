@@ -31,9 +31,6 @@ RUN mkdir -p /var/log/supervisor \
 # Copy application files
 COPY . .
 
-# Copy .env.production to .env for build
-COPY .env.production .env
-
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
