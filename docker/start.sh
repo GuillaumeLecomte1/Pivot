@@ -1,22 +1,5 @@
 #!/bin/sh
 
-# Mettre à jour le fichier .env avec les variables d'environnement de Dokploy
-if [ -n "$APP_URL" ]; then
-    sed -i "s|^APP_URL=.*|APP_URL=$APP_URL|g" .env
-fi
-
-if [ -n "$APP_ENV" ]; then
-    sed -i "s|^APP_ENV=.*|APP_ENV=$APP_ENV|g" .env
-fi
-
-if [ -n "$APP_DEBUG" ]; then
-    sed -i "s|^APP_DEBUG=.*|APP_DEBUG=$APP_DEBUG|g" .env
-fi
-
-if [ -n "$SESSION_DOMAIN" ]; then
-    sed -i "s|^SESSION_DOMAIN=.*|SESSION_DOMAIN=$SESSION_DOMAIN|g" .env
-fi
-
 # Create supervisor log directory if it doesn't exist
 mkdir -p /var/log/supervisor
 
