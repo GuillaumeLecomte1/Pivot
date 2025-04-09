@@ -38,6 +38,21 @@ RUN mkdir -p /var/log/supervisor \
 # Copy application files
 COPY . .
 
+# Create a minimal .env file
+RUN echo "APP_NAME=Pivot\n\
+APP_ENV=production\n\
+APP_KEY=\n\
+APP_DEBUG=false\n\
+APP_URL=https://pivot.guillaume-lcte.fr\n\
+LOG_CHANNEL=stack\n\
+DB_CONNECTION=mysql\n\
+BROADCAST_DRIVER=log\n\
+CACHE_DRIVER=file\n\
+FILESYSTEM_DISK=local\n\
+QUEUE_CONNECTION=sync\n\
+SESSION_DRIVER=file\n\
+SESSION_LIFETIME=120" > .env
+
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
