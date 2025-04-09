@@ -1,18 +1,21 @@
 #!/bin/sh
 
 # Update .env with Dokploy environment variables
-env | while IFS='=' read -r key value; do
+while IFS='=' read -r key value; do
+    # Skip empty lines and comments
+    [[ -z "$key" || "$key" =~ ^# ]] && continue
+    
+    # Remove any leading/trailing whitespace
+    key=$(echo "$key" | tr -d '[:space:]')
+    value=$(echo "$value" | tr -d '[:space:]')
+    
     if [ -n "$value" ]; then
-        # Escape special characters in the value
-        escaped_value=$(echo "$value" | sed 's/[\/&]/\\&/g')
-        # Update or append the environment variable
-        if grep -q "^${key}=" .env; then
-            sed -i "s/^${key}=.*/${key}=${escaped_value}/" .env
-        else
-            echo "${key}=${value}" >> .env
-        fi
+        # Remove any existing line with this key
+        sed -i "/^${key}=/d" .env
+        # Append the new key-value pair
+        echo "${key}=${value}" >> .env
     fi
-done
+done < <(env)
 
 # Enable PHP error logging
 echo "

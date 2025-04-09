@@ -39,19 +39,20 @@ RUN mkdir -p /var/log/supervisor \
 COPY . .
 
 # Create a minimal .env file
-RUN echo "APP_NAME=Pivot\n\
-APP_ENV=production\n\
-APP_KEY=\n\
-APP_DEBUG=false\n\
-APP_URL=https://pivot.guillaume-lcte.fr\n\
-LOG_CHANNEL=stack\n\
-DB_CONNECTION=mysql\n\
-BROADCAST_DRIVER=log\n\
-CACHE_DRIVER=file\n\
-FILESYSTEM_DISK=local\n\
-QUEUE_CONNECTION=sync\n\
-SESSION_DRIVER=file\n\
-SESSION_LIFETIME=120" > .env
+RUN printf '%s\n' \
+    'APP_NAME=Pivot' \
+    'APP_ENV=production' \
+    'APP_KEY=' \
+    'APP_DEBUG=false' \
+    'APP_URL=https://pivot.guillaume-lcte.fr' \
+    'LOG_CHANNEL=stack' \
+    'DB_CONNECTION=mysql' \
+    'BROADCAST_DRIVER=log' \
+    'CACHE_DRIVER=file' \
+    'FILESYSTEM_DISK=local' \
+    'QUEUE_CONNECTION=sync' \
+    'SESSION_DRIVER=file' \
+    'SESSION_LIFETIME=120' > .env
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
