@@ -1,5 +1,12 @@
 FROM php:8.2-fpm-alpine
 
+# Ajouter les labels Traefik
+LABEL traefik.enable=true
+LABEL traefik.http.routers.pivot-awlyhs.rule=Host(`pivot.guillaume-lcte.fr`)
+LABEL traefik.http.routers.pivot-awlyhs.entrypoints=websecure
+LABEL traefik.http.routers.pivot-awlyhs.tls=true
+LABEL traefik.http.services.pivot-awlyhs.loadbalancer.server.port=4004
+
 WORKDIR /var/www/html
 
 # Install dependencies
