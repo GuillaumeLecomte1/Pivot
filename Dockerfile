@@ -6,6 +6,7 @@ LABEL traefik.http.routers.pivot-awlyhs.rule=Host(`pivot.guillaume-lcte.fr`)
 LABEL traefik.http.routers.pivot-awlyhs.entrypoints=websecure
 LABEL traefik.http.routers.pivot-awlyhs.tls=true
 LABEL traefik.http.services.pivot-awlyhs.loadbalancer.server.port=4004
+LABEL traefik.http.services.pivot-awlyhs.loadbalancer.server.scheme=http
 
 WORKDIR /var/www/html
 
