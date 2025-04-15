@@ -38,31 +38,12 @@ RUN mkdir -p /var/log/supervisor \
 # Copy application files
 COPY . .
 
-# Create a minimal .env file with a default APP_KEY
-RUN printf '%s\n' \
-    'APP_NAME=Pivot' \
-    'APP_ENV=production' \
-    'APP_KEY=base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' \
-    'APP_DEBUG=false' \
-    'APP_URL=https://pivot.guillaume-lcte.fr' \
-    'LOG_CHANNEL=stack' \
-    'DB_CONNECTION=mysql' \
-    'BROADCAST_DRIVER=log' \
-    'CACHE_DRIVER=file' \
-    'FILESYSTEM_DISK=local' \
-    'QUEUE_CONNECTION=sync' \
-    'SESSION_DRIVER=file' \
-    'SESSION_LIFETIME=120' > .env
-
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
-
-# Generate application key
-RUN php artisan key:generate --force
 
 # Copy Nginx config
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf

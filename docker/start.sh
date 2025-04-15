@@ -38,26 +38,6 @@ chown -R www-data:www-data /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage
 chmod -R 775 /var/www/html/bootstrap/cache
 
-# Generate app key first
-php artisan key:generate --force --no-interaction
-
-# Update .env with Dokploy environment variables
-while IFS='=' read -r key value; do
-    # Skip empty lines, comments and APP_KEY
-    [[ -z "$key" || "$key" =~ ^# || "$key" == "APP_KEY" ]] && continue
-    
-    # Remove any leading/trailing whitespace
-    key=$(echo "$key" | tr -d '[:space:]')
-    value=$(echo "$value" | tr -d '[:space:]')
-    
-    if [ -n "$value" ]; then
-        # Remove any existing line with this key
-        sed -i "/^${key}=/d" .env
-        # Append the new key-value pair
-        echo "${key}=${value}" >> .env
-    fi
-done < <(env)
-
 # Run migrations
 php artisan migrate --force
 
