@@ -62,12 +62,12 @@ app:
 
   labels:
     - "traefik.enable=true"
-    - "traefik.http.routers.pivot-awlyhs.entrypoints=websecure"
-    - "traefik.http.routers.pivot-awlyhs.rule=Host(`pivot.guillaume-lcte.fr`)"
-    - "traefik.http.routers.pivot-awlyhs.tls=true"
-    - "traefik.http.services.pivot-awlyhs.loadbalancer.server.port=4004"
-    - "traefik.http.services.pivot-awlyhs.loadbalancer.server.scheme=http"
-    - "traefik.http.routers.pivot-awlyhs.middlewares=redirect-https"
+    - "traefik.http.routers.pivot.entrypoints=websecure"
+    - "traefik.http.routers.pivot.rule=Host(`pivot.guillaume-lcte.fr`)"
+    - "traefik.http.routers.pivot.tls=true"
+    - "traefik.http.services.pivot.loadbalancer.server.port=4004"
+    - "traefik.http.services.pivot.loadbalancer.server.scheme=http"
+    - "traefik.http.routers.pivot.middlewares=redirect-https"
     - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
     - "traefik.http.middlewares.redirect-https.redirectscheme.permanent=true"
 
