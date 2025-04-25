@@ -21,7 +21,7 @@ chmod 777 /var/log/php-fpm/error.log
 # Create supervisor log directory if it doesn't exist
 mkdir -p /var/log/supervisor
 
-# Set proper ownership
+# Set proper ownership for all application files
 chown -R www-data:www-data /var/www/html
 chmod -R 755 /var/www/html
 
@@ -31,25 +31,36 @@ mkdir -p /var/www/html/storage/framework/views
 mkdir -p /var/www/html/storage/framework/cache
 mkdir -p /var/www/html/storage/logs
 touch /var/www/html/storage/logs/laravel.log
+chmod 777 /var/www/html/storage/logs/laravel.log
 
-# Set storage permissions
+# Set storage permissions with correct group and permissions
 chown -R www-data:www-data /var/www/html/storage
 chown -R www-data:www-data /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage
 chmod -R 775 /var/www/html/bootstrap/cache
 
+# Verify .env file exists and key is set
+php artisan key:generate --force
+
 # Run migrations
 php artisan migrate --force
 
-# Clear and cache configuration
+# Clear all caches first
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 php artisan cache:clear
+php artisan optimize:clear
 
+# Then cache configuration
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+php artisan optimize
+
+# Output environment info for debugging
+echo "Environment: $(php artisan env)"
+echo "Base URL: $(php artisan --no-ansi tinker --execute="echo config('app.url');")"
 
 # Start supervisord
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf 
