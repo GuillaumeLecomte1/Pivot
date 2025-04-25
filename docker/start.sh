@@ -63,6 +63,10 @@ mkdir -p /var/www/html/storage/framework/sessions
 chmod -R 777 /var/www/html/storage/framework
 chown -R www-data:www-data /var/www/html/storage/framework
 
+# Vérifier la syntaxe des fichiers PHP
+echo "Vérification de la syntaxe des fichiers de configuration PHP..."
+php -l /usr/local/etc/php/conf.d/zz-custom.ini || echo "Erreur de syntaxe dans zz-custom.ini mais on continue"
+
 # Clear all caches first
 php artisan config:clear
 php artisan route:clear
@@ -85,6 +89,19 @@ su -s /bin/sh -c "php artisan optimize" www-data
 # Output environment info for debugging
 echo "Environment: $(php artisan env)"
 echo "Base URL: $(php artisan --no-ansi tinker --execute="echo config('app.url');")"
+
+# Vérifier que l'application Laravel est correctement initialisée
+echo "Tentative de chargement d'une route Laravel..."
+if php -r "
+    include '/var/www/html/vendor/autoload.php';
+    \$app = require_once '/var/www/html/bootstrap/app.php';
+    \$kernel = \$app->make(Illuminate\Contracts\Http\Kernel::class);
+    echo 'Application Laravel chargée correctement';
+"; then
+    echo "Application Laravel initialisée avec succès."
+else
+    echo "ERREUR: L'application Laravel n'a pas pu être initialisée correctement."
+fi
 
 # Verify healthcheck is working
 echo "Performing initial health check..."
