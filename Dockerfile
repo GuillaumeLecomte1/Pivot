@@ -46,8 +46,9 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Copy Nginx config
+# Copy configuration files
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
+COPY docker/php-custom.ini /usr/local/etc/php/conf.d/zz-custom.ini
 
 # Install Node dependencies and build assets
 RUN npm install
@@ -56,11 +57,15 @@ RUN npm run build
 # Copy supervisor configuration
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Make start script executable
+# Make scripts executable
 RUN chmod +x /var/www/html/docker/start.sh
+RUN chmod +x /var/www/html/docker/healthcheck.sh
 
 # Expose ports - only expose HTTP port, not PHP-FPM port
 EXPOSE 4004
+
+# Add healthcheck
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 CMD /var/www/html/docker/healthcheck.sh
 
 # Run start script
 CMD ["/var/www/html/docker/start.sh"] 

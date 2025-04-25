@@ -1,12 +1,14 @@
 #!/bin/sh
 
-# Enable PHP error logging
-echo "
-error_reporting = E_ALL
-display_errors = On
-log_errors = On
-error_log = /var/log/php-fpm/error.log
-" > /usr/local/etc/php/conf.d/error-logging.ini
+# Generate .env file from environment variables
+echo "Creating .env file from environment variables..."
+env | grep -E '^(APP_|DB_|MAIL_|REDIS_|LOG_|SESSION_|CACHE_|QUEUE_|BROADCAST_|PUSHER_|MIX_|VITE_)' > /var/www/html/.env
+echo "FORCE_HTTPS=${FORCE_HTTPS:-true}" >> /var/www/html/.env
+echo "ASSET_URL=${ASSET_URL:-${APP_URL}}" >> /var/www/html/.env
+chmod 644 /var/www/html/.env
+chown www-data:www-data /var/www/html/.env
+echo ".env file created with content:"
+cat /var/www/html/.env
 
 # Configure php-fpm to use a socket instead of a port to avoid conflicts
 echo "[www]
@@ -50,18 +52,18 @@ chown -R www-data:www-data /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage
 chmod -R 775 /var/www/html/bootstrap/cache
 
-# Verify .env file exists and key is set
-php artisan key:generate --force
-
-# Run migrations
-php artisan migrate --force
-
 # Clear all caches first
 php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 php artisan cache:clear
 php artisan optimize:clear
+
+# Verify key is set, using the newly created .env file
+php artisan key:generate --force
+
+# Run migrations
+php artisan migrate --force
 
 # Then cache configuration
 php artisan config:cache
