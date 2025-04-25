@@ -60,7 +60,7 @@ COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN chmod +x /var/www/html/docker/start.sh
 
 # Expose ports
-EXPOSE 4004
+EXPOSE 4004 9000
 
 # Run start script
 CMD ["/var/www/html/docker/start.sh"] 
