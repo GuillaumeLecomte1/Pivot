@@ -8,6 +8,17 @@ log_errors = On
 error_log = /var/log/php-fpm/error.log
 " > /usr/local/etc/php/conf.d/error-logging.ini
 
+# Configure php-fpm to use a socket instead of a port to avoid conflicts
+echo "[www]
+listen = /var/run/php-fpm.sock
+listen.owner = www-data
+listen.group = www-data
+listen.mode = 0660
+" > /usr/local/etc/php-fpm.d/zz-docker.conf
+
+# Update nginx to use socket instead of port 9000
+sed -i 's/fastcgi_pass 0.0.0.0:9000;/fastcgi_pass unix:\/var\/run\/php-fpm.sock;/g' /etc/nginx/http.d/default.conf
+
 # Create log directories and files with proper permissions
 mkdir -p /var/log/nginx
 mkdir -p /var/log/php-fpm

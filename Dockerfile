@@ -59,8 +59,8 @@ COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Make start script executable
 RUN chmod +x /var/www/html/docker/start.sh
 
-# Expose ports
-EXPOSE 4004 9000
+# Expose ports - only expose HTTP port, not PHP-FPM port
+EXPOSE 4004
 
 # Run start script
 CMD ["/var/www/html/docker/start.sh"] 
