@@ -52,6 +52,17 @@ chown -R www-data:www-data /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage
 chmod -R 775 /var/www/html/bootstrap/cache
 
+# Ensure Laravel cache directories are writable with proper permissions
+mkdir -p /var/www/html/bootstrap/cache
+chmod -R 777 /var/www/html/bootstrap/cache
+
+# Create cache directories for framework, views, and route caches
+mkdir -p /var/www/html/storage/framework/cache/data
+mkdir -p /var/www/html/storage/framework/views
+mkdir -p /var/www/html/storage/framework/sessions
+chmod -R 777 /var/www/html/storage/framework
+chown -R www-data:www-data /var/www/html/storage/framework
+
 # Clear all caches first
 php artisan config:clear
 php artisan route:clear
@@ -66,14 +77,19 @@ php artisan key:generate --force
 php artisan migrate --force
 
 # Then cache configuration
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-php artisan optimize
+su -s /bin/sh -c "php artisan config:cache" www-data
+su -s /bin/sh -c "php artisan route:cache" www-data
+su -s /bin/sh -c "php artisan view:cache" www-data
+su -s /bin/sh -c "php artisan optimize" www-data
 
 # Output environment info for debugging
 echo "Environment: $(php artisan env)"
 echo "Base URL: $(php artisan --no-ansi tinker --execute="echo config('app.url');")"
+
+# Verify healthcheck is working
+echo "Performing initial health check..."
+sleep 2
+/var/www/html/docker/healthcheck.sh || echo "Initial health check failed but continuing startup"
 
 # Start supervisord
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf 

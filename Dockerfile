@@ -26,6 +26,21 @@ RUN apk add --no-cache \
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql bcmath zip gd
 
+# Configure PHP
+RUN echo '[PHP] \n\
+display_errors=On \n\
+display_startup_errors=On \n\
+error_reporting=E_ALL \n\
+log_errors=On \n\
+error_log=/var/log/php-fpm/error.log \n\
+memory_limit=256M \n\
+max_execution_time=120 \n\
+upload_max_filesize=100M \n\
+post_max_size=100M \n\
+variables_order="EGPCS" \n\
+default_charset="UTF-8" \n\
+date.timezone=UTC' > /usr/local/etc/php/conf.d/zz-custom.ini
+
 # Install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -48,7 +63,6 @@ RUN composer install --optimize-autoloader --no-dev
 
 # Copy configuration files
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
-COPY docker/php-custom.ini /usr/local/etc/php/conf.d/zz-custom.ini
 
 # Install Node dependencies and build assets
 RUN npm install
