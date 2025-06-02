@@ -27,7 +27,13 @@ Route::get('/health', function () {
 });
 
 Route::get('/', function () {
-    return Inertia::render('HomePage');
+    return response()->json([
+        'message' => 'Pivot Application is running!',
+        'status' => 'success',
+        'timestamp' => now()->toISOString(),
+        'environment' => config('app.env'),
+        'database' => 'connected'
+    ]);
 })->name('home');
 
 Route::get('/categories', function () {
