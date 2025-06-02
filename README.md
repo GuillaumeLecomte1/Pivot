@@ -1,80 +1,58 @@
 # 🎯 Pivot - Application Laravel
 
-Application Laravel moderne déployée automatiquement sur Dokploy depuis GitHub.
+Application Laravel moderne déployée automatiquement sur Dokploy.
 
-## 🚀 **Déploiement Automatique**
+## 🚀 **Déploiement Automatique Simplifié**
 
-Cette application est configurée pour le déploiement automatique :
+**Workflow ultra-rapide :**
+```
+Cursor → GitHub → Dokploy → Production
+```
 
 ### ✅ **Configuration Actuelle**
 - **Domaine** : [pivot.guillaume-lcte.fr](https://pivot.guillaume-lcte.fr)
-- **Base de données** : MySQL existante (code-db-1)
-- **Auto-deploy** : Activé sur push vers `main`
+- **Status** : ✅ **FONCTIONNEL**
+- **Auto-deploy** : Direct depuis GitHub (sans CI/CD)
 - **SSL** : Let's Encrypt automatique
 - **Port** : 4004
 
-### 🔧 **Variables d'Environnement Configurées**
--
-
-## 🚀 **Pour Déployer**
+### 🚀 **Pour Déployer (Ultra-rapide)**
 
 ```bash
-# 1. Faire vos modifications
+# 1. Modifier le code dans Cursor
+# 2. Commit et push
 git add .
 git commit -m "feat: votre modification"
-
-# 2. Push pour déclencher le déploiement automatique
 git push origin main
+
+# 3. Dokploy détecte automatiquement et redéploie
+# ⏱️ Déploiement en ~30 secondes (sans CI/CD)
 ```
 
-Le déploiement se fait automatiquement via :
-- ✅ GitHub Actions (CI/CD)
-- ✅ Dokploy (container orchestration)
-- ✅ Traefik (reverse proxy + SSL)
-
-## 🩺 **Surveillance**
+### 🩺 **Surveillance**
 
 - **Health Check** : `https://pivot.guillaume-lcte.fr/health`
-- **Logs Dokploy** : Interface web sur port 3000
-- **Monitoring** : Traefik dashboard port 8080
+- **Application** : `https://pivot.guillaume-lcte.fr/`
+- **Dokploy Interface** : `http://guillaume-lcte.fr:3000`
 
-## 🔧 **Développement Local**
+### 🔧 **Variables d'Environnement**
 
-```bash
-# Installation
-composer install
-npm install
-npm run build
+Configurées dans Dokploy :
+- `DB_HOST=code-db-1` (MySQL container)
+- `DB_DATABASE=mysql`
+- `DB_USERNAME=phpmyadmin`
+- Base de données connectée ✅
 
-# Configuration
-cp .env.example .env
-php artisan key:generate
-
-# Base de données
-php artisan migrate --seed
-
-# Serveur de développement
-php artisan serve
-```
-
-## 📁 **Structure Docker**
+### 🎯 **Architecture Simplifiée**
 
 ```
-docker/
-├── nginx.conf      # Configuration Nginx (port 4004)
-├── start.sh       # Script de démarrage optimisé  
-├── healthcheck.sh # Vérification de santé
-└── supervisord.conf # Process management
+GitHub → Webhook → Dokploy → Docker Build → Traefik → HTTPS
+                                    ↓
+                              MySQL (code-db-1)
 ```
 
-## 🌐 **Architecture de Production**
-
-```
-GitHub → Actions → Dokploy → Docker → Traefik → pivot.guillaume-lcte.fr
-                      ↓
-                   MySQL (code-db-1)
-```
+**Performance** : Déploiement direct sans étapes intermédiaires
 
 ---
 
-**Status** : ✅ Production Ready - Auto-deploy configuré 
+**Status** : ✅ **PRODUCTION READY** - Déploiement simplifié configuré 
