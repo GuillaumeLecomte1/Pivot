@@ -18,11 +18,11 @@ app:
     LOG_LEVEL: error
 
     DB_CONNECTION: mysql
-    DB_HOST: 51.195.43.106
+    DB_HOST: code-db-1
     DB_PORT: 3306
-    DB_DATABASE: pivot
-    DB_USERNAME: pivot
-    DB_PASSWORD: pivot
+    DB_DATABASE: mysql
+    DB_USERNAME: phpmyadmin
+    DB_PASSWORD: whrk6ejdbmzyj6b5njz4q8ywt7bwoq3r
 
     BROADCAST_DRIVER: log
     CACHE_DRIVER: file
@@ -74,6 +74,7 @@ app:
     - "traefik.http.routers.pivot-awlyhs.entrypoints=websecure"
     - "traefik.http.routers.pivot-awlyhs.rule=Host(`pivot.guillaume-lcte.fr`)"
     - "traefik.http.routers.pivot-awlyhs.tls=true"
+    - "traefik.http.routers.pivot-awlyhs.tls.certresolver=letsencrypt"
     - "traefik.http.services.pivot-awlyhs.loadbalancer.server.port=4004"
     - "traefik.http.services.pivot-awlyhs.loadbalancer.server.scheme=http"
     - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"

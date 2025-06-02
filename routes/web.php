@@ -3,15 +3,27 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 // Health check endpoint for Dokploy
 Route::get('/health', function () {
-    return response()->json([
-        'status' => 'ok',
-        'timestamp' => now()->toISOString(),
-        'app' => config('app.name'),
-        'env' => config('app.env'),
-    ]);
+    try {
+        // Vérifier la connexion à la base de données
+        DB::connection()->getPdo();
+        
+        return response()->json([
+            'status' => 'healthy',
+            'database' => 'connected',
+            'timestamp' => now()->toISOString()
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'unhealthy',
+            'database' => 'disconnected',
+            'error' => $e->getMessage(),
+            'timestamp' => now()->toISOString()
+        ], 503);
+    }
 });
 
 Route::get('/', function () {
