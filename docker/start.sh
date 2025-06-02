@@ -3,46 +3,54 @@ set -e
 
 echo "🚀 Starting Pivot Laravel Application..."
 
-# Attendre que la base de données soit disponible
-echo "⏳ Waiting for database connection..."
-until php artisan db:monitor --max-tries=1 >/dev/null 2>&1; do
-    echo "Database not ready - waiting 2 seconds..."
-    sleep 2
-done
-echo "✅ Database connection established!"
-
 # Configuration de l'application
 echo "🔧 Configuring application..."
 
-# Optimiser les configurations
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-
-# Migration et seeders si nécessaire (en production uniquement si nouvelle installation)
-if [ "$APP_ENV" = "production" ]; then
-    echo "🗄️ Running migrations (if needed)..."
-    php artisan migrate --force --no-interaction || echo "Migrations already up to date or failed"
-else
-    echo "🗄️ Running migrations and seeds..."
-    php artisan migrate:fresh --seed --no-interaction
-fi
-
-# Créer les liens symboliques pour le stockage
-php artisan storage:link || echo "Storage link already exists"
-
-# Nettoyer le cache si nécessaire
-php artisan cache:clear
+# Créer les répertoires nécessaires
+mkdir -p /var/www/html/storage/framework/sessions
+mkdir -p /var/www/html/storage/framework/views
+mkdir -p /var/www/html/storage/framework/cache
+mkdir -p /var/www/html/storage/logs
+mkdir -p /var/log/nginx
 
 # Permissions
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Clear caches before starting
+php artisan config:clear || echo "Config clear failed"
+php artisan route:clear || echo "Route clear failed"
+php artisan view:clear || echo "View clear failed"
+php artisan cache:clear || echo "Cache clear failed"
+
+# Generate APP_KEY if not set
+php artisan key:generate --force || echo "Key generation failed"
+
+# Migration en production (sans --force pour éviter les erreurs)
+if [ "$APP_ENV" = "production" ]; then
+    echo "🗄️ Running migrations in production..."
+    php artisan migrate --no-interaction || echo "Migrations failed or already up to date"
+fi
+
+# Cache des configurations
+php artisan config:cache || echo "Config cache failed"
+php artisan route:cache || echo "Route cache failed"
+php artisan view:cache || echo "View cache failed"
+
+# Créer le lien de stockage
+php artisan storage:link || echo "Storage link already exists"
+
+# Optimisations
+php artisan optimize || echo "Optimization failed"
 
 echo "✅ Application configured successfully!"
 
 # Démarrer PHP-FPM en arrière-plan
 echo "🔄 Starting PHP-FPM..."
 php-fpm -D
+
+# Attendre que PHP-FPM soit prêt
+sleep 2
 
 # Démarrer Nginx en avant-plan
 echo "🌐 Starting Nginx..."

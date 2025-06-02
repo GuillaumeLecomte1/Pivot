@@ -21,7 +21,7 @@ RUN apk add --no-cache \
     git \
     curl \
     nginx \
-    supervisor
+    bash
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql bcmath zip gd
@@ -33,37 +33,31 @@ COPY docker/zz-custom.ini /usr/local/etc/php/conf.d/zz-custom.ini
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create necessary directories
-RUN mkdir -p /var/log/supervisor \
-    && mkdir -p /etc/supervisor/conf.d \
+RUN mkdir -p /var/log/nginx \
     && mkdir -p /var/www/html/storage/framework/sessions \
     && mkdir -p /var/www/html/storage/framework/views \
-    && mkdir -p /var/www/html/storage/framework/cache
+    && mkdir -p /var/www/html/storage/framework/cache \
+    && mkdir -p /var/www/html/storage/logs
 
 # Copy application files
 COPY . .
 
-# Set proper permissions
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
-
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
-# Copy configuration files
+# Install Node dependencies and build assets
+RUN npm install && npm run build
+
+# Copy nginx configuration
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 
-# Install Node dependencies and build assets
-RUN npm install
-RUN npm run build
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod +x /var/www/html/docker/start.sh \
+    && chmod +x /var/www/html/docker/healthcheck.sh
 
-# Copy supervisor configuration
-COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Make scripts executable
-RUN chmod +x /var/www/html/docker/start.sh
-RUN chmod +x /var/www/html/docker/healthcheck.sh
-
-# Expose ports - only expose HTTP port, not PHP-FPM port
+# Expose port
 EXPOSE 4004
 
 # Add healthcheck
