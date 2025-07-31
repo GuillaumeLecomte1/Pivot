@@ -1,5 +1,6 @@
 ﻿import { Head, Link, usePage } from '@inertiajs/react';
 import MainNavbar from '@/components/MainNavbar';
+import { MinimalCard, MinimalCardDescription, MinimalCardImage, MinimalCardTitle } from '@/components/ui/minimal-card';
 import type { SharedData } from '@/types';
 
 export default function HomePage() {
@@ -209,190 +210,124 @@ export default function HomePage() {
                             <div className="w-full lg:w-3/4">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                                     {/* Produit 1 */}
-                                    <div className="bg-white dark:bg-[#1C1929] rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-                                        <div className="relative">
-                                            <div className="aspect-w-1 aspect-h-1 relative">
-                                                <div className="bg-gray-200 dark:bg-[#2E2640] h-[250px] flex items-center justify-center">
-                                                    <img
-                                                        src="/images/chaise.png"
-                                                        alt="Chaise vintage"
-                                                        className="w-full h-full object-cover"
-                                                        onError={(e) => {
-                                                            const imgElement = e.currentTarget;
-                                                            imgElement.style.display = 'none';
-                                                            const div = document.createElement('div');
-                                                            div.className = 'bg-green-900 w-32 h-32 rounded-sm';
-                                                            if (imgElement.parentElement) {
-                                                                imgElement.parentElement.appendChild(div);
-                                                            }
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <button className="absolute top-3 right-3 p-1 bg-white dark:bg-[#1C1929] rounded-full">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    className="h-5 w-5 dark:text-white"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={1.5}
-                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
+                                    <MinimalCard className="relative">
+                                        <MinimalCardImage src="/images/products/ChaiseVintage.png" alt="Chaise vintage" />
+                                        <button className="absolute top-5 right-5 p-1 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5 text-gray-600 dark:text-gray-300"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={1.5}
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <div className="px-4 pb-4">
+                                            <MinimalCardDescription className="text-xs text-gray-500 dark:text-gray-400 px-0 pb-1">
+                                                Ressourcerie des biscottes (49)
+                                            </MinimalCardDescription>
+                                            <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mb-1">MOBILIER</div>
+                                            <MinimalCardTitle className="px-0 mt-0">Chaise</MinimalCardTitle>
+                                            <div className="font-bold text-lg mt-2 dark:text-white">15 €</div>
                                         </div>
-                                        <div className="p-3">
-                                            <div className="text-xs text-gray-500 dark:text-gray-400">Ressourcerie des biscottes (49)</div>
-                                            <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mt-1">MOBILIER</div>
-                                            <h3 className="font-semibold text-gray-900 dark:text-white mt-1">Chaise</h3>
-                                            <div className="font-bold mt-2 dark:text-white">15 €</div>
-                                        </div>
-                                    </div>
+                                    </MinimalCard>
 
                                     {/* Produit 2 */}
-                                    <div className="bg-white dark:bg-[#1C1929] rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-                                        <div className="relative">
-                                            <div className="aspect-w-1 aspect-h-1 relative">
-                                                <div className="bg-gray-200 dark:bg-[#2E2640] h-[250px] flex items-center justify-center">
-                                                    <img
-                                                        src="/images/pichet.png"
-                                                        alt="Pichet à lait"
-                                                        className="w-full h-full object-cover"
-                                                        onError={(e) => {
-                                                            const imgElement = e.currentTarget;
-                                                            imgElement.style.display = 'none';
-                                                            const div = document.createElement('div');
-                                                            div.className = 'bg-yellow-100 dark:bg-[#2E2640] w-32 h-40 rounded-sm';
-                                                            if (imgElement.parentElement) {
-                                                                imgElement.parentElement.appendChild(div);
-                                                            }
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <button className="absolute top-3 right-3 p-1 bg-white dark:bg-[#1C1929] rounded-full">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    className="h-5 w-5 dark:text-white"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={1.5}
-                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div className="p-3">
-                                            <div className="text-xs text-gray-500 dark:text-gray-400">La pagaille (49)</div>
-                                            <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mt-1">
+                                    <MinimalCard className="relative">
+                                        <MinimalCardImage src="/images/products/Pichet.png" alt="Pichet à lait" />
+                                        <button className="absolute top-5 right-5 p-1 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5 text-gray-600 dark:text-gray-300"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={1.5}
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <div className="px-4 pb-4">
+                                            <MinimalCardDescription className="text-xs text-gray-500 dark:text-gray-400 px-0 pb-1">
+                                                La pagaille (49)
+                                            </MinimalCardDescription>
+                                            <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mb-1">
                                                 ART DE LA TABLE
                                             </div>
-                                            <h3 className="font-semibold text-gray-900 dark:text-white mt-1">Pichet à lait</h3>
-                                            <div className="font-bold mt-2 dark:text-white">19 €</div>
+                                            <MinimalCardTitle className="px-0 mt-0">Pichet à lait</MinimalCardTitle>
+                                            <div className="font-bold text-lg mt-2 dark:text-white">19 €</div>
                                         </div>
-                                    </div>
+                                    </MinimalCard>
 
                                     {/* Produit 3 */}
-                                    <div className="bg-white dark:bg-[#1C1929] rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-                                        <div className="relative">
-                                            <div className="aspect-w-1 aspect-h-1 relative">
-                                                <div className="bg-gray-200 dark:bg-[#2E2640] h-[250px] flex items-center justify-center">
-                                                    <img
-                                                        src="/images/Article3.png"
-                                                        alt="Décoration intérieure"
-                                                        className="w-full h-full object-cover"
-                                                        onError={(e) => {
-                                                            e.currentTarget.src = 'https://placehold.co/600x400?text=Ressourcerie';
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <button className="absolute top-3 right-3 p-1 bg-white dark:bg-[#1C1929] rounded-full">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    className="h-5 w-5 dark:text-white"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={1.5}
-                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div className="p-3">
-                                            <div className="text-xs text-gray-500 dark:text-gray-400">Ressourcerie des biscottes (49)</div>
-                                            <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mt-1">
+                                    <MinimalCard className="relative">
+                                        <MinimalCardImage src="/images/products/Couvert.png" alt="Ensemble de couverts" />
+                                        <button className="absolute top-5 right-5 p-1 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5 text-gray-600 dark:text-gray-300"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={1.5}
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <div className="px-4 pb-4">
+                                            <MinimalCardDescription className="text-xs text-gray-500 dark:text-gray-400 px-0 pb-1">
+                                                Ressourcerie des biscottes (49)
+                                            </MinimalCardDescription>
+                                            <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mb-1">
                                                 ART DE LA TABLE
                                             </div>
-                                            <h3 className="font-semibold text-gray-900 dark:text-white mt-1">
-                                                5 astuces pour une déco éco-responsable
-                                            </h3>
-                                            <div className="font-bold mt-2 dark:text-white">25 €</div>
+                                            <MinimalCardTitle className="px-0 mt-0 text-base leading-tight">Ensemble de couverts</MinimalCardTitle>
+                                            <div className="font-bold text-lg mt-2 dark:text-white">8 €</div>
                                         </div>
-                                    </div>
+                                    </MinimalCard>
 
                                     {/* Produit 4 */}
-                                    <div className="bg-white dark:bg-[#1C1929] rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-                                        <div className="relative">
-                                            <div className="aspect-w-1 aspect-h-1 relative">
-                                                <div className="bg-gray-200 dark:bg-[#2E2640] h-[250px] flex items-center justify-center">
-                                                    <img
-                                                        src="/images/Article4.png"
-                                                        alt="Objets vintage"
-                                                        className="w-full h-full object-cover"
-                                                        onError={(e) => {
-                                                            e.currentTarget.src = 'https://placehold.co/600x400?text=Ressourcerie';
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <button className="absolute top-3 right-3 p-1 bg-white dark:bg-[#1C1929] rounded-full">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    className="h-5 w-5 dark:text-white"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={1.5}
-                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
+                                    <MinimalCard className="relative">
+                                        <MinimalCardImage src="/images/products/Armoire.png" alt="Armoire" />
+                                        <button className="absolute top-5 right-5 p-1 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5 text-gray-600 dark:text-gray-300"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={1.5}
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                />
+                                            </svg>
+                                        </button>
+                                        <div className="px-4 pb-4">
+                                            <MinimalCardDescription className="text-xs text-gray-500 dark:text-gray-400 px-0 pb-1">
+                                                Ressourcerie des biscottes (49)
+                                            </MinimalCardDescription>
+                                            <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mb-1">MOBILIER</div>
+                                            <MinimalCardTitle className="px-0 mt-0 text-base leading-tight">Armoire</MinimalCardTitle>
+                                            <div className="font-bold text-lg mt-2 dark:text-white">20 €</div>
                                         </div>
-                                        <div className="p-3">
-                                            <div className="text-xs text-gray-500 dark:text-gray-400">Ressourcerie des biscottes (49)</div>
-                                            <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mt-1">
-                                                ART DE LA TABLE
-                                            </div>
-                                            <h3 className="font-semibold text-gray-900 dark:text-white mt-1">
-                                                Les pièces vintage qui prennent de la valeur
-                                            </h3>
-                                            <div className="font-bold mt-2 dark:text-white">20 €</div>
-                                        </div>
-                                    </div>
+                                    </MinimalCard>
                                 </div>
                             </div>
                         </div>
@@ -524,197 +459,120 @@ export default function HomePage() {
                             {/* Produits en grille 2x2 - order-last sur mobile, order-first sur desktop */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 order-last lg:order-first">
                                 {/* Produit 1 */}
-                                <div className="bg-white dark:bg-[#1C1929] rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-                                    <div className="relative">
-                                        <div className="aspect-w-1 aspect-h-1 relative">
-                                            <div className="bg-gray-200 dark:bg-[#2E2640] h-[170px] flex items-center justify-center">
-                                                <img
-                                                    src="/images/chaise.png"
-                                                    alt="Chaise vintage"
-                                                    className="w-full h-full object-cover"
-                                                    onError={(e) => {
-                                                        const imgElement = e.currentTarget;
-                                                        imgElement.style.display = 'none';
-                                                        const div = document.createElement('div');
-                                                        div.className = 'bg-green-900 w-32 h-32 rounded-sm';
-                                                        if (imgElement.parentElement) {
-                                                            imgElement.parentElement.appendChild(div);
-                                                        }
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                        <button className="absolute top-3 right-3 p-1 bg-white dark:bg-[#1C1929] rounded-full">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-5 w-5 dark:text-white"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={1.5}
-                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        </button>
+                                <MinimalCard className="relative">
+                                    <MinimalCardImage src="/images/products/Enfilade.png" alt="Enfilade vintage en bois" className="h-[140px]" />
+                                    <button className="absolute top-5 right-5 p-1 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4 text-gray-600 dark:text-gray-300"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={1.5}
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <div className="px-4 pb-4">
+                                        <MinimalCardDescription className="text-xs text-gray-500 dark:text-gray-400 px-0 pb-1">
+                                            Ressourcerie des biscottes (49)
+                                        </MinimalCardDescription>
+                                        <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mb-1">MOBILIER</div>
+                                        <MinimalCardTitle className="px-0 mt-0 text-base">Enfilade vintage en bois</MinimalCardTitle>
+                                        <div className="font-bold text-lg mt-2 dark:text-white">33 €</div>
                                     </div>
-                                    <div className="p-3">
-                                        <div className="text-xs text-gray-500 dark:text-gray-400">Ressourcerie des biscottes (49)</div>
-                                        <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mt-1">MOBILIER</div>
-                                        <h3 className="font-semibold text-gray-900 dark:text-white mt-1">Chaise</h3>
-                                        <div className="font-bold mt-2 dark:text-white">15 €</div>
-                                    </div>
-                                </div>
+                                </MinimalCard>
 
                                 {/* Produit 2 */}
-                                <div className="bg-white dark:bg-[#1C1929] rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-                                    <div className="relative">
-                                        <div className="aspect-w-1 aspect-h-1 relative">
-                                            <div className="bg-gray-200 dark:bg-[#2E2640] h-[170px] flex items-center justify-center">
-                                                <img
-                                                    src="/images/pichet.png"
-                                                    alt="Pichet à lait"
-                                                    className="w-full h-full object-cover"
-                                                    onError={(e) => {
-                                                        const imgElement = e.currentTarget;
-                                                        imgElement.style.display = 'none';
-                                                        const div = document.createElement('div');
-                                                        div.className = 'bg-yellow-100 dark:bg-[#2E2640] w-32 h-40 rounded-sm';
-                                                        if (imgElement.parentElement) {
-                                                            imgElement.parentElement.appendChild(div);
-                                                        }
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                        <button className="absolute top-3 right-3 p-1 bg-white dark:bg-[#1C1929] rounded-full">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-5 w-5 dark:text-white"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={1.5}
-                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        </button>
+                                <MinimalCard className="relative">
+                                    <MinimalCardImage src="/images/products/Semainier.png" alt="Semainier en bois" className="h-[140px]" />
+                                    <button className="absolute top-5 right-5 p-1 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4 text-gray-600 dark:text-gray-300"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={1.5}
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <div className="px-4 pb-4">
+                                        <MinimalCardDescription className="text-xs text-gray-500 dark:text-gray-400 px-0 pb-1">
+                                            La pagaille (49)
+                                        </MinimalCardDescription>
+                                        <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mb-1">MOBILIER</div>
+                                        <MinimalCardTitle className="px-0 mt-0 text-base">Semainier en bois</MinimalCardTitle>
+                                        <div className="font-bold text-lg mt-2 dark:text-white">24 €</div>
                                     </div>
-                                    <div className="p-3">
-                                        <div className="text-xs text-gray-500 dark:text-gray-400">La pagaille (49)</div>
-                                        <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mt-1">ART DE LA TABLE</div>
-                                        <h3 className="font-semibold text-gray-900 dark:text-white mt-1">Pichet à lait</h3>
-                                        <div className="font-bold mt-2 dark:text-white">19 €</div>
-                                    </div>
-                                </div>
+                                </MinimalCard>
 
                                 {/* Produit 3 */}
-                                <div className="bg-white dark:bg-[#1C1929] rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-                                    <div className="relative">
-                                        <div className="aspect-w-1 aspect-h-1 relative">
-                                            <div className="bg-gray-200 dark:bg-[#2E2640] h-[170px] flex items-center justify-center">
-                                                <img
-                                                    src="/images/assiettes.png"
-                                                    alt="Lot d'assiettes"
-                                                    className="w-full h-full object-cover"
-                                                    onError={(e) => {
-                                                        const imgElement = e.currentTarget;
-                                                        imgElement.style.display = 'none';
-                                                        const div = document.createElement('div');
-                                                        div.className = 'flex gap-2';
-                                                        div.innerHTML = `
-                                                            <div class="bg-blue-200 dark:bg-[#2E2640] w-20 h-20 rounded-full"></div>
-                                                            <div class="bg-blue-200 dark:bg-[#2E2640] w-20 h-20 rounded-full"></div>
-                                                            <div class="bg-blue-200 dark:bg-[#2E2640] w-20 h-20 rounded-full"></div>
-                                                        `;
-                                                        if (imgElement.parentElement) {
-                                                            imgElement.parentElement.appendChild(div);
-                                                        }
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                        <button className="absolute top-3 right-3 p-1 bg-white dark:bg-[#1C1929] rounded-full">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-5 w-5 dark:text-white"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={1.5}
-                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        </button>
+                                <MinimalCard className="relative">
+                                    <MinimalCardImage src="/images/products/LotAssiette.png" alt="Lot d'assiettes" className="h-[140px]" />
+                                    <button className="absolute top-5 right-5 p-1 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4 text-gray-600 dark:text-gray-300"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={1.5}
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <div className="px-4 pb-4">
+                                        <MinimalCardDescription className="text-xs text-gray-500 dark:text-gray-400 px-0 pb-1">
+                                            Ressourcerie des biscottes (49)
+                                        </MinimalCardDescription>
+                                        <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mb-1">ART DE LA TABLE</div>
+                                        <MinimalCardTitle className="px-0 mt-0 text-base">Lot d'assiettes</MinimalCardTitle>
+                                        <div className="font-bold text-lg mt-2 dark:text-white">25 €</div>
                                     </div>
-                                    <div className="p-3">
-                                        <div className="text-xs text-gray-500 dark:text-gray-400">Ressourcerie des biscottes (49)</div>
-                                        <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mt-1">ART DE LA TABLE</div>
-                                        <h3 className="font-semibold text-gray-900 dark:text-white mt-1">Lot d'assiettes</h3>
-                                        <div className="font-bold mt-2 dark:text-white">25 €</div>
-                                    </div>
-                                </div>
+                                </MinimalCard>
 
                                 {/* Produit 4 */}
-                                <div className="bg-white dark:bg-[#1C1929] rounded-lg overflow-hidden border border-gray-100 dark:border-gray-700">
-                                    <div className="relative">
-                                        <div className="aspect-w-1 aspect-h-1 relative">
-                                            <div className="bg-gray-200 dark:bg-[#2E2640] h-[170px] flex items-center justify-center">
-                                                <img
-                                                    src="/images/vase.png"
-                                                    alt="Vase décoratif"
-                                                    className="w-full h-full object-cover"
-                                                    onError={(e) => {
-                                                        const imgElement = e.currentTarget;
-                                                        imgElement.style.display = 'none';
-                                                        const div = document.createElement('div');
-                                                        div.className = 'bg-pink-100 dark:bg-[#2E2640] w-32 h-40 rounded-sm';
-                                                        if (imgElement.parentElement) {
-                                                            imgElement.parentElement.appendChild(div);
-                                                        }
-                                                    }}
-                                                />
-                                            </div>
-                                        </div>
-                                        <button className="absolute top-3 right-3 p-1 bg-white dark:bg-[#1C1929] rounded-full">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="h-5 w-5 dark:text-white"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={1.5}
-                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                        </button>
+                                <MinimalCard className="relative">
+                                    <MinimalCardImage src="/images/products/Vase.png" alt="Vase décoratif" className="h-[140px]" />
+                                    <button className="absolute top-5 right-5 p-1 bg-white dark:bg-gray-800 rounded-full shadow-sm">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="h-4 w-4 text-gray-600 dark:text-gray-300"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={1.5}
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                            />
+                                        </svg>
+                                    </button>
+                                    <div className="px-4 pb-4">
+                                        <MinimalCardDescription className="text-xs text-gray-500 dark:text-gray-400 px-0 pb-1">
+                                            La pagaille (49)
+                                        </MinimalCardDescription>
+                                        <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mb-1">DÉCORATION</div>
+                                        <MinimalCardTitle className="px-0 mt-0 text-base">Vase décoratif</MinimalCardTitle>
+                                        <div className="font-bold text-lg mt-2 dark:text-white">16 €</div>
                                     </div>
-                                    <div className="p-3">
-                                        <div className="text-xs text-gray-500 dark:text-gray-400">La pagaille (49)</div>
-                                        <div className="uppercase text-xs font-semibold text-[#6ED47C] dark:text-[#6ED47C] mt-1">DÉCORATION</div>
-                                        <h3 className="font-semibold text-gray-900 dark:text-white mt-1">Vase décoratif</h3>
-                                        <div className="font-bold mt-2 dark:text-white">32 €</div>
-                                    </div>
-                                </div>
+                                </MinimalCard>
                             </div>
                         </div>
                     </div>
