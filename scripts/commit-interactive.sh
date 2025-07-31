@@ -30,23 +30,10 @@ echo "${PURPLE}║               ${WHITE}🎯 PIVOT - COMMIT INTERACTIF${PURPLE}
 echo "${PURPLE}╚══════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
-# Check if there are staged files
-if git diff --cached --quiet; then
-    echo "${RED}❌ Aucun fichier stagé trouvé !${NC}"
-    echo "${YELLOW}💡 Utilisez 'git add <fichiers>' avant de lancer ce script${NC}"
-    echo ""
-    echo "${CYAN}📋 Fichiers modifiés disponibles :${NC}"
-    git status --porcelain | head -10
-    echo ""
-    read -p "Voulez-vous ajouter tous les fichiers modifiés ? (y/N): " add_all
-    if [[ $add_all =~ ^[Yy]$ ]]; then
-        git add .
-        echo "${GREEN}✅ Tous les fichiers ont été ajoutés${NC}"
-    else
-        echo "${YELLOW}⚠️ Ajoutez manuellement vos fichiers avec 'git add <fichier>'${NC}"
-        exit 1
-    fi
-fi
+# Auto-add all changes
+echo "${CYAN}📦 Ajout automatique de tous les fichiers modifiés...${NC}"
+git add .
+echo "${GREEN}✅ Tous les fichiers ont été ajoutés automatiquement${NC}"
 
 echo ""
 echo "${CYAN}📋 Fichiers à commiter :${NC}"

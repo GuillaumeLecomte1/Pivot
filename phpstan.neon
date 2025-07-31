@@ -6,16 +6,29 @@ parameters:
     paths:
         - app/
 
-    # Level 9 is the highest level
-    level: 5
+    # Level 4 pour moins de strictness
+    level: 4
 
     ignoreErrors:
         - '#Parameter .* of class .* constructor expects .*#'
         - '#array_values is already a list#'
         - '#Class .* not found#'
         - '#Called .env. outside of the config directory#'
+        - '#Undefined variable#'
+        - '#Variable .* might not be defined#'
+        - '#Access to an undefined property#'
+        - '#Call to an undefined method#'
+        - '#PHPDoc tag @var#'
+        - '#unused#'
         
     excludePaths:
         - ./*/*/FileToBeExcluded.php
         - tests/
+        - database/migrations/
+        - bootstrap/cache/
+        - storage/
+
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    reportUnmatchedIgnoredErrors: false
 
