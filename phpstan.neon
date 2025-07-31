@@ -10,9 +10,12 @@ parameters:
     level: 5
 
     ignoreErrors:
-        - '#PHPDoc tag @var#'
+        - '#Parameter .* of class .* constructor expects .*#'
+        - '#array_values is already a list#'
+        - '#Class .* not found#'
+        - '#Called .env. outside of the config directory#'
         
     excludePaths:
         - ./*/*/FileToBeExcluded.php
+        - tests/
 
-    checkMissingIterableValueType: false

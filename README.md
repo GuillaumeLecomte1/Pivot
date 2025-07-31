@@ -39,7 +39,11 @@ Pivot connecte les ressourceries françaises avec les consommateurs souhaitant a
 
 ### Outils de développement
 
--   **Biome** - Linter et formateur ultra-rapide
+-   **Biome** - Linter et formateur ultra-rapide (remplace Prettier + ESLint)
+-   **Husky** - Git hooks pour pre-commit validation
+-   **Laravel Pint** - Formateur de code PHP
+-   **PHPStan/Larastan** - Analyse statique PHP
+-   **Commitlint** - Validation des messages de commit
 -   **Docker** - Conteneurisation
 -   **Composer** - Gestionnaire de dépendances PHP
 -   **NPM** - Gestionnaire de dépendances JavaScript
@@ -139,6 +143,9 @@ npm run format          # Formate le code avec Biome
 npm run lint            # Lint le code avec Biome
 npm run check           # Vérifie et corrige le code
 npm run types           # Vérification TypeScript
+
+# Commits interactifs
+npm run commit          # Interface de commit avec gitmoji et validation
 ```
 
 ## 🏗️ Architecture du projet
@@ -158,9 +165,56 @@ Pivot/
 └── public/                # Assets publics
 ```
 
+## 🚀 Workflow de développement
+
+### Commits avec Gitmoji
+
+Pivot utilise un système de commits interactif avec des gitmojis pour améliorer la lisibilité de l'historique Git.
+
+```bash
+npm run commit
+```
+
+**Interface interactive :**
+1. **Sélection du gitmoji** : Choisissez parmi 9 types populaires (1-9)
+2. **Description** : Rédigez votre message de commit
+3. **Validation automatique** : Pre-commit hooks avec Biome, PHPStan, Laravel Pint
+4. **Push automatique** : Option de push après validation réussie
+
+**Gitmojis disponibles :**
+- ✨ **feat** - Nouvelle fonctionnalité
+- 🐛 **fix** - Correction de bug  
+- 📚 **docs** - Documentation
+- 💄 **style** - Style/UI/UX
+- ♻️ **refactor** - Refactorisation
+- ⚡ **perf** - Performance
+- ✅ **test** - Tests
+- 🔧 **chore** - Maintenance
+- 🚀 **build** - Build/Deploy
+
+**Exemple de commit généré :**
+```
+✨ feat: add user authentication system
+```
+
+### Pre-commit Hooks
+
+Le projet utilise **Husky** pour exécuter automatiquement :
+- **Biome** : Formatage et lint JavaScript/TypeScript
+- **Laravel Pint** : Formatage du code PHP  
+- **PHPStan** : Analyse statique PHP
+- **Commitlint** : Validation des messages de commit
+
+### Outils de qualité
+
+- **Biome** (ultra-rapide) remplace Prettier + ESLint
+- **Laravel Pint** pour le formatage PHP
+- **Larastan/PHPStan** pour l'analyse statique
+- **Conventional Commits** avec support gitmoji
+
 ## 🤝 Contribution
 
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
+Les contributions sont les bienvenues ! Utilisez `npm run commit` pour respecter les conventions du projet.
 
 ## 📄 Licence
 

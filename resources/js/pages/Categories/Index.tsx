@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
+import AppLayout from '@/components/AppLayout';
 
 const categories = [
     {
@@ -55,7 +55,7 @@ const categories = [
 
 export default function CategoriesIndex() {
     return (
-        <AuthenticatedLayout>
+        <AppLayout>
             <Head title="Catégories" />
 
             <div className="container mx-auto px-4 py-12">
@@ -76,6 +76,6 @@ export default function CategoriesIndex() {
                     ))}
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AppLayout>
     );
 }

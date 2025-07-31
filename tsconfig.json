@@ -116,8 +116,8 @@
   },
   "include": ["resources/js/**/*.ts", "resources/js/**/*.d.ts", "resources/js/**/*.tsx"],
   "exclude": [
-    "**/*.js", 
-    "**/*.config.js", 
+    "**/*.js",
+    "**/*.config.js",
     "node_modules",
     "resources/js/components/navbar.tsx",
     "resources/js/pages/auth/login.tsx",

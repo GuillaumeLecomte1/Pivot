@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
+import AppLayout from '@/components/AppLayout';
 
 const ressourceries = [
     {
@@ -30,7 +30,7 @@ const ressourceries = [
 
 export default function RessourceriesIndex() {
     return (
-        <AuthenticatedLayout>
+        <AppLayout>
             <Head title="Ressourceries" />
 
             <div className="container mx-auto px-4 py-12">
@@ -68,6 +68,6 @@ export default function RessourceriesIndex() {
                     ))}
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AppLayout>
     );
 }

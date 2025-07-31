@@ -15,7 +15,7 @@ class HttpsProtocol
     public function handle(Request $request, Closure $next): Response
     {
         // Check if the request is secure
-        if (!$request->secure() && app()->environment() === 'production') {
+        if (! $request->secure() && app()->environment() === 'production') {
             // If the request is not secure, redirect to the secure URL
             return redirect()->secure($request->getRequestUri());
         }
@@ -27,4 +27,4 @@ class HttpsProtocol
 
         return $next($request);
     }
-} 
+}

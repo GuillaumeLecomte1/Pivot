@@ -1,9 +1,9 @@
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
+import AppLayout from '@/components/AppLayout';
 
 export default function About() {
     return (
-        <AuthenticatedLayout>
+        <AppLayout>
             <Head title="Notre histoire" />
 
             <div className="container mx-auto px-4 py-12">
@@ -35,6 +35,6 @@ export default function About() {
                     </ul>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </AppLayout>
     );
 }

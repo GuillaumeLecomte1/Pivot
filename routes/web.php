@@ -1,27 +1,27 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
 
 // Health check endpoint for Dokploy
 Route::get('/health', function () {
     try {
         // Vérifier la connexion à la base de données
         DB::connection()->getPdo();
-        
+
         return response()->json([
             'status' => 'healthy',
             'database' => 'connected',
-            'timestamp' => now()->toISOString()
+            'timestamp' => now()->toISOString(),
         ], 200);
     } catch (\Exception $e) {
         return response()->json([
             'status' => 'unhealthy',
             'database' => 'disconnected',
             'error' => $e->getMessage(),
-            'timestamp' => now()->toISOString()
+            'timestamp' => now()->toISOString(),
         ], 503);
     }
 });
@@ -41,6 +41,8 @@ Route::get('/ressourceries', function () {
 Route::get('/notre-histoire', function () {
     return Inertia::render('About');
 })->name('about');
+
+Route::get('/produits/{id}', [ProductController::class, 'show'])->name('products.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', function () {

@@ -1,8 +1,5 @@
 {
-  "*.{js,jsx,ts,tsx}": [
-    "echo '  🔧 Biome: formatage et lint JavaScript/TypeScript...'",
-    "biome check --write"
-  ],
+  "*.{js,jsx,ts,tsx}": ["echo '  🔧 Biome: formatage et lint JavaScript/TypeScript...'", "biome check --write"],
   "*.php": [
     "echo '  🎨 Laravel Pint: formatage du code PHP...'",
     "./vendor/bin/pint",
@@ -11,5 +8,5 @@
   ],
   "package.json": ["echo '  📦 Package.json: formatage avec Biome...'", "biome format --write"],
   "composer.json": ["echo '  🎼 Composer.json: pas de formatage automatique'"],
-  "*.md": ["echo '  📄 Markdown: formatage avec Biome...'", "biome format --write"]
+  "*.md": ["echo '  📄 Markdown: pas de formatage automatique'"]
 }
