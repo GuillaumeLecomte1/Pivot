@@ -1,6 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
-import { FormEventHandler } from 'react';
+import type { FormEventHandler } from 'react';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
@@ -90,10 +90,15 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         <Label htmlFor="remember">Remember me</Label>
                     </div>
 
-                    <Button type="submit" className="mt-4 w-full" tabIndex={4} disabled={processing}>
-                        {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
+                    <button
+                        type="submit"
+                        className="mt-4 w-full bg-black text-white dark:bg-white dark:text-black hover:bg-opacity-90 transition-colors h-9 px-4 py-2 rounded-md font-medium inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none"
+                        tabIndex={4}
+                        disabled={processing}
+                    >
+                        {processing && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
                         Log in
-                    </Button>
+                    </button>
                 </div>
 
                 <div className="text-muted-foreground text-center text-sm">

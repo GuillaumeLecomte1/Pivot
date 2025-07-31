@@ -1,5 +1,5 @@
-import { SidebarProvider } from '@/components/ui/sidebar';
 import { useState } from 'react';
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 interface AppShellProps {
     children: React.ReactNode;

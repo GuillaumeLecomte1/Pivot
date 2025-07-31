@@ -40,7 +40,7 @@ export const colors = {
         border: 'border-gray-700',
         input: 'border-gray-700',
         ring: 'ring-blue-500',
-    }
+    },
 } as const;
 
 export type ColorKey = keyof typeof colors.light;
@@ -52,4 +52,4 @@ export const getColor = (theme: Theme, key: ColorKey) => {
 
 export const getThemeColors = (theme: Theme) => {
     return colors[theme];
-}; 
+};

@@ -1,14 +1,14 @@
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 
 const ressourceries = [
     {
         id: 1,
-        name: 'Ressourcerie d\'Angers',
+        name: "Ressourcerie d'Angers",
         address: '123 rue de la Ressourcerie, 49000 Angers',
         phone: '02 41 23 45 67',
         email: 'contact@ressourcerie-angers.fr',
-        image: 'https://placehold.co/600x400?text=Ressourcerie+Angers'
+        image: 'https://placehold.co/600x400?text=Ressourcerie+Angers',
     },
     {
         id: 2,
@@ -16,7 +16,7 @@ const ressourceries = [
         address: '456 avenue du Recyclage, 44000 Nantes',
         phone: '02 40 12 34 56',
         email: 'contact@ressourcerie-nantes.fr',
-        image: 'https://placehold.co/600x400?text=Ressourcerie+Nantes'
+        image: 'https://placehold.co/600x400?text=Ressourcerie+Nantes',
     },
     {
         id: 3,
@@ -24,18 +24,18 @@ const ressourceries = [
         address: '789 boulevard de la Récupération, 35000 Rennes',
         phone: '02 99 12 34 56',
         email: 'contact@ressourcerie-rennes.fr',
-        image: 'https://placehold.co/600x400?text=Ressourcerie+Rennes'
-    }
+        image: 'https://placehold.co/600x400?text=Ressourcerie+Rennes',
+    },
 ];
 
 export default function RessourceriesIndex() {
     return (
         <AuthenticatedLayout>
             <Head title="Ressourceries" />
-            
+
             <div className="container mx-auto px-4 py-12">
                 <h1 className="text-4xl font-bold mb-8">Nos ressourceries</h1>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {ressourceries.map((ressourcerie) => (
                         <div key={ressourcerie.id} className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -70,4 +70,4 @@ export default function RessourceriesIndex() {
             </div>
         </AuthenticatedLayout>
     );
-} 
+}

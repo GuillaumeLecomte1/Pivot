@@ -1,5 +1,5 @@
 import { useTheme } from '@/components/ThemeProvider';
-import { getColor, getThemeColors, ColorKey } from '@/lib/colors';
+import { type ColorKey, getColor, getThemeColors } from '@/lib/colors';
 
 const getSystemTheme = () => {
     if (typeof window === 'undefined') return 'light';
@@ -21,6 +21,6 @@ export const useThemeColors = () => {
     return {
         getThemeColor,
         getCurrentThemeColors,
-        theme: currentTheme
+        theme: currentTheme,
     };
-}; 
+};

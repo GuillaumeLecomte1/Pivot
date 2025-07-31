@@ -1,19 +1,14 @@
 import { Link, usePage } from '@inertiajs/react';
-import { 
-    NavigationMenu, 
-    NavigationMenuItem, 
-    NavigationMenuList, 
-    navigationMenuTriggerStyle 
-} from '@/components/ui/navigation-menu';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { UserMenuContent } from '@/components/user-menu-content';
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
+import { Bell, Home, Menu, Settings, Users } from 'lucide-react';
 import { Icon } from '@/components/icon';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
+import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
+import { UserMenuContent } from '@/components/user-menu-content';
 import { cn } from '@/lib/utils';
-import { Menu, Home, Users, Settings, Bell } from 'lucide-react';
-import { type NavItem } from '@/types';
+import type { NavItem } from '@/types';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 
@@ -50,14 +45,14 @@ export function Navbar({ className }: NavbarProps) {
     const getInitials = (name: string) => {
         return name
             .split(' ')
-            .map(part => part[0])
+            .map((part) => part[0])
             .join('')
             .toUpperCase()
             .substring(0, 2);
     };
 
     return (
-        <header className={cn("border-b border-sidebar-border/80 sticky top-0 z-40 bg-background", className)}>
+        <header className={cn('border-b border-sidebar-border/80 sticky top-0 z-40 bg-background', className)}>
             <div className="mx-auto flex h-16 items-center justify-between px-4 md:max-w-7xl">
                 {/* Mobile Menu */}
                 <div className="flex items-center">
@@ -103,7 +98,7 @@ export function Navbar({ className }: NavbarProps) {
                                             className={cn(
                                                 navigationMenuTriggerStyle(),
                                                 page.url === item.href && activeItemStyles,
-                                                'h-9 cursor-pointer px-3'
+                                                'h-9 cursor-pointer px-3',
                                             )}
                                         >
                                             {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
@@ -125,7 +120,7 @@ export function Navbar({ className }: NavbarProps) {
                     <Button variant="ghost" size="icon" className="h-9 w-9 cursor-pointer">
                         <Bell className="size-5 opacity-80 hover:opacity-100" />
                     </Button>
-                    
+
                     {/* User Menu */}
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -146,4 +141,4 @@ export function Navbar({ className }: NavbarProps) {
             </div>
         </header>
     );
-} 
+}

@@ -1,9 +1,9 @@
+import type { PageProps as InertiaPageProps } from '@inertiajs/core';
 import { useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
-import { PageProps as InertiaPageProps } from '@inertiajs/core';
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import type { FormEventHandler } from 'react';
 import { useTheme } from '@/components/ThemeProvider';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 
 interface User {
     name: string;
@@ -21,12 +21,25 @@ export default function Edit() {
     const user = auth.user;
     const { theme } = useTheme();
 
-    const { data: profileData, setData: setProfileData, patch: updateProfile, errors: profileErrors, processing: profileProcessing } = useForm({
+    const {
+        data: profileData,
+        setData: setProfileData,
+        patch: updateProfile,
+        errors: profileErrors,
+        processing: profileProcessing,
+    } = useForm({
         name: user.name,
         email: user.email,
     });
 
-    const { data: passwordData, setData: setPasswordData, put: updatePassword, errors: passwordErrors, processing: passwordProcessing, reset: resetPassword } = useForm({
+    const {
+        data: passwordData,
+        setData: setPasswordData,
+        put: updatePassword,
+        errors: passwordErrors,
+        processing: passwordProcessing,
+        reset: resetPassword,
+    } = useForm({
         current_password: '',
         password: '',
         password_confirmation: '',
@@ -50,13 +63,9 @@ export default function Edit() {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                         <div className="max-w-xl">
-                            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                                Informations du profil
-                            </h2>
+                            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Informations du profil</h2>
 
-                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                Mettez à jour les informations de votre compte.
-                            </p>
+                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Mettez à jour les informations de votre compte.</p>
 
                             <form onSubmit={submitProfile} className="mt-6 space-y-6">
                                 <div>
@@ -67,7 +76,7 @@ export default function Edit() {
                                         id="name"
                                         type="text"
                                         value={profileData.name}
-                                        onChange={e => setProfileData('name', e.target.value)}
+                                        onChange={(e) => setProfileData('name', e.target.value)}
                                         className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
                                     />
                                     {profileErrors.name && <p className="mt-2 text-sm text-red-600">{profileErrors.name}</p>}
@@ -81,7 +90,7 @@ export default function Edit() {
                                         id="email"
                                         type="email"
                                         value={profileData.email}
-                                        onChange={e => setProfileData('email', e.target.value)}
+                                        onChange={(e) => setProfileData('email', e.target.value)}
                                         className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
                                     />
                                     {profileErrors.email && <p className="mt-2 text-sm text-red-600">{profileErrors.email}</p>}
@@ -100,13 +109,9 @@ export default function Edit() {
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                         <div className="max-w-xl">
-                            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                                Préférences de thème
-                            </h2>
+                            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Préférences de thème</h2>
 
-                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                Personnalisez l'apparence de votre interface.
-                            </p>
+                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Personnalisez l'apparence de votre interface.</p>
 
                             <div className="mt-6">
                                 <div className="flex items-center justify-between">
@@ -124,13 +129,9 @@ export default function Edit() {
 
                     <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                         <div className="max-w-xl">
-                            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                                Modifier le mot de passe
-                            </h2>
+                            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Modifier le mot de passe</h2>
 
-                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                Assurez-vous d'utiliser un mot de passe long et sécurisé.
-                            </p>
+                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Assurez-vous d'utiliser un mot de passe long et sécurisé.</p>
 
                             <form onSubmit={submitPassword} className="mt-6 space-y-6">
                                 <div>
@@ -141,10 +142,12 @@ export default function Edit() {
                                         id="current_password"
                                         type="password"
                                         value={passwordData.current_password}
-                                        onChange={e => setPasswordData('current_password', e.target.value)}
+                                        onChange={(e) => setPasswordData('current_password', e.target.value)}
                                         className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
                                     />
-                                    {passwordErrors.current_password && <p className="mt-2 text-sm text-red-600">{passwordErrors.current_password}</p>}
+                                    {passwordErrors.current_password && (
+                                        <p className="mt-2 text-sm text-red-600">{passwordErrors.current_password}</p>
+                                    )}
                                 </div>
 
                                 <div>
@@ -155,7 +158,7 @@ export default function Edit() {
                                         id="password"
                                         type="password"
                                         value={passwordData.password}
-                                        onChange={e => setPasswordData('password', e.target.value)}
+                                        onChange={(e) => setPasswordData('password', e.target.value)}
                                         className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
                                     />
                                     {passwordErrors.password && <p className="mt-2 text-sm text-red-600">{passwordErrors.password}</p>}
@@ -169,7 +172,7 @@ export default function Edit() {
                                         id="password_confirmation"
                                         type="password"
                                         value={passwordData.password_confirmation}
-                                        onChange={e => setPasswordData('password_confirmation', e.target.value)}
+                                        onChange={(e) => setPasswordData('password_confirmation', e.target.value)}
                                         className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
                                     />
                                 </div>
@@ -188,4 +191,4 @@ export default function Edit() {
             </div>
         </AuthenticatedLayout>
     );
-} 
+}

@@ -1,0 +1,16 @@
+vendor/
+node_modules/
+public/
+bootstrap/ssr/
+tailwind.config.js
+storage/
+app/
+config/
+database/
+routes/
+tests/
+*.blade.php
+*.php
+composer.json
+composer.lock
+package-lock.json
