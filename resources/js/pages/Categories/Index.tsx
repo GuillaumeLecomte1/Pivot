@@ -59,18 +59,18 @@ export default function CategoriesIndex() {
             <Head title="Catégories" />
 
             <div className="container mx-auto px-4 py-12">
-                <h1 className="text-4xl font-bold mb-8">Catégories</h1>
+                <h1 className="mb-8 font-bold text-4xl">Catégories</h1>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {categories.map((category) => (
                         <a
                             key={category.id}
                             href={category.href}
-                            className={`${category.color} p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow`}
+                            className={`${category.color} rounded-lg p-6 shadow-sm transition-shadow hover:shadow-md`}
                         >
                             <div className="flex items-center space-x-4">
                                 <span className="text-4xl">{category.icon}</span>
-                                <h2 className="text-xl font-semibold">{category.name}</h2>
+                                <h2 className="font-semibold text-xl">{category.name}</h2>
                             </div>
                         </a>
                     ))}

@@ -52,7 +52,7 @@ export function Navbar({ className }: NavbarProps) {
     };
 
     return (
-        <header className={cn('border-b border-sidebar-border/80 sticky top-0 z-40 bg-background', className)}>
+        <header className={cn('sticky top-0 z-40 border-sidebar-border/80 border-b bg-background', className)}>
             <div className="mx-auto flex h-16 items-center justify-between px-4 md:max-w-7xl">
                 {/* Mobile Menu */}
                 <div className="flex items-center">
@@ -63,7 +63,7 @@ export function Navbar({ className }: NavbarProps) {
                                     <Menu className="h-5 w-5" />
                                 </Button>
                             </SheetTrigger>
-                            <SheetContent side="left" className="bg-sidebar flex h-full w-64 flex-col items-stretch justify-between">
+                            <SheetContent side="left" className="flex h-full w-64 flex-col items-stretch justify-between bg-sidebar">
                                 <SheetHeader className="flex justify-start text-left">
                                     <AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white" />
                                 </SheetHeader>

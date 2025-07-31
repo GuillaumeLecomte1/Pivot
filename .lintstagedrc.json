@@ -1,0 +1,15 @@
+{
+  "*.{js,jsx,ts,tsx}": [
+    "echo '  🔧 Biome: formatage et lint JavaScript/TypeScript...'",
+    "biome check --write"
+  ],
+  "*.php": [
+    "echo '  🎨 Laravel Pint: formatage du code PHP...'",
+    "./vendor/bin/pint",
+    "echo '  🔍 PHPStan: analyse statique PHP...'",
+    "./vendor/bin/phpstan analyse --no-progress"
+  ],
+  "package.json": ["echo '  📦 Package.json: formatage avec Biome...'", "biome format --write"],
+  "composer.json": ["echo '  🎼 Composer.json: pas de formatage automatique'"],
+  "*.md": ["echo '  📄 Markdown: formatage avec Biome...'", "biome format --write"]
+}

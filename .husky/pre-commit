@@ -1,0 +1,62 @@
+# Detect terminal capabilities
+if [ -t 1 ] && command -v tput > /dev/null 2>&1 && tput colors > /dev/null 2>&1; then
+    # Colors for better visual output
+    RED=$(tput setaf 1)
+    GREEN=$(tput setaf 2)
+    YELLOW=$(tput setaf 3)
+    BLUE=$(tput setaf 4)
+    PURPLE=$(tput setaf 5)
+    CYAN=$(tput setaf 6)
+    WHITE=$(tput setaf 7; tput bold)
+    NC=$(tput sgr0) # No Color
+else
+    # No colors for basic terminals
+    RED=''
+    GREEN=''
+    YELLOW=''
+    BLUE=''
+    PURPLE=''
+    CYAN=''
+    WHITE=''
+    NC=''
+fi
+
+# Header with project name
+echo "${PURPLE}╔══════════════════════════════════════════════════════════╗${NC}"
+echo "${PURPLE}║                    ${WHITE}🎯 PIVOT PRE-COMMIT${PURPLE}                    ║${NC}"
+echo "${PURPLE}╚══════════════════════════════════════════════════════════╝${NC}"
+echo ""
+
+# Check for staged files first
+if git diff --cached --quiet; then
+    echo "${RED}❌ Aucun fichier stagé trouvé !${NC}"
+    echo "${YELLOW}💡 Utilisez 'git add <fichiers>' avant de commiter${NC}"
+    exit 1
+fi
+
+echo "${CYAN}🚀 Démarrage des vérifications pre-commit...${NC}"
+echo ""
+
+# Show what files are being processed
+echo "${BLUE}📋 Fichiers à traiter :${NC}"
+git diff --cached --name-only | sed 's/^/  • /'
+echo ""
+
+# Run lint-staged with better visual feedback
+echo "${PURPLE}🔍 Exécution des vérifications automatiques...${NC}"
+echo ""
+
+if npx lint-staged; then
+    echo ""
+    echo "${GREEN}╔══════════════════════════════════════════════════════════╗${NC}"
+    echo "${GREEN}║                   ${WHITE}✅ SUCCÈS !${GREEN}                          ║${NC}"
+    echo "${GREEN}║            Toutes les vérifications ont réussi           ║${NC}"
+    echo "${GREEN}╚══════════════════════════════════════════════════════════╝${NC}"
+else
+    echo ""
+    echo "${RED}╔══════════════════════════════════════════════════════════╗${NC}"
+    echo "${RED}║                    ${WHITE}❌ ÉCHEC !${RED}                           ║${NC}"
+    echo "${RED}║               Des erreurs ont été détectées              ║${NC}"
+    echo "${RED}╚══════════════════════════════════════════════════════════╝${NC}"
+    exit 1
+fi

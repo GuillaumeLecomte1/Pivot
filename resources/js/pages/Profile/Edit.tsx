@@ -60,16 +60,16 @@ export default function Edit() {
     return (
         <AuthenticatedLayout>
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
+                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8 dark:bg-gray-800">
                         <div className="max-w-xl">
-                            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Informations du profil</h2>
+                            <h2 className="font-medium text-gray-900 text-lg dark:text-gray-100">Informations du profil</h2>
 
-                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Mettez à jour les informations de votre compte.</p>
+                            <p className="mt-1 text-gray-600 text-sm dark:text-gray-400">Mettez à jour les informations de votre compte.</p>
 
                             <form onSubmit={submitProfile} className="mt-6 space-y-6">
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    <label htmlFor="name" className="block font-medium text-gray-700 text-sm dark:text-gray-300">
                                         Nom
                                     </label>
                                     <input
@@ -77,13 +77,13 @@ export default function Edit() {
                                         type="text"
                                         value={profileData.name}
                                         onChange={(e) => setProfileData('name', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 dark:border-gray-700 dark:bg-gray-900"
                                     />
-                                    {profileErrors.name && <p className="mt-2 text-sm text-red-600">{profileErrors.name}</p>}
+                                    {profileErrors.name && <p className="mt-2 text-red-600 text-sm">{profileErrors.name}</p>}
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    <label htmlFor="email" className="block font-medium text-gray-700 text-sm dark:text-gray-300">
                                         Email
                                     </label>
                                     <input
@@ -91,15 +91,15 @@ export default function Edit() {
                                         type="email"
                                         value={profileData.email}
                                         onChange={(e) => setProfileData('email', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 dark:border-gray-700 dark:bg-gray-900"
                                     />
-                                    {profileErrors.email && <p className="mt-2 text-sm text-red-600">{profileErrors.email}</p>}
+                                    {profileErrors.email && <p className="mt-2 text-red-600 text-sm">{profileErrors.email}</p>}
                                 </div>
 
                                 <button
                                     type="submit"
                                     disabled={profileProcessing}
-                                    className="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    className="inline-flex items-center rounded-md border border-transparent bg-green-600 px-4 py-2 font-semibold text-white text-xs uppercase tracking-widest transition duration-150 ease-in-out hover:bg-green-700 focus:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 active:bg-green-900"
                                 >
                                     Enregistrer
                                 </button>
@@ -107,17 +107,17 @@ export default function Edit() {
                         </div>
                     </div>
 
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8 dark:bg-gray-800">
                         <div className="max-w-xl">
-                            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Préférences de thème</h2>
+                            <h2 className="font-medium text-gray-900 text-lg dark:text-gray-100">Préférences de thème</h2>
 
-                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Personnalisez l'apparence de votre interface.</p>
+                            <p className="mt-1 text-gray-600 text-sm dark:text-gray-400">Personnalisez l'apparence de votre interface.</p>
 
                             <div className="mt-6">
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100">Thème actuel</h3>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        <h3 className="font-medium text-gray-900 text-sm dark:text-gray-100">Thème actuel</h3>
+                                        <p className="text-gray-500 text-sm dark:text-gray-400">
                                             {theme === 'light' ? 'Thème clair' : theme === 'dark' ? 'Thème sombre' : 'Thème système'}
                                         </p>
                                     </div>
@@ -127,15 +127,15 @@ export default function Edit() {
                         </div>
                     </div>
 
-                    <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8 dark:bg-gray-800">
                         <div className="max-w-xl">
-                            <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Modifier le mot de passe</h2>
+                            <h2 className="font-medium text-gray-900 text-lg dark:text-gray-100">Modifier le mot de passe</h2>
 
-                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Assurez-vous d'utiliser un mot de passe long et sécurisé.</p>
+                            <p className="mt-1 text-gray-600 text-sm dark:text-gray-400">Assurez-vous d'utiliser un mot de passe long et sécurisé.</p>
 
                             <form onSubmit={submitPassword} className="mt-6 space-y-6">
                                 <div>
-                                    <label htmlFor="current_password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    <label htmlFor="current_password" className="block font-medium text-gray-700 text-sm dark:text-gray-300">
                                         Mot de passe actuel
                                     </label>
                                     <input
@@ -143,15 +143,15 @@ export default function Edit() {
                                         type="password"
                                         value={passwordData.current_password}
                                         onChange={(e) => setPasswordData('current_password', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 dark:border-gray-700 dark:bg-gray-900"
                                     />
                                     {passwordErrors.current_password && (
-                                        <p className="mt-2 text-sm text-red-600">{passwordErrors.current_password}</p>
+                                        <p className="mt-2 text-red-600 text-sm">{passwordErrors.current_password}</p>
                                     )}
                                 </div>
 
                                 <div>
-                                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    <label htmlFor="password" className="block font-medium text-gray-700 text-sm dark:text-gray-300">
                                         Nouveau mot de passe
                                     </label>
                                     <input
@@ -159,13 +159,13 @@ export default function Edit() {
                                         type="password"
                                         value={passwordData.password}
                                         onChange={(e) => setPasswordData('password', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 dark:border-gray-700 dark:bg-gray-900"
                                     />
-                                    {passwordErrors.password && <p className="mt-2 text-sm text-red-600">{passwordErrors.password}</p>}
+                                    {passwordErrors.password && <p className="mt-2 text-red-600 text-sm">{passwordErrors.password}</p>}
                                 </div>
 
                                 <div>
-                                    <label htmlFor="password_confirmation" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    <label htmlFor="password_confirmation" className="block font-medium text-gray-700 text-sm dark:text-gray-300">
                                         Confirmer le mot de passe
                                     </label>
                                     <input
@@ -173,14 +173,14 @@ export default function Edit() {
                                         type="password"
                                         value={passwordData.password_confirmation}
                                         onChange={(e) => setPasswordData('password_confirmation', e.target.value)}
-                                        className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 dark:border-gray-700 dark:bg-gray-900"
                                     />
                                 </div>
 
                                 <button
                                     type="submit"
                                     disabled={passwordProcessing}
-                                    className="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150"
+                                    className="inline-flex items-center rounded-md border border-transparent bg-green-600 px-4 py-2 font-semibold text-white text-xs uppercase tracking-widest transition duration-150 ease-in-out hover:bg-green-700 focus:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 active:bg-green-900"
                                 >
                                     Mettre à jour le mot de passe
                                 </button>

@@ -8,7 +8,7 @@ export default function Example() {
             <Head title="Exemple" />
 
             <div className="space-y-6">
-                <h1 className="text-3xl font-bold">Page d'exemple</h1>
+                <h1 className="font-bold text-3xl">Page d'exemple</h1>
 
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     <Card>

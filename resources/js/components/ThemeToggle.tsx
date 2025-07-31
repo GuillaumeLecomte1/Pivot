@@ -10,12 +10,12 @@ export function ThemeToggle() {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="icon" className="h-9 w-9 border-2">
-                    <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                    <Sun className="dark:-rotate-90 h-5 w-5 rotate-0 scale-100 transition-all dark:scale-0" />
                     <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                     <span className="sr-only">Changer de thème</span>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <DropdownMenuContent align="end" className="border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
                 <DropdownMenuItem onClick={() => setTheme('light')} className="hover:bg-gray-100 dark:hover:bg-gray-700">
                     <Sun className="mr-2 h-4 w-4" />
                     <span>Clair</span>

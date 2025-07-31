@@ -55,12 +55,12 @@ const MinimalCardImage = React.forwardRef<HTMLDivElement, React.HTMLAttributes<H
 MinimalCardImage.displayName = 'MinimalCardImage';
 
 const MinimalCardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(({ className, ...props }, ref) => (
-    <h3 ref={ref} className={cn('mt-2 px-1 text-lg font-semibold leading-tight', className)} {...props} />
+    <h3 ref={ref} className={cn('mt-2 px-1 font-semibold text-lg leading-tight', className)} {...props} />
 ));
 MinimalCardTitle.displayName = 'MinimalCardTitle';
 
 const MinimalCardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(({ className, ...props }, ref) => (
-    <p ref={ref} className={cn('px-1 pb-2 text-sm text-neutral-500', className)} {...props} />
+    <p ref={ref} className={cn('px-1 pb-2 text-neutral-500 text-sm', className)} {...props} />
 ));
 MinimalCardDescription.displayName = 'MinimalCardDescription';
 

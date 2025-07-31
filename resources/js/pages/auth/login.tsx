@@ -4,7 +4,6 @@ import type { FormEventHandler } from 'react';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
-import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -48,7 +47,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             type="email"
                             required
                             autoFocus
-                            tabIndex={1}
+                            tabIndex="0"
                             autoComplete="email"
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
@@ -61,7 +60,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                         <div className="flex items-center">
                             <Label htmlFor="password">Password</Label>
                             {canResetPassword && (
-                                <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
+                                <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex="0">
                                     Forgot password?
                                 </TextLink>
                             )}
@@ -70,7 +69,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             id="password"
                             type="password"
                             required
-                            tabIndex={2}
+                            tabIndex="0"
                             autoComplete="current-password"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
@@ -85,15 +84,15 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             name="remember"
                             checked={data.remember}
                             onClick={() => setData('remember', !data.remember)}
-                            tabIndex={3}
+                            tabIndex="0"
                         />
                         <Label htmlFor="remember">Remember me</Label>
                     </div>
 
                     <button
                         type="submit"
-                        className="mt-4 w-full bg-black text-white dark:bg-white dark:text-black hover:bg-opacity-90 transition-colors h-9 px-4 py-2 rounded-md font-medium inline-flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none"
-                        tabIndex={4}
+                        className="mt-4 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md bg-black px-4 py-2 font-medium text-white transition-colors hover:bg-opacity-90 disabled:pointer-events-none disabled:opacity-50 dark:bg-white dark:text-black"
+                        tabIndex="0"
                         disabled={processing}
                     >
                         {processing && <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />}
@@ -101,15 +100,15 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     </button>
                 </div>
 
-                <div className="text-muted-foreground text-center text-sm">
+                <div className="text-center text-muted-foreground text-sm">
                     Don't have an account?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
+                    <TextLink href={route('register')} tabIndex="0">
                         Sign up
                     </TextLink>
                 </div>
             </form>
 
-            {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
+            {status && <div className="mb-4 text-center font-medium text-green-600 text-sm">{status}</div>}
         </AuthLayout>
     );
 }

@@ -1,0 +1,46 @@
+# Detect terminal capabilities
+if [ -t 1 ] && command -v tput > /dev/null 2>&1 && tput colors > /dev/null 2>&1; then
+    # Colors for better visual output
+    RED=$(tput setaf 1)
+    GREEN=$(tput setaf 2)
+    YELLOW=$(tput setaf 3)
+    BLUE=$(tput setaf 4)
+    PURPLE=$(tput setaf 5)
+    CYAN=$(tput setaf 6)
+    WHITE=$(tput setaf 7; tput bold)
+    NC=$(tput sgr0) # No Color
+else
+    # No colors for basic terminals
+    RED=''
+    GREEN=''
+    YELLOW=''
+    BLUE=''
+    PURPLE=''
+    CYAN=''
+    WHITE=''
+    NC=''
+fi
+
+echo ""
+echo "${CYAN}📝 Validation du message de commit...${NC}"
+echo ""
+
+if npx --no -- commitlint --edit "$1"; then
+    echo "${GREEN}✅ Message de commit valide !${NC}"
+    echo "${BLUE}💡 Format: type(scope): description${NC}"
+else
+    echo ""
+    echo "${RED}╔══════════════════════════════════════════════════════════╗${NC}"
+    echo "${RED}║                ${WHITE}❌ MESSAGE INVALIDE !${RED}                   ║${NC}"
+    echo "${RED}╚══════════════════════════════════════════════════════════╝${NC}"
+    echo ""
+    echo "${YELLOW}📋 Format attendu: ${WHITE}type(scope): description${NC}"
+    echo "${YELLOW}📋 Types valides: ${WHITE}feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert${NC}"
+    echo ""
+    echo "${CYAN}💡 Exemples:${NC}"
+    echo "  ${GREEN}feat: add user authentication${NC}"
+    echo "  ${GREEN}fix(api): resolve login endpoint issue${NC}"
+    echo "  ${GREEN}docs: update README installation steps${NC}"
+    echo ""
+    exit 1
+fi

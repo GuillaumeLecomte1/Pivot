@@ -1,16 +1,13 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { useState } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import type { SharedData } from '@/types';
 
 export default function MainNavbar() {
-    const { auth } = usePage<SharedData>().props;
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [_isMenuOpen, _setIsMenuOpen] = useState(false);
 
     return (
-        <header className="container mx-auto px-4 sm:px-6 lg:px-12 py-6">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-0">
+        <header className="container mx-auto px-4 py-6 sm:px-6 lg:px-12">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-0">
                 {/* Logo */}
                 <div className="flex items-center justify-between">
                     <Link href="/" className="flex items-center">
@@ -32,15 +29,22 @@ export default function MainNavbar() {
                         />
                     </Link>
                     {/* Mobile menu button */}
-                    <button className="md:hidden p-2 dark:text-foreground">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button type="button" className="p-2 md:hidden dark:text-foreground">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            aria-label="Menu"
+                        >
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
 
                 {/* Navigation */}
-                <nav className="hidden md:flex items-center space-x-8">
+                <nav className="hidden items-center space-x-8 md:flex">
                     <Link href="/" className="text-gray-800 hover:text-gray-600 dark:text-gray-200 dark:hover:text-gray-400">
                         Accueil
                     </Link>
@@ -57,15 +61,21 @@ export default function MainNavbar() {
 
                 {/* Actions */}
                 <div className="flex items-center space-x-6">
-                    <Link href="/pivot-pro" className="px-4 py-2 bg-black text-white rounded text-sm md:text-base dark:bg-white dark:text-black">
+                    <Link href="/pivot-pro" className="rounded bg-black px-4 py-2 text-sm text-white md:text-base dark:bg-white dark:text-black">
                         Pivot Pro
                     </Link>
 
                     {/* User actions */}
                     <div className="flex items-center space-x-4">
-                        <Link href="/angers" className="hidden md:flex items-center text-gray-700 dark:text-gray-300">
+                        <Link href="/angers" className="hidden items-center text-gray-700 md:flex dark:text-gray-300">
                             <span>Angers</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="ml-1 h-5 w-5"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-label="Sélectionner ville"
+                            >
                                 <path
                                     fillRule="evenodd"
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -84,6 +94,7 @@ export default function MainNavbar() {
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
+                                    aria-label="Favoris"
                                 >
                                     <path
                                         strokeLinecap="round"
@@ -100,6 +111,7 @@ export default function MainNavbar() {
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
+                                    aria-label="Panier"
                                 >
                                     <path
                                         strokeLinecap="round"
@@ -114,7 +126,7 @@ export default function MainNavbar() {
                         {/* Login button */}
                         <Link
                             href="/login"
-                            className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black rounded hover:bg-opacity-90 transition-colors text-sm md:text-base"
+                            className="rounded bg-black px-4 py-2 text-sm text-white transition-colors hover:bg-opacity-90 md:text-base dark:bg-white dark:text-black"
                         >
                             Se connecter
                         </Link>

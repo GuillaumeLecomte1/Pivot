@@ -43,7 +43,7 @@ export default function Register() {
                             type="text"
                             required
                             autoFocus
-                            tabIndex={1}
+                            tabIndex="0"
                             autoComplete="name"
                             value={data.name}
                             onChange={(e) => setData('name', e.target.value)}
@@ -59,7 +59,7 @@ export default function Register() {
                             id="email"
                             type="email"
                             required
-                            tabIndex={2}
+                            tabIndex="0"
                             autoComplete="email"
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
@@ -75,7 +75,7 @@ export default function Register() {
                             id="password"
                             type="password"
                             required
-                            tabIndex={3}
+                            tabIndex="0"
                             autoComplete="new-password"
                             value={data.password}
                             onChange={(e) => setData('password', e.target.value)}
@@ -91,7 +91,7 @@ export default function Register() {
                             id="password_confirmation"
                             type="password"
                             required
-                            tabIndex={4}
+                            tabIndex="0"
                             autoComplete="new-password"
                             value={data.password_confirmation}
                             onChange={(e) => setData('password_confirmation', e.target.value)}
@@ -101,15 +101,15 @@ export default function Register() {
                         <InputError message={errors.password_confirmation} />
                     </div>
 
-                    <Button type="submit" className="mt-2 w-full" tabIndex={5} disabled={processing}>
+                    <Button type="submit" className="mt-2 w-full" tabIndex="0" disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Create account
                     </Button>
                 </div>
 
-                <div className="text-muted-foreground text-center text-sm">
+                <div className="text-center text-muted-foreground text-sm">
                     Already have an account?{' '}
-                    <TextLink href={route('login')} tabIndex={6}>
+                    <TextLink href={route('login')} tabIndex="0">
                         Log in
                     </TextLink>
                 </div>

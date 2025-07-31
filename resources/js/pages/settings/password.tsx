@@ -116,7 +116,7 @@ export default function Password() {
                                 leave="transition ease-in-out"
                                 leaveTo="opacity-0"
                             >
-                                <p className="text-sm text-neutral-600">Saved</p>
+                                <p className="text-neutral-600 text-sm">Saved</p>
                             </Transition>
                         </div>
                     </form>
