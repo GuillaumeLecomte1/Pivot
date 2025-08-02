@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 import AppLayout from '@/components/AppLayout';
 import { MinimalCard } from '@/components/ui/minimal-card';
@@ -29,8 +29,35 @@ interface ProductPageProps {
 export default function ProductShow({ product, relatedProducts = [] }: ProductPageProps) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [isAddingToCart, setIsAddingToCart] = useState(false);
 
     const currentImage = product.images[selectedImageIndex] || '/images/products/placeholder.png';
+
+    const addToCart = () => {
+        setIsAddingToCart(true);
+
+        router.post(
+            '/panier/ajouter',
+            {
+                product_id: product.id,
+                product_data: product,
+                quantity: 1,
+            },
+            {
+                onSuccess: () => {
+                    // Rediriger vers le panier après ajout réussi
+                    router.visit('/panier');
+                },
+                onError: (errors) => {
+                    console.error('Erreur ajout panier:', errors);
+                    alert("Erreur lors de l'ajout au panier");
+                },
+                onFinish: () => {
+                    setIsAddingToCart(false);
+                },
+            },
+        );
+    };
 
     return (
         <AppLayout>
@@ -193,15 +220,69 @@ export default function ProductShow({ product, relatedProducts = [] }: ProductPa
                         <div className="space-y-3">
                             <button
                                 type="button"
-                                className="w-full rounded-xl bg-[#6ED47C] py-4 font-semibold text-white transition-colors hover:bg-[#5bc26b] dark:text-black"
+                                onClick={() => addToCart()}
+                                disabled={isAddingToCart}
+                                className="w-full rounded-xl bg-[#6ED47C] py-4 font-semibold text-white transition-colors hover:bg-[#5bc26b] disabled:opacity-50 dark:text-black"
+                            >
+                                {isAddingToCart ? (
+                                    <span className="flex items-center justify-center">
+                                        <svg className="mr-2 h-4 w-4 animate-spin" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                            <path
+                                                className="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                            />
+                                        </svg>
+                                        Ajout en cours...
+                                    </span>
+                                ) : (
+                                    <>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="mr-2 inline h-5 w-5"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m8.5-5v6a1 1 0 01-1 1H9a1 1 0 01-1-1v-6m8 0V9a1 1 0 00-1-1H9a1 1 0 00-1 1v4.01"
+                                            />
+                                        </svg>
+                                        Ajouter au panier
+                                    </>
+                                )}
+                            </button>
+
+                            <button
+                                type="button"
+                                className="w-full rounded-xl border-2 border-[#6ED47C] py-4 font-semibold text-[#6ED47C] transition-colors hover:bg-[#6ED47C] hover:text-white dark:hover:text-black"
                             >
                                 Contacter la ressourcerie
                             </button>
+
                             {product.ressourcerie.phone && (
                                 <a
                                     href={`tel:${product.ressourcerie.phone}`}
                                     className="block w-full rounded-xl border-2 border-gray-300 py-4 text-center font-semibold text-gray-900 transition-colors hover:border-gray-400 hover:bg-gray-50 dark:border-gray-600 dark:text-white dark:hover:border-gray-500 dark:hover:bg-neutral-800"
                                 >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="mr-2 inline h-4 w-4"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21L6.16 10.439c-.37.24-.581.693-.398 1.13.43 1.026 1.293 2.454 2.571 3.733 1.279 1.278 2.707 2.14 3.733 2.571.437.183.89-.027 1.13-.398l1.052-4.064a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.948V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                        />
+                                    </svg>
                                     Appeler : {product.ressourcerie.phone}
                                 </a>
                             )}

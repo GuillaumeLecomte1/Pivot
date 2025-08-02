@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,13 @@ Route::get('/notre-histoire', function () {
 })->name('about');
 
 Route::get('/produits/{id}', [ProductController::class, 'show'])->name('products.show');
+
+// Cart routes
+Route::get('/panier', [CartController::class, 'index'])->name('cart.index');
+Route::post('/panier/ajouter', [CartController::class, 'add'])->name('cart.add');
+Route::put('/panier/items/{item}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/panier/items/{item}', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/panier/vider', [CartController::class, 'clear'])->name('cart.clear');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', function () {

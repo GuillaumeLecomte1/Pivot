@@ -10,16 +10,7 @@
     "echo '  🔍 PHPStan: analyse statique PHP...'",
     "./vendor/bin/phpstan analyse --no-progress --quiet --memory-limit=512M"
   ],
-  "package.json": [
-    "echo '  📦 Package.json: formatage avec Biome...'",
-    "biome format --write"
-  ],
-  "composer.json": [
-    "echo '  🎼 Composer.json: validation...'",
-    "composer validate --no-check-publish --quiet"
-  ],
-  "*.md": [
-    "echo '  📄 Markdown: formatage avec Biome...'",
-    "biome format --write --no-errors-on-unmatched"
-  ]
+  "package.json": ["echo '  📦 Package.json: formatage avec Biome...'", "biome format --write"],
+  "composer.json": ["echo '  🎼 Composer.json: validation...'", "composer validate --no-check-publish --quiet"],
+  "*.md": ["echo '  📄 Markdown: formatage avec Biome...'", "biome format --write --no-errors-on-unmatched"]
 }

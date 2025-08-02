@@ -55,10 +55,56 @@ resources/css/      # Styles CSS/Tailwind
 - **Conventions :** PascalCase pour composants, camelCase pour variables
 - **Imports :** Organisation automatique avec Biome
 
-### PHP
-- **Standard :** Laravel Pint (PSR-12 étendu)
+### PHP (PSR-12 Extended)
+- **Standard :** Laravel Pint (PSR-12 strict compliance)
 - **Analyse :** PHPStan level 4 (équilibré)
-- **Conventions :** Laravel standards
+- **Conventions :** Laravel + PSR-12 standards
+
+**PSR-12 Rules strictes :**
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+final class Product extends Model
+{
+    protected $fillable = [
+        'name',
+        'description', 
+        'price',
+    ];
+
+    protected $casts = [
+        'price' => 'decimal:2',
+        'created_at' => 'datetime',
+    ];
+
+    public function ressourcerie(): BelongsTo
+    {
+        return $this->belongsTo(Ressourcerie::class);
+    }
+
+    public function getFormattedPriceAttribute(): string
+    {
+        return number_format($this->price, 2) . ' €';
+    }
+}
+```
+
+**Règles PSR-12 obligatoires :**
+- `declare(strict_types=1)` sur chaque fichier PHP
+- Namespaces + use statements organisés
+- Classes `final` par défaut (sauf extends nécessaire)
+- Méthodes typées (paramètres + return types)
+- Properties typées (PHP 7.4+)
+- Indentation 4 spaces, pas de tabs
+- Lignes max 120 caractères
+- Opening braces nouvelle ligne pour classes/méthodes
 
 ### CSS
 - **Framework :** Tailwind CSS v4
@@ -182,6 +228,7 @@ import { useTransition, useDeferredValue } from 'react'
 
 **Code E-commerce :**
 - **Domain-Driven Design** : Product, Order, User contexts
+- **PSR-12 Compliance** : strict types, final classes, typed properties
 - **API-First** : headless commerce ready
 - **Security** : PCI DSS compliance, RGPD
 - **Monitoring** : APM + business metrics

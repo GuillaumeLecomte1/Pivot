@@ -28,7 +28,5 @@ parameters:
         - bootstrap/cache/
         - storage/
 
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
     reportUnmatchedIgnoredErrors: false
 
