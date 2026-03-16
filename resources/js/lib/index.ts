@@ -135,3 +135,17 @@ export {
     setItem,
     setJsonItem,
 } from './storage';
+// Re-export Theme utilities
+export type { Theme, ThemeError } from './theme';
+export {
+    applyTheme,
+    getMediaQuery,
+    getStoredTheme,
+    getSystemTheme,
+    initializeTheme,
+    isMediaQueryAvailable,
+    resolveTheme,
+    setStoredTheme,
+    subscribeToSystemTheme,
+    toggleTheme,
+} from './theme';
