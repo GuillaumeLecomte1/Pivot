@@ -1,10 +1,23 @@
-import { LucideIcon } from 'lucide-react';
+/**
+ * Type definitions for Pivot
+ *
+ * This file provides TypeScript types for the application.
+ * For runtime validation, use the Effect schemas from @/lib/schema
+ */
+
 import type { Config } from 'ziggy-js';
 
-export interface Auth {
-    user: User;
-}
+// Import types from Effect schemas for consistency
+// These are inferred from the schemas in @/lib/schema
+import type { SchemaAppearance, SchemaAuth, SchemaNavItem, SchemaUser } from '@/lib/schema';
 
+// Re-export types from Effect schemas
+export type User = SchemaUser;
+export type Auth = SchemaAuth;
+export type NavItem = SchemaNavItem;
+export type Appearance = SchemaAppearance;
+
+// Breadcrumb type (following same pattern)
 export interface BreadcrumbItem {
     title: string;
     href: string;
@@ -15,28 +28,10 @@ export interface NavGroup {
     items: NavItem[];
 }
 
-export interface NavItem {
-    title: string;
-    href: string;
-    icon?: LucideIcon | null;
-    isActive?: boolean;
-}
-
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
     ziggy: Config & { location: string };
     [key: string]: unknown;
-}
-
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    avatar?: string;
-    email_verified_at: string | null;
-    created_at: string;
-    updated_at: string;
-    [key: string]: unknown; // This allows for additional properties...
 }

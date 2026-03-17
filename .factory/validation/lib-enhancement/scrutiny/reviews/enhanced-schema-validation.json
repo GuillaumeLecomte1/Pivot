@@ -1,0 +1,94 @@
+{
+  "featureId": "enhanced-schema-validation",
+  "reviewedAt": "2026-03-16T23:31:50Z",
+  "commitId": "4a66e3a",
+  "transcriptSkeletonReviewed": true,
+  "diffReviewed": true,
+  "status": "fail",
+  "codeReview": {
+    "summary": "Implementation adds Either-based validation functions to schema.ts and API response parsing utilities. While the code is syntactically correct and passes tests, there are significant gaps in test coverage for the new Either-based validation functions (VAL-LIB-004) and API response parsing utilities (VAL-LIB-005). The validation contract explicitly requires 'Unit tests comparing with existing validate function' and 'Unit tests with valid/invalid API responses', but no such tests exist for the new functions.",
+    "issues": [
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "117-145",
+        "severity": "blocking",
+        "description": "validateEither function has no dedicated unit tests. The validation contract VAL-LIB-004 requires 'Unit tests comparing with existing validate function' but there are no tests that verify Either return type behavior."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "147-171",
+        "severity": "blocking",
+        "description": "validateEitherDetailed function has no dedicated unit tests."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "173-181",
+        "severity": "blocking",
+        "description": "createEitherValidator function has no dedicated unit tests."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "183-204",
+        "severity": "blocking",
+        "description": "validateAndTransform function has no dedicated unit tests."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "206-215",
+        "severity": "blocking",
+        "description": "validateAsync function has no dedicated unit tests."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "234-260",
+        "severity": "blocking",
+        "description": "parseApiResponse function has no unit tests. VAL-LIB-005 explicitly requires 'Unit tests with valid/invalid API responses' but there are no tests for this function."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "262-305",
+        "severity": "blocking",
+        "description": "parsePaginatedResponse function has no unit tests. This is required by VAL-LIB-005."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "325-346",
+        "severity": "blocking",
+        "description": "parseApiError function has no unit tests. This is required by VAL-LIB-005."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "348-367",
+        "severity": "non_blocking",
+        "description": "safeParse function has no unit tests."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "369-385",
+        "severity": "non_blocking",
+        "description": "validateRequired function has no unit tests."
+      },
+      {
+        "file": "resources/js/lib/schema.ts",
+        "line": "387-405",
+        "severity": "non_blocking",
+        "description": "validateOptional function has no unit tests."
+      },
+      {
+        "file": "resources/js/lib/index.ts",
+        "line": "75-90",
+        "severity": "non_blocking",
+        "description": "The new Either-based validation functions (validateEither, parseApiResponse, etc.) are not re-exported in lib/index.ts. Users must import directly from './lib/schema' instead of from the main lib entry point."
+      }
+    ]
+  },
+  "sharedStateObservations": [
+    {
+      "area": "skills",
+      "observation": "The handoff claims 'Existing tests cover schema validation - new Either-based functions maintain backward compatibility' but this conflates testing the existing validate() function with testing the new Either-based functions. The validation contract explicitly requires unit tests for the new Either functions, but none exist.",
+      "evidence": "VAL-LIB-004 evidence says 'Unit tests comparing with existing validate function' but effect.test.ts only tests validate(), not validateEither(). VAL-LIB-005 evidence says 'Unit tests with valid/invalid API responses' but no tests exist for parseApiResponse, parsePaginatedResponse, or parseApiError."
+    }
+  ],
+  "addressesFailureFrom": null,
+  "summary": "The feature implementation adds the required Either-based validation functions and API response parsing utilities to schema.ts. However, it FAILS validation because the validation contract explicitly requires unit tests for these new functions (VAL-LIB-004 and VAL-LIB-005), but none exist. The existing tests only cover the original validate() function, not the new Either-based functions. All 173 tests pass, but they don't cover the specific functionality that VAL-LIB-004 and VAL-LIB-005 require evidence for."
+}

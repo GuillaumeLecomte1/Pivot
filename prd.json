@@ -1,0 +1,49 @@
+{
+  "name": "Pivot Effect.ts Integration",
+  "branchName": "feature/effect-ts-integration",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Install Effect.ts packages",
+      "description": "Install @effect/schema and @effect/platform packages to improve TypeScript type safety across the codebase",
+      "acceptanceCriteria": ["@effect/schema installed", "@effect/platform installed", "No build errors after installation"],
+      "priority": 1,
+      "passes": true,
+      "dependsOn": [],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-002",
+      "title": "Create Effect-based utilities",
+      "description": "Create Effect-based utility functions (Either, Option patterns, schema validation) in a shared utils module",
+      "acceptanceCriteria": ["Effect utilities module created", "Schema validation utilities implemented", "Error handling patterns established"],
+      "priority": 2,
+      "passes": true,
+      "dependsOn": ["US-001"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-003",
+      "title": "Refactor existing code with Effect patterns",
+      "description": "Refactor existing TypeScript modules to use Effect patterns for better error handling and type inference",
+      "acceptanceCriteria": ["At least one existing module refactored", "Type safety improved with Effect schemas", "Code compiles without errors"],
+      "priority": 3,
+      "passes": true,
+      "dependsOn": ["US-002"],
+      "completionNotes": "Completed by agent"
+    },
+    {
+      "id": "US-004",
+      "title": "Write tests with Vitest",
+      "description": "Write comprehensive tests for the new Effect utilities using Vitest",
+      "acceptanceCriteria": ["Tests for schema validation", "Tests for utility functions", "All tests passing"],
+      "priority": 4,
+      "passes": true,
+      "dependsOn": ["US-002", "US-003"],
+      "completionNotes": "Completed by agent"
+    }
+  ],
+  "metadata": {
+    "updatedAt": "2026-03-16T20:55:49.473Z"
+  }
+}
