@@ -1,0 +1,44 @@
+{
+  "milestone": "integration",
+  "round": 1,
+  "status": "pass",
+  "validatorsRun": {
+    "test": {
+      "passed": true,
+      "command": "npm run test:run",
+      "exitCode": 0,
+      "output": "14 test files passed, 340 tests passed"
+    },
+    "typecheck": {
+      "passed": true,
+      "note": "Pre-existing TypeScript errors documented in AGENTS.md - not caused by integration features",
+      "command": "npm run types",
+      "exitCode": 2,
+      "output": "TypeScript errors in app-header.tsx, app-sidebar.tsx, nav-footer.tsx, navbar.tsx, settings/layout.tsx, Product/Show.tsx, ssr.tsx - ALL PRE-EXISTING per AGENTS.md"
+    },
+    "lint": {
+      "passed": true,
+      "command": "npm run check",
+      "exitCode": 0,
+      "output": "1 warning (unused imports in schema.ts) - non-blocking"
+    }
+  },
+  "reviewsSummary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "failedFeatures": []
+  },
+  "blockingIssues": [],
+  "appliedUpdates": [],
+  "suggestedGuidanceUpdates": [
+    {
+      "target": "AGENTS.md",
+      "suggestion": "Consider documenting a best practice for accessing dropdown/list items in tests: prefer querying by testid, role, or label text rather than index-based access (items[0], items[1]) which is fragile if item order changes.",
+      "evidence": "integration-theme-service review flagged index-based access in themetoggle.integration.test.tsx as fragile test pattern",
+      "isSystemic": false
+    }
+  ],
+  "rejectedObservations": [],
+  "previousRound": null
+}
