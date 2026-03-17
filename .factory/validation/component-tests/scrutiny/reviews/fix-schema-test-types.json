@@ -1,0 +1,15 @@
+{
+  "featureId": "fix-schema-test-types",
+  "reviewedAt": "2026-03-17T00:45:00.000Z",
+  "commitId": "c5cac54",
+  "transcriptSkeletonReviewed": true,
+  "diffReviewed": true,
+  "status": "pass",
+  "codeReview": {
+    "summary": "The worker fixed the TypeScript type compatibility issues in schema.test.ts by modifying the ApiResponseSchema function signature in schema.ts. The change was from `<T extends Schema.Schema<unknown>>` to `<T>`, which allows Effect Schema types like UserSchema and ApiErrorSchema to be properly passed without type errors. The fix is minimal and targeted.",
+    "issues": []
+  },
+  "sharedStateObservations": [],
+  "addressesFailureFrom": null,
+  "summary": "The feature fix is complete and verified. The TypeScript type errors in schema.test.ts (lines 321, 346, 363) have been resolved by changing the generic constraint in ApiResponseSchema from `<T extends Schema.Schema<unknown>>` to `<T>` in resources/js/lib/schema.ts. All 320 tests pass and no TypeScript errors remain in schema.test.ts."
+}
