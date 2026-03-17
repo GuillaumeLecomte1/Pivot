@@ -7,7 +7,7 @@
 
 import * as ParseResult from 'effect/ParseResult';
 import * as Schema from 'effect/Schema';
-import { type Either, fail, isLeft, isRight, pipe, succeed } from './either';
+import { type Either, fail, isRight, succeed } from './either';
 
 export { Schema };
 

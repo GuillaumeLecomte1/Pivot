@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RessourcerieController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,9 +36,10 @@ Route::get('/categories', function () {
     return Inertia::render('Categories/Index');
 })->name('categories.index');
 
-Route::get('/ressourceries', function () {
-    return Inertia::render('Ressourceries/Index');
-})->name('ressourceries.index');
+Route::get('/departements', [RessourcerieController::class, 'index'])->name('departements.index');
+Route::get('/departements/{department}/ressourceries', [RessourcerieController::class, 'byDepartment'])->name('departements.ressourceries');
+Route::get('/ressourceries', [RessourcerieController::class, 'index'])->name('ressourceries.index');
+Route::get('/ressourceries/{id}', [RessourcerieController::class, 'show'])->name('ressourceries.show');
 
 Route::get('/notre-histoire', function () {
     return Inertia::render('About');

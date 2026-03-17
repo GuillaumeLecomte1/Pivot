@@ -141,9 +141,9 @@ export default function HomePage() {
                                     Retrouvez toutes les annonces des ressourceries près de chez vous !
                                 </p>
                             </div>
-                            <button
-                                type="button"
-                                className="mt-4 flex items-center self-start rounded border border-black bg-black px-4 py-2 text-white md:mt-0 md:self-auto dark:bg-white dark:text-black"
+                            <Link
+                                href="/departements"
+                                className="mt-4 flex items-center self-start rounded border border-black bg-black px-4 py-2 text-white hover:bg-gray-800 md:mt-0 md:self-auto dark:bg-white dark:text-black"
                             >
                                 afficher la carte
                                 <svg
@@ -159,7 +159,7 @@ export default function HomePage() {
                                         clipRule="evenodd"
                                     />
                                 </svg>
-                            </button>
+                            </Link>
                         </div>
 
                         {/* Logo line */}
