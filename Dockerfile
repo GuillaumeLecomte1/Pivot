@@ -46,7 +46,7 @@ COPY . .
 RUN composer install --optimize-autoloader --no-dev
 
 # Install Node dependencies and build assets
-RUN npm install && npm run build
+RUN npm install --legacy-peer-deps && npm run build
 
 # Copy nginx configuration
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
