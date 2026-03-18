@@ -1,0 +1,15 @@
+{
+  "featureId": "fix-typescript-errors",
+  "reviewedAt": "2026-03-18T22:35:00.000Z",
+  "commitId": "d575689",
+  "transcriptSkeletonReviewed": true,
+  "diffReviewed": true,
+  "status": "pass",
+  "codeReview": {
+    "summary": "Successfully fixed TypeScript errors in all 7 files. Changes include: (1) Updated SchemaNavItem type in schema.ts to use ComponentType<LucideProps> for icon property, which indirectly fixed icon type errors in app-header.tsx, app-sidebar.tsx, nav-footer.tsx, and layouts/settings/layout.tsx; (2) Fixed navbar.tsx auth typing with usePage<SharedData>(); (3) Fixed ssr.tsx import to use default import from ziggy-js instead of non-existent vendor path; (4) Fixed Product/Show.tsx router.post to stringify product_data; (5) Added ziggy.d.ts and ziggy-vendor.d.ts type declarations for ziggy-js module.",
+    "issues": []
+  },
+  "sharedStateObservations": [],
+  "addressesFailureFrom": null,
+  "summary": "TypeScript errors fixed successfully. All 7 files resolved: 4 via direct modification (navbar.tsx, schema.ts, ssr.tsx, Product/Show.tsx) and 3 indirectly through schema.ts type change (app-header.tsx, app-sidebar.tsx, nav-footer.tsx, layouts/settings/layout.tsx). Ziggy module declarations added. npm run types passes with 0 errors."
+}
