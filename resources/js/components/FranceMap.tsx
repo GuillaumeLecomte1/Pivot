@@ -35,8 +35,8 @@ export function FranceMap({ onSelectDepartment, selectedDepartment }: FranceMapP
                         fillColor = '#E5E7EB'; // Light gray on hover
                     }
 
-                    const strokeColor = isHighlighted ? '#15803d' : '#CCCCCC';
-                    const strokeWidth = isHovered || isSelected ? 1.5 : 0.5;
+                    const strokeColor = '#CCCCCC';
+                    const strokeWidth = 1;
 
                     return (
                         <g key={dept.code}>
