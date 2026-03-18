@@ -1,12 +1,14 @@
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import type { FormEventHandler } from 'react';
+import { useEffect, useState } from 'react';
 
 import InputError from '@/components/input-error';
 import TextLink from '@/components/text-link';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useAutoFill } from '@/hooks/useAutoFill';
 import AuthLayout from '@/layouts/auth-layout';
 
 type LoginForm = {
@@ -20,12 +22,72 @@ interface LoginProps {
     canResetPassword: boolean;
 }
 
+interface DemoCredentials {
+    email: string;
+    password: string;
+}
+
 export default function Login({ status, canResetPassword }: LoginProps) {
     const { data, setData, post, processing, errors, reset } = useForm<Required<LoginForm>>({
         email: '',
         password: '',
         remember: false,
     });
+
+    const [demoType, setDemoType] = useState<'client' | 'ressourcier' | null>(null);
+    const [demoAutoSubmit, setDemoAutoSubmit] = useState(false);
+    const { isAnimating, cursorVisible, startAnimation } = useAutoFill();
+
+    // Check for demo query parameter on mount
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const demoValue = urlParams.get('demo');
+        if (demoValue === 'client' || demoValue === 'ressourcier') {
+            setDemoType(demoValue);
+        }
+    }, []);
+
+    // Fetch demo credentials and start animation when demoType is set
+    useEffect(() => {
+        if (!demoType || isAnimating || demoAutoSubmit) {
+            return;
+        }
+
+        const fetchAndAnimate = async () => {
+            try {
+                const response = await fetch('/api/demo/credentials');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch demo credentials');
+                }
+                const credentials: { client: DemoCredentials; ressourcier: DemoCredentials } = await response.json();
+                const demoCreds = demoType === 'client' ? credentials.client : credentials.ressourcier;
+
+                startAnimation({
+                    email: demoCreds.email,
+                    password: demoCreds.password,
+                    onEmailChange: (value) => setData('email', value),
+                    onPasswordChange: (value) => setData('password', value),
+                    onComplete: () => {
+                        setDemoAutoSubmit(true);
+                    },
+                });
+            } catch (error) {
+                console.error('Demo auto-fill error:', error);
+            }
+        };
+
+        fetchAndAnimate();
+    }, [demoType, isAnimating, demoAutoSubmit, setData, startAnimation]);
+
+    // Auto-submit form after animation completes
+    useEffect(() => {
+        if (demoAutoSubmit && !isAnimating && data.email && data.password) {
+            post(route('login'), {
+                onFinish: () => reset('password'),
+            });
+            setDemoAutoSubmit(false);
+        }
+    }, [demoAutoSubmit, isAnimating, data.email, data.password, post, reset]);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -42,17 +104,26 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                 <div className="grid gap-6">
                     <div className="grid gap-2">
                         <Label htmlFor="email">Email address</Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            required
-                            autoFocus
-                            tabIndex="0"
-                            autoComplete="email"
-                            value={data.email}
-                            onChange={(e) => setData('email', e.target.value)}
-                            placeholder="email@example.com"
-                        />
+                        <div className="relative">
+                            <Input
+                                id="email"
+                                type="email"
+                                required
+                                autoFocus
+                                tabIndex="0"
+                                autoComplete="email"
+                                value={data.email}
+                                onChange={(e) => setData('email', e.target.value)}
+                                placeholder="email@example.com"
+                                className={isAnimating && cursorVisible ? 'pr-4' : ''}
+                            />
+                            {isAnimating && (
+                                <span
+                                    className="-translate-y-1/2 absolute top-1/2 right-3 h-5 w-0.5 animate-blink bg-gray-900 dark:bg-white"
+                                    style={{ animation: 'blink 1s step-end infinite' }}
+                                />
+                            )}
+                        </div>
                         <InputError message={errors.email} />
                     </div>
 
@@ -65,16 +136,25 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                 </TextLink>
                             )}
                         </div>
-                        <Input
-                            id="password"
-                            type="password"
-                            required
-                            tabIndex="0"
-                            autoComplete="current-password"
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
-                            placeholder="Password"
-                        />
+                        <div className="relative">
+                            <Input
+                                id="password"
+                                type="password"
+                                required
+                                tabIndex="0"
+                                autoComplete="current-password"
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                                placeholder="Password"
+                                className={isAnimating && cursorVisible ? 'pr-4' : ''}
+                            />
+                            {isAnimating && (
+                                <span
+                                    className="-translate-y-1/2 absolute top-1/2 right-3 h-5 w-0.5 bg-gray-900 dark:bg-white"
+                                    style={{ animation: 'blink 1s step-end infinite' }}
+                                />
+                            )}
+                        </div>
                         <InputError message={errors.password} />
                     </div>
 
@@ -109,6 +189,13 @@ export default function Login({ status, canResetPassword }: LoginProps) {
             </form>
 
             {status && <div className="mb-4 text-center font-medium text-green-600 text-sm">{status}</div>}
+
+            <style>{`
+                @keyframes blink {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0; }
+                }
+            `}</style>
         </AuthLayout>
     );
 }
