@@ -4,9 +4,10 @@ import { departments } from '@/data/franceDepartments';
 interface FranceMapProps {
     onSelectDepartment: (deptCode: string) => void;
     selectedDepartment?: string;
+    comingSoonDept?: string | null;
 }
 
-export function FranceMap({ onSelectDepartment, selectedDepartment }: FranceMapProps) {
+export function FranceMap({ onSelectDepartment, selectedDepartment, comingSoonDept }: FranceMapProps) {
     const [hoveredDept, setHoveredDept] = useState<string | null>(null);
 
     // Scale and offset to fit the map nicely in the SVG viewBox
@@ -100,6 +101,19 @@ export function FranceMap({ onSelectDepartment, selectedDepartment }: FranceMapP
                     >
                         Voir les ressourceries en {selectedDepartment}
                     </button>
+                </div>
+            )}
+
+            {/* Coming Soon tooltip */}
+            {comingSoonDept && (
+                <div className="pointer-events-none fixed inset-0 z-50 flex items-center justify-center">
+                    <div className="fade-in zoom-in animate-in rounded-lg bg-gray-900 px-6 py-4 text-white shadow-xl duration-300">
+                        <p className="text-center font-medium">
+                            <span className="mr-2 text-lg">🚧</span>
+                            Bientôt disponible !<span className="ml-2 text-lg">🚧</span>
+                        </p>
+                        <p className="mt-1 text-center text-gray-300 text-sm">Ce département sera bientôt accessible</p>
+                    </div>
                 </div>
             )}
         </div>
