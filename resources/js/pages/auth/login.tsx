@@ -1,4 +1,4 @@
-import { Head, useForm } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import type { FormEventHandler } from 'react';
 import { useEffect, useState } from 'react';
@@ -83,11 +83,20 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     useEffect(() => {
         if (demoAutoSubmit && !isAnimating && data.email && data.password) {
             post(route('login'), {
-                onFinish: () => reset('password'),
+                onSuccess: () => {
+                    // For demo ressourcier login, redirect to dashboard
+                    if (demoType === 'ressourcier') {
+                        router.visit('/ressourcerie/dashboard');
+                    }
+                    // For other logins (including client demo), let Inertia follow the server redirect (to /)
+                },
+                onFinish: () => {
+                    reset('password');
+                    setDemoAutoSubmit(false);
+                },
             });
-            setDemoAutoSubmit(false);
         }
-    }, [demoAutoSubmit, isAnimating, data.email, data.password, post, reset]);
+    }, [demoAutoSubmit, isAnimating, data.email, data.password, post, reset, demoType]);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
