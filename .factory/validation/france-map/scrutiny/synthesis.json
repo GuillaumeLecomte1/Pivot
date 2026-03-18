@@ -1,0 +1,96 @@
+{
+  "milestone": "france-map",
+  "round": 1,
+  "status": "pass",
+  "validatorsRun": {
+    "test": {
+      "passed": true,
+      "command": "npm run test:run",
+      "exitCode": 0,
+      "summary": "340 tests passed across 14 test files"
+    },
+    "typecheck": {
+      "passed": true,
+      "command": "npm run types",
+      "exitCode": 0,
+      "summary": "TypeScript type checking passed with no errors"
+    },
+    "lint": {
+      "passed": true,
+      "command": "npm run check",
+      "exitCode": 0,
+      "summary": "Biome linting passed, 135 files checked"
+    }
+  },
+  "reviewsSummary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "failedFeatures": []
+  },
+  "blockingIssues": [],
+  "nonBlockingIssues": [
+    {
+      "featureId": "france-map-geojson",
+      "severity": "suggestion",
+      "description": "The data file is 207KB which is substantial. Consider lazy-loading or splitting by region for better initial load performance."
+    },
+    {
+      "featureId": "france-map-geojson",
+      "severity": "suggestion",
+      "description": "Tooltip position is fixed at x:150, y:10 regardless of which department is hovered. Consider positioning relative to hovered department."
+    },
+    {
+      "featureId": "france-map-colors",
+      "severity": "non_blocking",
+      "description": "Stroke styling was simplified from conditional to constant. Stroke-based hover feedback was removed but fill color still changes, maintaining some hover feedback."
+    },
+    {
+      "featureId": "france-map-colors",
+      "severity": "non_blocking",
+      "description": "When isHighlighted is true (dept 49), hover/selected gray fill doesn't apply. This is correct per requirements but worth noting."
+    },
+    {
+      "featureId": "france-map-interactions",
+      "severity": "non_blocking",
+      "description": "The 'coming soon' tooltip uses full-screen overlay (fixed inset-0) blocking all interaction for 2 seconds. A less intrusive toast would be better UX."
+    },
+    {
+      "featureId": "france-map-interactions",
+      "severity": "non_blocking",
+      "description": "The 'coming soon' tooltip doesn't indicate which department was clicked. Consider showing department name/code."
+    },
+    {
+      "featureId": "france-map-interactions",
+      "severity": "non_blocking",
+      "description": "Tooltip auto-dismisses after 2 seconds with no user-controllable dismiss option."
+    },
+    {
+      "featureId": "france-map-interactions",
+      "severity": "suggestion",
+      "description": "Tooltip uses hardcoded French text. Consider i18n for multi-language support."
+    },
+    {
+      "featureId": "france-map-homepage",
+      "severity": "suggestion",
+      "description": "FranceMap's selectedDepartment prop and CTA button feature are not utilized on homepage since only dept 49 is interactive. Acceptable for now."
+    }
+  ],
+  "appliedUpdates": [
+    {
+      "target": "library",
+      "description": "Document the new `resources/js/data/` directory pattern for storing large static GeoJSON/dataset files",
+      "sourceFeature": "france-map-geojson"
+    }
+  ],
+  "suggestedGuidanceUpdates": [
+    {
+      "target": "AGENTS.md",
+      "suggestion": "Clarify the frontend-worker skill procedure regarding manual verification steps. The skill lists manual verification steps (e.g., verify rendering, click department 49) but workers are skipping them in favor of automated checks. Consider either: (1) making manual verification mandatory, or (2) explicitly stating that automated checks are sufficient for features that integrate with existing components.",
+      "evidence": "france-map-geojson worker only ran automated checks (npm run types, npm run lint, npm run test:run) but verificationSteps listed manual checks that were skipped. This pattern was also observed in other scrutiny validations.",
+      "isSystemic": true
+    }
+  ],
+  "rejectedObservations": [],
+  "previousRound": null
+}

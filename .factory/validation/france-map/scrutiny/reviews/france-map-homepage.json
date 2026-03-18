@@ -1,0 +1,20 @@
+{
+  "featureId": "france-map-homepage",
+  "reviewedAt": "2026-03-19T00:45:00.000Z",
+  "commitId": "5895114",
+  "transcriptSkeletonReviewed": true,
+  "diffReviewed": true,
+  "status": "pass",
+  "codeReview": {
+    "summary": "The feature successfully integrates the FranceMap component into the homepage. The implementation replaces the 'afficher la carte' link with the interactive map, correctly navigates to /departements/49/ressourceries when department 49 is clicked, and removes unused code (LogoItem). TypeScript and Biome lint both passed.",
+    "issues": [
+      {
+        "severity": "suggestion",
+        "description": "The FranceMap component's selectedDepartment prop and CTA button feature are not utilized on the homepage. Since only department 49 is interactive, this is acceptable. However, if more departments become interactive in the future, this pattern may need revisiting."
+      }
+    ]
+  },
+  "sharedStateObservations": [],
+  "addressesFailureFrom": null,
+  "summary": "Feature france-map-homepage passes review. The integration correctly replaces the 'afficher la carte' link with the interactive FranceMap component on the homepage. The map displays all 96 departments with department 49 (Maine-et-Loire) highlighted in Pivot green (#6ED47C). Clicking department 49 navigates to /departements/49/ressourceries. The unused LogoItem component was removed. TypeScript typecheck and Biome lint both passed with no errors. The implementation aligns with the expected behavior documented in the feature and AGENTS.md."
+}
