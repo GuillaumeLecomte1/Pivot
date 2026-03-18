@@ -7,6 +7,8 @@
 
 import * as ParseResult from 'effect/ParseResult';
 import * as Schema from 'effect/Schema';
+import type { LucideProps } from 'lucide-react';
+import type { ComponentType } from 'react';
 import { type Either, fail, isRight, succeed } from './either';
 
 export { Schema };
@@ -635,7 +637,7 @@ export type SchemaProduct = {
 /**
  * Type inferred from NavItemSchema - simplified for compatibility
  */
-export type SchemaNavItem = { title: string; href: string; icon?: string; isActive?: boolean };
+export type SchemaNavItem = { title: string; href: string; icon?: ComponentType<LucideProps> | null; isActive?: boolean };
 
 /**
  * Type inferred from AppearanceSchema

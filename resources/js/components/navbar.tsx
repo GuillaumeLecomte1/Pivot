@@ -8,7 +8,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuT
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { UserMenuContent } from '@/components/user-menu-content';
 import { cn } from '@/lib/utils';
-import type { NavItem } from '@/types';
+import type { NavItem, SharedData } from '@/types';
 import AppLogo from './app-logo';
 import AppLogoIcon from './app-logo-icon';
 
@@ -38,7 +38,7 @@ interface NavbarProps {
 }
 
 export function Navbar({ className }: NavbarProps) {
-    const page = usePage();
+    const page = usePage<SharedData>();
     const auth = page.props.auth || { user: { name: 'Utilisateur', avatar: null } };
 
     // Fonction pour obtenir les initiales

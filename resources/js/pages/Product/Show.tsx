@@ -40,7 +40,7 @@ export default function ProductShow({ product, relatedProducts = [] }: ProductPa
             '/panier/ajouter',
             {
                 product_id: product.id,
-                product_data: product,
+                product_data: JSON.stringify(product),
                 quantity: 1,
             },
             {
