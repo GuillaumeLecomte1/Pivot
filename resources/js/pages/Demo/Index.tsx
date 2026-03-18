@@ -1,6 +1,6 @@
 import { Head, router } from '@inertiajs/react';
 import { motion, type Variants } from 'framer-motion';
-import { User, Store } from 'lucide-react';
+import { Store, User } from 'lucide-react';
 
 import AppLayout from '@/components/AppLayout';
 
