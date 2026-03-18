@@ -1,29 +1,9 @@
-﻿import { Head, Link } from '@inertiajs/react';
+﻿import { Head, Link, router } from '@inertiajs/react';
 import AppLayout from '@/components/AppLayout';
+import { FranceMap } from '@/components/FranceMap';
 import { MinimalCard, MinimalCardDescription, MinimalCardImage, MinimalCardTitle } from '@/components/ui/minimal-card';
 
 export default function HomePage() {
-    const LogoItem = () => (
-        <div className="p-3 sm:h-16 sm:p-4">
-            <img
-                src="/images/logoPivot.png"
-                alt="Logo Pivot"
-                className="h-6 w-auto sm:h-8"
-                onError={(e) => {
-                    console.error('Erreur de chargement du logo');
-                    const imgElement = e.currentTarget;
-                    imgElement.style.display = 'none';
-                    const textFallback = document.createElement('span');
-                    textFallback.className = 'text-gray-300 font-bold text-sm sm:text-base';
-                    textFallback.textContent = 'LOGO';
-                    if (imgElement.parentElement) {
-                        imgElement.parentElement.appendChild(textFallback);
-                    }
-                }}
-            />
-        </div>
-    );
-
     return (
         <AppLayout>
             <Head title="Pivot - La marketplace des ressourceries françaises">
@@ -134,50 +114,27 @@ export default function HomePage() {
                 {/* Ressourceries section */}
                 <section className="py-12">
                     <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-                        <div className="mb-4 flex flex-col md:flex-row md:items-center md:justify-between">
-                            <div>
-                                <h2 className="font-bold text-2xl">Les ressourceries digitalisées</h2>
-                                <p className="mt-2 text-[#6ED47C] dark:text-[#6ED47C]">
-                                    Retrouvez toutes les annonces des ressourceries près de chez vous !
-                                </p>
-                            </div>
-                            <Link
-                                href="/departements"
-                                className="mt-4 flex items-center self-start rounded border border-black bg-black px-4 py-2 text-white hover:bg-gray-800 md:mt-0 md:self-auto dark:bg-white dark:text-black"
-                            >
-                                afficher la carte
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="ml-2 h-5 w-5"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    aria-label="Afficher carte"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
-                            </Link>
+                        <div className="mb-8 text-center">
+                            <h2 className="font-bold text-2xl">Les ressourceries digitalisées</h2>
+                            <p className="mt-2 text-[#6ED47C] dark:text-[#6ED47C]">
+                                Retrouvez toutes les annonces des ressourceries près de chez vous !
+                            </p>
                         </div>
 
-                        {/* Logo line */}
-                        <div className="mt-8">
-                            <div className="flex items-center justify-between">
-                                <div className="hidden lg:block">
-                                    <LogoItem />
-                                </div>
-                                <div className="hidden md:block">
-                                    <LogoItem />
-                                </div>
-                                <div className="hidden sm:block">
-                                    <LogoItem />
-                                </div>
-                                <LogoItem />
-                                <LogoItem />
-                                <LogoItem />
-                            </div>
+                        <div className="mx-auto mb-8 max-w-4xl">
+                            <FranceMap
+                                onSelectDepartment={(deptCode) => {
+                                    if (deptCode === '49') {
+                                        router.visit(`/departements/${deptCode}/ressourceries`);
+                                    }
+                                }}
+                            />
+                        </div>
+
+                        <div className="mt-4 text-center">
+                            <p className="text-muted-foreground text-sm">
+                                Cliquez sur le département 49 (Maine-et-Loire) pour voir les ressourceries disponibles
+                            </p>
                         </div>
                     </div>
                 </section>
