@@ -28,6 +28,10 @@ Route::get('/health', function () {
     }
 });
 
+Route::get('/demo', function () {
+    return Inertia::render('Demo/Index');
+})->name('demo');
+
 Route::get('/', function () {
     return Inertia::render('HomePage');
 })->name('home');
