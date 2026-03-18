@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RessourcerieController;
+use App\Http\Controllers\RessourcerieDashboardController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -93,6 +94,11 @@ Route::middleware(['auth'])->group(function () {
 
         return back();
     })->name('profile.password');
+
+    Route::middleware(['ressourcier'])->group(function () {
+        Route::get('/ressourcerie/dashboard', [RessourcerieDashboardController::class, 'index'])
+            ->name('ressourcerie.dashboard');
+    });
 });
 
 require __DIR__.'/settings.php';
