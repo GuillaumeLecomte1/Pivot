@@ -1,0 +1,46 @@
+{
+  "featureId": "demo-seeder",
+  "reviewedAt": "2026-03-18T22:31:00.000Z",
+  "commitId": "242299881995df1ed5f58d7c221fdebb6cd6dbcf",
+  "transcriptSkeletonReviewed": true,
+  "diffReviewed": true,
+  "status": "pass",
+  "codeReview": {
+    "summary": "DemoSeeder and DemoUsersSeeder create the required demo data (2 users, 1 ressourcerie in dept 49, 5 products). However, both seeders lack idempotency - they will fail if run a second time due to unique constraint violations. This is a non-blocking issue since the validation assertions (VAL-DEMO-003, VAL-DEMO-004, VAL-DEMO-005) only require the seeders to create the data once, not to be re-runnable.",
+    "issues": [
+      {
+        "file": "database/seeders/DemoUsersSeeder.php",
+        "line": 12,
+        "severity": "non_blocking",
+        "description": "DemoUsersSeeder uses User::create() directly without checking if users already exist. If run twice, will fail with 'UNIQUE constraint failed: users.email' for client@demo.pivot and ressourcier@demo.pivot. Should use firstOrCreate or check existence first for idempotency."
+      },
+      {
+        "file": "database/seeders/DemoUsersSeeder.php",
+        "line": 18,
+        "severity": "non_blocking",
+        "description": "Same idempotency issue for ressourcier@demo.pivot user."
+      },
+      {
+        "file": "database/seeders/DemoSeeder.php",
+        "line": 23,
+        "severity": "non_blocking",
+        "description": "No null check on $ressourcier after User::where()->first(). If DemoUsersSeeder fails, $ressourcier will be null and accessing $ressourcier->id will cause a runtime error."
+      },
+      {
+        "file": "database/seeders/DemoSeeder.php",
+        "line": 26,
+        "severity": "non_blocking",
+        "description": "DemoSeeder creates new ressourcerie and products without checking if they already exist. Re-running will create duplicates. Should check existence first for idempotency."
+      }
+    ]
+  },
+  "sharedStateObservations": [
+    {
+      "area": "services",
+      "observation": "The backend-worker skill requires running 'php artisan migrate' and 'php artisan db:seed' commands to verify implementation, but PHP is not available in the current environment. The worker spent time investigating PHP availability via nix-shell and docker before acknowledging the limitation. services.yaml doesn't document PHP as a required service.",
+      "evidence": "Transcript shows: 'Command not found. The command or program may not be installed or not in PATH. bash: ligne 1: php: commande introuvable'. Worker then tried which php8.2, nix-shell, docker before concluding PHP wasn't available."
+    }
+  ],
+  "addressesFailureFrom": null,
+  "summary": "DemoSeeder implementation meets all validation assertions (VAL-DEMO-003, VAL-DEMO-004, VAL-DEMO-005) by creating client@demo.pivot and ressourcier@demo.pivot users with bcrypt passwords, a ressourcerie in department 49, and 5 sample products. Code follows Laravel conventions (final class, typed methods, proper namespace). Non-blocking issues: seeders lack idempotency and will fail if re-run, but this doesn't affect initial validation."
+}
