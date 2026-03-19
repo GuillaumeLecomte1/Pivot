@@ -1,0 +1,52 @@
+{
+  "milestone": "ressourcerie-dashboard",
+  "round": 1,
+  "status": "fail",
+  "validatorsRun": {
+    "test": { "passed": true, "command": "npm run test", "exitCode": 0 },
+    "typecheck": { "passed": true, "command": "npm run types", "exitCode": 0 },
+    "lint": { "passed": true, "command": "npm run check", "exitCode": 0 }
+  },
+  "reviewsSummary": {
+    "total": 7,
+    "passed": 6,
+    "failed": 1,
+    "failedFeatures": ["dashboard-add-product"]
+  },
+  "blockingIssues": [
+    {
+      "featureId": "dashboard-add-product",
+      "severity": "blocking",
+      "description": "Feature description states 'adds to product list optimistically' but implementation uses window.location.reload() (full page reload) at line 82 of Dashboard.tsx instead of updating product list state directly. The same pattern is used in dashboard-edit-product and dashboard-delete-product (also using window.location.reload()), which reviewers marked as non-blocking due to consistency with codebase. However, dashboard-add-product was explicitly marked as FAIL due to the 'optimistically' wording in the feature description."
+    }
+  ],
+  "appliedUpdates": [],
+  "suggestedGuidanceUpdates": [
+    {
+      "target": "AGENTS.md",
+      "suggestion": "Add section defining 'optimistic update' pattern vs 'page reload' pattern. Currently the term 'optimistically' is used in feature descriptions without a shared definition. Implementation uses window.location.reload() consistently, suggesting this IS the intended pattern, not true optimistic UI. Either update feature descriptions to say 'reloads page after mutation' or define optimistic UI pattern and update implementations.",
+      "evidence": "dashboard-add-product, dashboard-edit-product, dashboard-delete-product all use window.location.reload() - reviewers noted this is consistent but feature descriptions use 'optimistically'. Feature descriptions should match implementation.",
+      "isSystemic": true
+    },
+    {
+      "target": "services.yaml",
+      "suggestion": "Add PHP/Laravel service and commands for verification. Workers cannot run php artisan migrate, pint, or phpstan because PHP is not installed and services.yaml has no PHP commands defined. Add a laravel service with start/stop/healthcheck commands and php verification command.",
+      "evidence": "Multiple workers reported 'php: command not found'. backend-worker skill references php artisan and curl commands but services.yaml is empty (services: {}).",
+      "isSystemic": true
+    },
+    {
+      "target": "AGENTS.md",
+      "suggestion": "Clarify file location for AGENTS.md - workers expect it at .factory/AGENTS.md but some found it at the mission directory level. Ensure single source of truth location.",
+      "evidence": "dashboard-add-product reviewer found AGENTS.md doesn't exist at .factory/AGENTS.md. Mission has its own AGENTS.md at /home/glecomte/.factory/missions/b914dd70-5a76-479e-b9ab-da8291ab12c1/AGENTS.md",
+      "isSystemic": false
+    },
+    {
+      "target": "AGENTS.md",
+      "suggestion": "Document the pattern for controller return types: ProductApiController::destroy returns Response while other methods return JsonResponse. This inconsistency should be standardized or documented.",
+      "evidence": "dashboard-delete-product reviewer noted destroy() returns \\Illuminate\\Http\\Response vs store/update returning JsonResponse",
+      "isSystemic": false
+    }
+  ],
+  "rejectedObservations": [],
+  "previousRound": null
+}
