@@ -1,11 +1,11 @@
 import { Head } from '@inertiajs/react';
 import { useState } from 'react';
-import AppLayout from '@/layouts/app-layout';
 import { ProductForm } from '@/components/ProductForm';
 import { ProductList, type ProductListItem } from '@/components/ProductList';
 import { Button } from '@/components/ui/button';
-import type { BreadcrumbItem } from '@/types';
+import AppLayout from '@/layouts/app-layout';
 import type { ProductInput } from '@/lib/schemas/ProductSchema';
+import type { BreadcrumbItem } from '@/types';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -95,8 +95,33 @@ export default function RessourcerieDashboard({ ressourcerie, products }: Props)
     };
 
     const handleEditProduct = async (product: ProductListItem, data: ProductInput) => {
-        // Edit functionality would be implemented here
-        console.log('Edit product:', product.id, data);
+        setIsLoading(true);
+
+        try {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+            const response = await fetch(`/api/products/${product.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken || '',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Erreur lors de la modification du produit');
+            }
+
+            // Reload the page to get the updated products list
+            window.location.reload();
+        } catch (error) {
+            console.error('Error editing product:', error);
+            alert(error instanceof Error ? error.message : 'Erreur lors de la modification du produit');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleDeleteProduct = async (productId: number) => {
@@ -136,12 +161,7 @@ export default function RessourcerieDashboard({ ressourcerie, products }: Props)
 
                 <div className="rounded-lg bg-white p-6 shadow dark:bg-neutral-800">
                     <h2 className="mb-4 font-semibold text-xl">Mes produits</h2>
-                    <ProductList
-                        products={productListItems}
-                        onEdit={handleEditProduct}
-                        onDelete={handleDeleteProduct}
-                        isLoading={isLoading}
-                    />
+                    <ProductList products={productListItems} onEdit={handleEditProduct} onDelete={handleDeleteProduct} isLoading={isLoading} />
                 </div>
 
                 {/* Add Product Dialog */}
@@ -150,11 +170,7 @@ export default function RessourcerieDashboard({ ressourcerie, products }: Props)
                         <div className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800">
                             <div className="mb-4 flex items-center justify-between">
                                 <h2 className="font-semibold text-xl">Ajouter un produit</h2>
-                                <button
-                                    onClick={() => setIsAddFormOpen(false)}
-                                    className="text-muted-foreground hover:text-foreground"
-                                    type="button"
-                                >
+                                <button onClick={() => setIsAddFormOpen(false)} className="text-muted-foreground hover:text-foreground" type="button">
                                     ✕
                                 </button>
                             </div>

@@ -10,4 +10,5 @@ Route::get('/demo/credentials', [DemoController::class, 'credentials']);
 
 Route::middleware('auth')->group(function () {
     Route::post('/products', [ProductApiController::class, 'store']);
+    Route::put('/products/{id}', [ProductApiController::class, 'update']);
 });
