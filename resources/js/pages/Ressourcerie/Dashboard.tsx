@@ -125,8 +125,31 @@ export default function RessourcerieDashboard({ ressourcerie, products }: Props)
     };
 
     const handleDeleteProduct = async (productId: number) => {
-        // Delete functionality would be implemented here
-        console.log('Delete product:', productId);
+        setIsLoading(true);
+
+        try {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+            const response = await fetch(`/api/products/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken || '',
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Erreur lors de la suppression du produit');
+            }
+
+            // Reload the page to get the updated products list
+            window.location.reload();
+        } catch (error) {
+            console.error('Error deleting product:', error);
+            alert(error instanceof Error ? error.message : 'Erreur lors de la suppression du produit');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (

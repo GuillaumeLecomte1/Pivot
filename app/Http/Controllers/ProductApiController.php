@@ -130,4 +130,41 @@ final class ProductApiController extends Controller
             'product' => $product,
         ], 200);
     }
+
+    /**
+     * Remove the specified product from storage.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, int $id): \Illuminate\Http\Response
+    {
+        $user = $request->user();
+
+        if (! $user || ! $user->ressourcerie) {
+            return response()->json([
+                'message' => 'Vous devez être connecté en tant que ressourcier pour supprimer un produit.',
+            ], 403);
+        }
+
+        $product = Product::find($id);
+
+        if (! $product) {
+            return response()->json([
+                'message' => 'Produit non trouvé.',
+            ], 404);
+        }
+
+        // Check that the product belongs to the authenticated ressourcerie's user
+        if ($product->ressourcerie_id !== $user->ressourcerie->id) {
+            return response()->json([
+                'message' => 'Vous ne pouvez supprimer que vos propres produits.',
+            ], 403);
+        }
+
+        $product->delete();
+
+        return response()->noContent();
+    }
 }
