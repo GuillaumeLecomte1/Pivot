@@ -1,6 +1,11 @@
 import { Head } from '@inertiajs/react';
+import { useState } from 'react';
 import AppLayout from '@/layouts/app-layout';
+import { ProductForm } from '@/components/ProductForm';
+import { ProductList, type ProductListItem } from '@/components/ProductList';
+import { Button } from '@/components/ui/button';
 import type { BreadcrumbItem } from '@/types';
+import type { ProductInput } from '@/lib/schemas/ProductSchema';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -40,57 +45,128 @@ interface Props {
 }
 
 export default function RessourcerieDashboard({ ressourcerie, products }: Props) {
+    const [isAddFormOpen, setIsAddFormOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    // Convert Product[] to ProductListItem[] for ProductList
+    const productListItems: ProductListItem[] = products.map((p) => ({
+        id: p.id,
+        name: p.name,
+        description: p.description,
+        price: p.price,
+        image_url: p.image_url,
+        category: p.category,
+        condition: p.condition,
+        is_available: p.is_available,
+        created_at: p.created_at,
+    }));
+
+    const handleAddProduct = async (data: ProductInput) => {
+        setIsLoading(true);
+
+        try {
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+            const response = await fetch('/api/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken || '',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Erreur lors de la création du produit');
+            }
+
+            // Close the form on success
+            setIsAddFormOpen(false);
+
+            // Reload the page to get the updated products list
+            window.location.reload();
+        } catch (error) {
+            console.error('Error adding product:', error);
+            alert(error instanceof Error ? error.message : 'Erreur lors de la création du produit');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const handleEditProduct = async (product: ProductListItem, data: ProductInput) => {
+        // Edit functionality would be implemented here
+        console.log('Edit product:', product.id, data);
+    };
+
+    const handleDeleteProduct = async (productId: number) => {
+        // Delete functionality would be implemented here
+        console.log('Delete product:', productId);
+    };
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={`${ressourcerie.name} - Tableau de bord`} />
 
             <div className="container mx-auto px-4 py-12">
-                <div className="mb-8">
-                    <h1 className="mb-2 font-bold text-4xl">Tableau de bord</h1>
-                    <p className="text-lg text-muted-foreground">Bienvenue, {ressourcerie.name}</p>
+                <div className="mb-8 flex items-center justify-between">
+                    <div>
+                        <h1 className="mb-2 font-bold text-4xl">Tableau de bord</h1>
+                        <p className="text-lg text-muted-foreground">Bienvenue, {ressourcerie.name}</p>
+                    </div>
+                    <Button onClick={() => setIsAddFormOpen(true)} className="bg-green-600 hover:bg-green-700">
+                        Ajouter un produit
+                    </Button>
                 </div>
 
                 <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-                    <div className="rounded-lg bg-white p-6 shadow">
+                    <div className="rounded-lg bg-white p-6 shadow dark:bg-neutral-800">
                         <p className="mb-1 text-muted-foreground text-sm">Mes produits</p>
                         <p className="font-bold text-3xl">{products.length}</p>
                     </div>
-                    <div className="rounded-lg bg-white p-6 shadow">
+                    <div className="rounded-lg bg-white p-6 shadow dark:bg-neutral-800">
                         <p className="mb-1 text-muted-foreground text-sm">Département</p>
                         <p className="font-bold text-3xl">{ressourcerie.department}</p>
                     </div>
-                    <div className="rounded-lg bg-white p-6 shadow">
+                    <div className="rounded-lg bg-white p-6 shadow dark:bg-neutral-800">
                         <p className="mb-1 text-muted-foreground text-sm">Ville</p>
                         <p className="font-bold text-xl">{ressourcerie.city}</p>
                     </div>
                 </div>
 
-                <div className="rounded-lg bg-white p-6 shadow">
+                <div className="rounded-lg bg-white p-6 shadow dark:bg-neutral-800">
                     <h2 className="mb-4 font-semibold text-xl">Mes produits</h2>
-                    {products.length === 0 ? (
-                        <p className="text-muted-foreground">Aucun produit pour le moment.</p>
-                    ) : (
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                            {products.map((product) => (
-                                <div key={product.id} className="rounded-lg border p-4">
-                                    <div className="mb-2 h-32 bg-gray-100">
-                                        {product.image_url ? (
-                                            <img src={product.image_url} alt={product.name} className="h-full w-full rounded object-cover" />
-                                        ) : (
-                                            <div className="flex h-full items-center justify-center text-gray-400">Pas d'image</div>
-                                        )}
-                                    </div>
-                                    <h3 className="mb-1 font-semibold">{product.name}</h3>
-                                    <p className="mb-2 font-medium text-green-600">{product.price} €</p>
-                                    <div className="flex flex-wrap gap-2 text-xs">
-                                        <span className="rounded bg-gray-100 px-2 py-1">{product.category}</span>
-                                        <span className="rounded bg-gray-100 px-2 py-1">{product.condition}</span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                    <ProductList
+                        products={productListItems}
+                        onEdit={handleEditProduct}
+                        onDelete={handleDeleteProduct}
+                        isLoading={isLoading}
+                    />
                 </div>
+
+                {/* Add Product Dialog */}
+                {isAddFormOpen && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                        <div className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-800">
+                            <div className="mb-4 flex items-center justify-between">
+                                <h2 className="font-semibold text-xl">Ajouter un produit</h2>
+                                <button
+                                    onClick={() => setIsAddFormOpen(false)}
+                                    className="text-muted-foreground hover:text-foreground"
+                                    type="button"
+                                >
+                                    ✕
+                                </button>
+                            </div>
+                            <ProductForm
+                                onSubmit={handleAddProduct}
+                                onCancel={() => setIsAddFormOpen(false)}
+                                submitLabel="Ajouter le produit"
+                                isLoading={isLoading}
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
         </AppLayout>
     );
