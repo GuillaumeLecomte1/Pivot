@@ -78,7 +78,9 @@ export default function DemoLogin({ canResetPassword }: LoginProps) {
             post(route('login'), {
                 onSuccess: () => {
                     if (demoType === 'ressourcier') {
-                        router.visit('/ressourcerie/dashboard');
+                        router.visit('/demo/ressourcerie/dashboard');
+                    } else {
+                        router.visit('/');
                     }
                 },
                 onFinish: () => {

@@ -33,6 +33,54 @@ Route::get('/demo', function () {
     return Inertia::render('Demo/Index');
 })->name('demo');
 
+Route::get('/demo/ressourcerie/dashboard', function () {
+    return Inertia::render('Ressourcerie/DemoDashboard', [
+        'ressourcerieName' => 'La Recyclerie de Lyon',
+        'partnerName' => 'Julien Martin',
+        'partnerRole' => 'Admin Partner',
+        'partnerAvatar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDdu2XtbLtYSzBp7kdSqz_fE4dDRKQ_HmJaUBPq3SAZQ7JhRMYvciOopxHHg5MT7VFe57D6o22vgCjL7bXVbzyV6SU-GWORTLkBCweRiBy9d7ssQjBJEAccX0lTlEdljnJGEqcnHSGF0F8wOvxYf33V1V7SRMixrwwQQQWk3cvZUsFZGYkbNO2n-78XA7g0yKJoNIj-0efXPOdizpbKdnP8igtr5u3jpgH245cO_jK3PyXAHrUQP9ycGqkhD5MuMwdiTfPYQ437INPV',
+        'stats' => [
+            'totalSales' => '€12,450',
+            'salesChange' => '+12.5% from last month',
+            'co2Saved' => '450kg',
+            'activeListings' => '124',
+            'listingsToday' => '12 items listed today',
+        ],
+        'activities' => [
+            [
+                'id' => 1,
+                'name' => 'Mid-Century Oak Armchair',
+                'imageUrl' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAKz7kLItfvOFoMvecytXuh6GgyYDsKhlCqfftkJkKr_hCwhj9WU89kA0V7nKkK-gH4rSLqz1oYJLG9gf2QfmPc6nMBPaURyuKDKYaTrbvP17lBraQt5R3gGir34aSxBhqE4e6yAK4NmXsF1r7NNORqIB4EX1mlaHhLX1XYqnS7wMCmRZXl9DO69LzuQ6KQLnHBKl5HzNYtFZZH26RsRbGbK3wMn-7N_VaPjI7qP2QFumhhBnLWBjp-9gD_Fo7kJnkWaN1n8h39UgIR',
+                'action' => 'Sold to Marie L.',
+                'user' => 'Marie L.',
+                'time' => '2 hours ago',
+                'price' => '€85.00',
+                'status' => 'completed',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Vintage Seiko Diver',
+                'imageUrl' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuCEUxZDbnL6YwgJmd6yxBWlkY-AgLxJHy0O1gsAtHHTGECIZDM1Nb_cW--inHuTWj4a9lm758TzC-aQSSTflmDPfFKWNeU5AGrxC9RmdSuyMl350opK_6gWOf9lj2UHyW-AIRKOhdR_PuB6teu89mkIoQog_kYZY4qlshdM9L0oP5fNubhEFPDV1tVGo3HIpo6mzvxpTtw0LEGSW57SMcEcilbKK-A0gVRfjcFZOEiPNt90e20iWNUUJmvzCIehMOWffKau5G5cAvbE',
+                'action' => 'Listed by Team Member: Sarah',
+                'user' => 'Sarah',
+                'time' => '4 hours ago',
+                'price' => '€145.00',
+                'status' => 'review',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Canon AE-1 Film Camera',
+                'imageUrl' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuBp4qLGdNpthuCjwjcGRXBmYD_5_e4wcE17uDI_HX6IVUHEZTWtAMopK1JyXza6723sCJLt3mL8yo5u8W63yPtYFBbBnt3UxJ7cPs6lLFIF6QOxZ96y9_0YMUj-1EjVDeptcBc3jTVkGhyAxoEv9L-SX5JwjTjpq2-uOfdhFrnA-29YEETUIrZPku4LU0E-ODJ3E6_6TvAR-BqC8H9yoM95vgrKU8jxM6qoXDJPAs9aQzbUrcCxE4HNHjS2jgCeJ8hinC2NZJQEgtkW',
+                'action' => 'Sold to Thomas K.',
+                'user' => 'Thomas K.',
+                'time' => '6 hours ago',
+                'price' => '€210.00',
+                'status' => 'completed',
+            ],
+        ],
+    ]);
+})->name('demo.ressourcier.dashboard');
+
 Route::get('/', function () {
     return Inertia::render('HomePage');
 })->name('home');
