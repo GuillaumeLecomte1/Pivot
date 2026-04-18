@@ -10,7 +10,7 @@ export default function DemoIndex() {
     const handleDemoSelect = (type: DemoType) => {
         // Navigate to login page with demo type indicator
         // The auto-fill animation will be handled by demo-auto-fill-animation feature
-        router.visit('/login', {
+        router.visit('/demo/login', {
             data: { demo: type },
             method: 'get',
         });
