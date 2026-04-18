@@ -181,6 +181,64 @@ Route::get('/demo/ressourcerie/inventory', function () {
     ]);
 })->name('demo.ressourcier.inventory');
 
+Route::get('/demo/ressourcerie/analytics', function () {
+    return Inertia::render('Ressourcerie/DemoAnalytics', [
+        'partnerName' => 'Julien Martin',
+        'partnerRole' => 'Admin Partner',
+        'partnerAvatar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDdu2XtbLtYSzBp7kdSqz_fE4dDRKQ_HmJaUBPq3SAZQ7JhRMYvciOopxHHg5MT7VFe57D6o22vgCjL7bXVbzyV6SU-GWORTLkBCweRiBy9d7ssQjBJEAccX0lTlEdljnJGEqcnHSGF0F8wOvxYf33V1V7SRMixrwwQQQWk3cvZUsFZGYkbNO2n-78XA7g0yKJoNIj-0efXPOdizpbKdnP8igtr5u3jpgH245cO_jK3PyXAHrUQP9ycGqkhD5MuMwdiTfPYQ437INPV',
+        'stats' => [
+            'totalRevenue' => '€12,450',
+            'totalSales' => 156,
+            'averageBasket' => '€79.80',
+            'conversionRate' => '3.2%',
+        ],
+        'salesByMonth' => [
+            ['month' => 'Jan', 'sales' => 45],
+            ['month' => 'Feb', 'sales' => 52],
+            ['month' => 'Mar', 'sales' => 48],
+            ['month' => 'Apr', 'sales' => 61],
+            ['month' => 'May', 'sales' => 55],
+            ['month' => 'Jun', 'sales' => 72],
+        ],
+        'salesByCategory' => [
+            ['category' => 'Furniture', 'sales' => 89, 'percentage' => 57],
+            ['category' => 'Decor', 'sales' => 45, 'percentage' => 29],
+            ['category' => 'Electronics', 'sales' => 22, 'percentage' => 14],
+        ],
+        'topProducts' => [
+            ['id' => 1, 'name' => 'Mid-Century Oak Armchair', 'sales' => 12, 'revenue' => '€1,020'],
+            ['id' => 2, 'name' => 'Vintage Seiko Diver Watch', 'sales' => 8, 'revenue' => '€1,160'],
+            ['id' => 3, 'name' => 'Canon AE-1 Film Camera', 'sales' => 6, 'revenue' => '€1,260'],
+            ['id' => 4, 'name' => 'Retro Table Lamp', 'sales' => 15, 'revenue' => '€225'],
+        ],
+        'salesByDay' => [
+            ['day' => 'Mon', 'sales' => 85],
+            ['day' => 'Tue', 'sales' => 62],
+            ['day' => 'Wed', 'sales' => 78],
+            ['day' => 'Thu', 'sales' => 90],
+            ['day' => 'Fri', 'sales' => 95],
+            ['day' => 'Sat', 'sales' => 110],
+            ['day' => 'Sun', 'sales' => 88],
+        ],
+    ]);
+})->name('demo.ressourcier.analytics');
+
+Route::get('/demo/ressourcerie/settings', function () {
+    return Inertia::render('Ressourcerie/DemoSettings', [
+        'partnerName' => 'Julien Martin',
+        'partnerRole' => 'Admin Partner',
+        'partnerAvatar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDdu2XtbLtYSzBp7kdSqz_fE4dDRKQ_HmJaUBPq3SAZQ7JhRMYvciOopxHHg5MT7VFe57D6o22vgCjL7bXVbzyV6SU-GWORTLkBCweRiBy9d7ssQjBJEAccX0lTlEdljnJGEqcnHSGF0F8wOvxYf33V1V7SRMixrwwQQQWk3cvZUsFZGYkbNO2n-78XA7g0yKJoNIj-0efXPOdizpbKdnP8igtr5u3jpgH245cO_jK3PyXAHrUQP9ycGqkhD5MuMwdiTfPYQ437INPV',
+        'ressourcerie' => [
+            'name' => 'La Recyclerie de Lyon',
+            'address' => 'Rue de la République, 45',
+            'city' => 'Lyon',
+            'postalCode' => '69002',
+            'phone' => '+33 4 78 XX XX XX',
+            'email' => 'contact@recyclerie-lyon.fr',
+        ],
+    ]);
+})->name('demo.ressourcier.settings');
+
 Route::get('/', function () {
     return Inertia::render('HomePage');
 })->name('home');
