@@ -126,6 +126,61 @@ Route::get('/demo/ressourcerie/team', function () {
     ]);
 })->name('demo.ressourcier.team');
 
+Route::get('/demo/ressourcerie/inventory', function () {
+    return Inertia::render('Ressourcerie/DemoInventory', [
+        'partnerName' => 'Julien Martin',
+        'partnerRole' => 'Admin Partner',
+        'partnerAvatar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDdu2XtbLtYSzBp7kdSqz_fE4dDRKQ_HmJaUBPq3SAZQ7JhRMYvciOopxHHg5MT7VFe57D6o22vgCjL7bXVbzyV6SU-GWORTLkBCweRiBy9d7ssQjBJEAccX0lTlEdljnJGEqcnHSGF0F8wOvxYf33V1V7SRMixrwwQQQWk3cvZUsFZGYkbNO2n-78XA7g0yKJoNIj-0efXPOdizpbKdnP8igtr5u3jpgH245cO_jK3PyXAHrUQP9ycGqkhD5MuMwdiTfPYQ437INPV',
+        'items' => [
+            [
+                'id' => 1,
+                'name' => 'Vintage Wooden Chair',
+                'category' => 'Furniture',
+                'condition' => 'Restored',
+                'price' => '€25.00',
+                'imageUrl' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDhq0fA1mFUNxMXqcvgl2yrAqRryfn6p3ie3KgWMyUjBHmWmjAGjfoNEoAXOETtoGR22iBA5iC8w7nqeCdDMZ5q48k_1y15RUGBGT3dVxPLdLLIOL6sC80qZa2Qvgr_dm9MDYbyZqlOCNXqUEcaVrJC6NZji-_g0czVCOKkPDq16RdnSA89i2pYSy-U2AFy7ssCeZw_ugev7W1JiSjnoRlmNOSrwk3xbqG35VusYh00252s6RJAmg6j-qdqy2Xfyu25S7c6JkCCpHd4',
+                'status' => 'in_stock',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Retro Table Lamp',
+                'category' => 'Decor',
+                'condition' => 'Tested Working',
+                'price' => '€15.00',
+                'imageUrl' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuD5XC2dc1Mg8U3_JjUpxd1DUfCo6vQDafAwiWCiggsSgE6PMlFzB-75LZdqT7Z7WYRVK_vnop3DJINRCDR-I_WTagPvrdEZ4ZyTghh9xA_I4o7MQ9OyAduNSAlfgyCL6dGFcB3nbjafRwAYN6ugxWCpiV4UH9VZtomOvHjkIDdLM_4BWWUxAdHe79sukIERCM7epfe1m5Fs4lCC0E6OMXHWIyMAQ3QZSZubkxzIXmPjCDeAAi42knRTmNZEqciynmUqfElt6Vhd5tlV',
+                'status' => 'in_stock',
+            ],
+            [
+                'id' => 3,
+                'name' => 'City Bicycle',
+                'category' => 'Sports',
+                'condition' => 'Repaired',
+                'price' => '€45.00',
+                'imageUrl' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuC3632AV-g2dIWhbO5MmSpHVbZbsObdi4je1GTGewrKp5tb7ZK7vBymM8pvwIhF4wParmAFhlfocNq6Nh7CyI2cbQk3cZvFBzy_ciNU2lvAAGog7prE4xP5a19buI18-9Z5ppFNLIrgAKhM_i1H2A9-9s4SWOxcQhvoqemqOgA5kVJupLchgTNTtNByiRgml47Vbz518CiDT2gRfGAQhZ5ZzFtr8zYKyo6BsDY6M467X7Oe4PFOhSGEaS3f14bZSJffBsUVLC_i6RBD',
+                'status' => 'sold',
+            ],
+            [
+                'id' => 4,
+                'name' => 'Wooden Bookshelf',
+                'category' => 'Furniture',
+                'condition' => 'As-Is',
+                'price' => '€30.00',
+                'imageUrl' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRvy8IPoBcjN_AmH55QFUbPc8xd5xhlFjYJa0X6DL6DkiJ08u-fy62NWB-fls3g4zXpyTNTKzvRpC4h1cpRFoyTgeX60HKdb1V4E-imaXrdUTKsgxd2VeMs-Djg6drZJlE62k2G3ALlMG-CTv9R01FCEOfGMK6I71yW35hUT7D8yba6q3jFDR1q4JAp3CpxZalYOSsPoGle44l57y0SENb2xUCeMfDGZzeFfugoSo8tzrXKGdYP0o9fAIdmu-_QYDjW4ZpEPsxNJ0W',
+                'status' => 'needs_repair',
+            ],
+            [
+                'id' => 5,
+                'name' => 'Wall Mirror',
+                'category' => 'Decor',
+                'condition' => 'Good Condition',
+                'price' => '€20.00',
+                'imageUrl' => '',
+                'status' => 'in_stock',
+            ],
+        ],
+    ]);
+})->name('demo.ressourcier.inventory');
+
 Route::get('/', function () {
     return Inertia::render('HomePage');
 })->name('home');
