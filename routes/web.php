@@ -81,6 +81,51 @@ Route::get('/demo/ressourcerie/dashboard', function () {
     ]);
 })->name('demo.ressourcier.dashboard');
 
+Route::get('/demo/ressourcerie/team', function () {
+    return Inertia::render('Ressourcerie/DemoTeam', [
+        'currentUser' => [
+            'name' => 'Alex Rivière',
+            'role' => 'Admin Manager',
+            'avatar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuDGyzzqfLEGq36MQKkXp6lS1BGWCG_wJCSSVdLKI2bkAeIATKEZpf1INUu-eJ1rFz7PU-vLPQOW4vor2y_ob5c8peUbNV4UnTNBbx7Kssp0VdIVR2eqKeXMOL-eMqoRG9VA9DTxGtOFHbuvO78fYXZr51wVnh8NgWj3gMO6Z-p52oz98XVlxtzKQyPnYsVV32246YZAHQrWiAYNa-mCKFyfiCBn7RBOKXqlobYDEKrcSJwznaIhYhHDMSJAc_aefe4dDfaB3gmZVAt2',
+        ],
+        'stats' => [
+            'totalStaff' => 24,
+            'pendingInvites' => 8,
+            'lastActivity' => '14m ago',
+        ],
+        'members' => [
+            [
+                'id' => 1,
+                'name' => 'Marc Dupont',
+                'email' => 'marc.d@ressourcerie.org',
+                'avatar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAMj9Nt4xMPKfGRFERNF-5gJrgVM_ynrv5SYdnIWh6PQDYz3PGpUSKjLPtuGQuJDIh4FVIuRT3FaWqLhL0sNjV4ZaOGS0nSF72Hit56PhQ1P2NBMJGBivZF4QDa5PSET3jZAJnNgycdtH1tD_FePMDFBGlDrzZP2WRSHURXVg_wdtspwl0enS95S8WKaKfgTJw04OZkPRRdnbpGE8J62xB2u_txdfizT9IkbaWaXAQMNJGu1RjlZ7yPSeAh5-kqVmakrVc-VGWCxHp9',
+                'role' => 'admin',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Sophie Laurent',
+                'email' => 'sophie.l@ressourcerie.org',
+                'avatar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuCMLcoS3VkG2ZelWln8IDiHD0QKJvtqo94pBbM5g-R2YImUUyA-ZyONwwT4M40O-yFUt8rcp-faWY3nXJ17v1hulIVaY7-XdnriOvspSdqnOCskwdE4CA4CDCOUnIsoJ2IgaBxcq5pUUvqhkv-1zzQ1JWB-yuLtJz0c4Ld84lk47vIDF54gvX5_TVVx10UO5OQpljWl28nXFU2__349XVxNs5eQgq-DGCk9u1GiZwUJA1G99gSu3HCvtSn_v3gs1aZC94IxHd2n3Apt',
+                'role' => 'editor',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Lucas Bernard',
+                'email' => 'lucas.b@ressourcerie.org',
+                'avatar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAGmbAquxCZDcjMGqqI-epfibMs95OAXAtH5uSTAEVsWoKBq9R_DSOGsDKJA9c0faooWywShFMzwNRrhnlA98x9rkJF37uer48iutu6p5STfWv8mgGzq7T43ElAk9Tkl4B4eUOoAXxWnkJFtz67gOfF3uliSHpuJ9nSCAu0FsqHPDUSdluUDmenuneliHHPVWRi1Vgm857CQSdKhDYYXCcPo8pNXaKHfJ9mNMU5vlndXdeR__OZ-a7zhQCAb2sElkJ-csXWcRYwVqMa',
+                'role' => 'staff',
+            ],
+            [
+                'id' => 4,
+                'name' => 'Emma Petit',
+                'email' => 'emma.p@ressourcerie.org',
+                'avatar' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuD0qBXkXJZkWlvZ9u2aI6lS4QvMRqCqV1e0mN7qY8hT6bKc9L8xZ1oP5dF3gH',
+                'role' => 'away',
+            ],
+        ],
+    ]);
+})->name('demo.ressourcier.team');
+
 Route::get('/', function () {
     return Inertia::render('HomePage');
 })->name('home');

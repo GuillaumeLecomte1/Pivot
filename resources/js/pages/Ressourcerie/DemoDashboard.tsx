@@ -42,9 +42,9 @@ export default function DemoRessourcerieDashboard({ ressourcerieName, partnerNam
     const [searchQuery, setSearchQuery] = useState('');
 
     const navItems = [
-        { icon: 'dashboard', label: 'Overview', active: true, href: '#' },
+        { icon: 'dashboard', label: 'Overview', active: true, href: '/demo/ressourcerie/dashboard' },
         { icon: 'inventory_2', label: 'Inventory', active: false, href: '#' },
-        { icon: 'group', label: 'Team', active: false, href: '#' },
+        { icon: 'group', label: 'Team', active: false, href: '/demo/ressourcerie/team' },
         { icon: 'analytics', label: 'Analytics', active: false, href: '#' },
         { icon: 'settings', label: 'Settings', active: false, href: '#' },
     ];
@@ -74,28 +74,40 @@ export default function DemoRessourcerieDashboard({ ressourcerieName, partnerNam
                     </div>
 
                     {/* Navigation */}
-                    <nav className="flex-1 space-y-1">
+                    <nav className="flex flex-1 flex-col gap-1">
                         {navItems.map((item) => (
                             <a
                                 key={item.label}
-                                className={`flex items-center gap-3 px-4 py-3 font-headline font-medium text-sm tracking-wide transition-transform duration-200 active:scale-95 ${
+                                className={`flex items-center gap-3 px-4 py-3 font-headline font-medium text-sm tracking-wide transition-transform duration-200 ${
                                     item.active
                                         ? 'rounded-lg bg-gradient-to-br from-[#006e2a] to-[#6ed47c] text-white shadow-sm'
                                         : 'rounded-lg text-[#1c1b1b] hover:translate-x-1 hover:bg-[#f0edec]'
                                 }`}
                                 href={item.href}
                             >
-                                <span className="material-symbols-outlined text-xl">{item.icon}</span>
+                                <span
+                                    className="material-symbols-outlined text-xl"
+                                    style={item.active ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                                >
+                                    {item.icon}
+                                </span>
                                 {item.label}
                             </a>
                         ))}
                     </nav>
 
                     {/* Bottom Actions */}
-                    <div className="mt-auto space-y-1 border-[#becaba]/10 border-t pt-6">
+                    <div className="mt-auto flex flex-col gap-1 border-[#becaba]/10 border-t pt-6">
                         <button
                             type="button"
-                            className="flex w-full items-center gap-3 rounded-lg px-4 py-3 font-headline font-medium text-[#1c1b1b] text-sm tracking-wide transition-transform duration-200 hover:translate-x-1 hover:bg-[#f0edec]"
+                            className="mb-4 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#006e2a] to-[#6ed47c] px-4 py-3 font-semibold text-sm text-white shadow-md transition-all hover:opacity-90"
+                        >
+                            <span className="material-symbols-outlined text-sm">add</span>
+                            List New Item
+                        </button>
+                        <button
+                            type="button"
+                            className="flex items-center gap-3 rounded-lg px-4 py-3 font-headline font-medium text-[#1c1b1b] text-sm tracking-wide transition-transform duration-200 hover:translate-x-1 hover:bg-[#f0edec]"
                         >
                             <span className="material-symbols-outlined text-xl">contact_support</span>
                             Support
@@ -103,7 +115,7 @@ export default function DemoRessourcerieDashboard({ ressourcerieName, partnerNam
                         <button
                             type="button"
                             onClick={handleLogout}
-                            className="flex w-full items-center gap-3 rounded-lg px-4 py-3 font-headline font-medium text-[#1c1b1b] text-sm tracking-wide transition-transform duration-200 hover:translate-x-1 hover:bg-[#f0edec]"
+                            className="flex items-center gap-3 rounded-lg px-4 py-3 font-headline font-medium text-[#ba1a1a] text-sm tracking-wide transition-transform duration-200 hover:translate-x-1 hover:bg-[#f0edec]"
                         >
                             <span className="material-symbols-outlined text-xl">logout</span>
                             Logout
