@@ -42,10 +42,10 @@ export default function DemoRessourcerieDashboard({ ressourcerieName, partnerNam
 
     const navItems = [
         { icon: 'dashboard', label: 'Overview', active: true, href: '/demo/ressourcerie/dashboard' },
-        { icon: 'inventory_2', label: 'Inventory', active: false, href: '#' },
+        { icon: 'inventory_2', label: 'Inventory', active: false, href: '/demo/ressourcerie/inventory' },
         { icon: 'group', label: 'Team', active: false, href: '/demo/ressourcerie/team' },
-        { icon: 'analytics', label: 'Analytics', active: false, href: '#' },
-        { icon: 'settings', label: 'Settings', active: false, href: '#' },
+        { icon: 'analytics', label: 'Analytics', active: false, href: '/demo/ressourcerie/analytics' },
+        { icon: 'settings', label: 'Settings', active: false, href: '/demo/ressourcerie/settings' },
     ];
 
     const handleLogout = () => {

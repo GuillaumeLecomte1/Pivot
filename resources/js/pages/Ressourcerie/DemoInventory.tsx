@@ -37,8 +37,8 @@ const navItems = [
     { icon: 'dashboard', label: 'Overview', active: false, href: '/demo/ressourcerie/dashboard' },
     { icon: 'inventory_2', label: 'Inventory', active: true, href: '/demo/ressourcerie/inventory' },
     { icon: 'group', label: 'Team', active: false, href: '/demo/ressourcerie/team' },
-    { icon: 'analytics', label: 'Analytics', active: false, href: '#' },
-    { icon: 'settings', label: 'Settings', active: false, href: '#' },
+    { icon: 'analytics', label: 'Analytics', active: false, href: '/demo/ressourcerie/analytics' },
+    { icon: 'settings', label: 'Settings', active: false, href: '/demo/ressourcerie/settings' },
 ];
 
 export default function DemoInventoryPage({ partnerName, partnerRole, partnerAvatar, items }: Props) {
