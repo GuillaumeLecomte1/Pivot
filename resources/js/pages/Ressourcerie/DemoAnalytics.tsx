@@ -76,12 +76,11 @@ export default function DemoAnalyticsPage({
     const _maxSalesByCategory = Math.max(...salesByCategory.map((d) => d.sales));
 
     return (
-        <div>
+        <div className="min-h-screen">
             <Head title="Analytics - Partner Hub" />
 
-            <div className="flex min-h-screen">
-                {/* Sidebar Navigation */}
-                <aside className="fixed top-0 left-0 z-50 flex h-screen w-64 flex-col gap-2 bg-[#f6f3f2] p-4">
+            {/* Sidebar Navigation */}
+            <aside className="fixed top-0 left-0 z-50 flex h-screen w-64 flex-col gap-2 bg-[#f6f3f2] p-4">
                     <div className="mb-6 flex items-center gap-3 px-2 py-4">
                         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#006e2a] to-[#6ed47c] text-white">
                             <span className="material-symbols-outlined text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
@@ -326,7 +325,6 @@ export default function DemoAnalyticsPage({
                         </div>
                     </div>
                 </main>
-            </div>
         </div>
     );
 }
