@@ -1,6 +1,5 @@
 import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
-import DemoPageLayout from '@/layouts/app/demo-page-layout';
 import type { BreadcrumbItem } from '@/types';
 
 interface ActivityItem {
@@ -54,7 +53,7 @@ export default function DemoRessourcerieDashboard({ ressourcerieName, partnerNam
     };
 
     return (
-        <DemoPageLayout breadcrumbs={breadcrumbs}>
+        <div>
             <Head title={`${ressourcerieName} - Partner Hub`} />
 
             <div className="flex min-h-screen">
@@ -333,6 +332,6 @@ export default function DemoRessourcerieDashboard({ ressourcerieName, partnerNam
                     </div>
                 </main>
             </div>
-        </DemoPageLayout>
+        </div>
     );
 }
