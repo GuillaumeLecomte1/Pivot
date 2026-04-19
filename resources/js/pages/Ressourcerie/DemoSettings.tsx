@@ -1,6 +1,6 @@
 import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
-import AppLayout from '@/layouts/app-layout';
+import DemoPageLayout from '@/layouts/app/demo-page-layout';
 import type { BreadcrumbItem } from '@/types';
 
 interface Props {
@@ -51,7 +51,7 @@ export default function DemoSettingsPage({ partnerName, partnerRole, partnerAvat
     ];
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DemoPageLayout breadcrumbs={breadcrumbs}>
             <Head title="Settings - Partner Hub" />
 
             <div className="flex min-h-screen">
@@ -401,6 +401,6 @@ export default function DemoSettingsPage({ partnerName, partnerRole, partnerAvat
                     </div>
                 </main>
             </div>
-        </AppLayout>
+        </DemoPageLayout>
     );
 }

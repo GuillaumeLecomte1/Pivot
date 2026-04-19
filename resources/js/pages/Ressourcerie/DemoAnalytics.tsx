@@ -1,6 +1,6 @@
 import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
-import AppLayout from '@/layouts/app-layout';
+import DemoPageLayout from '@/layouts/app/demo-page-layout';
 import type { BreadcrumbItem } from '@/types';
 
 interface SalesData {
@@ -76,7 +76,7 @@ export default function DemoAnalyticsPage({
     const _maxSalesByCategory = Math.max(...salesByCategory.map((d) => d.sales));
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DemoPageLayout breadcrumbs={breadcrumbs}>
             <Head title="Analytics - Partner Hub" />
 
             <div className="flex min-h-screen">
@@ -327,6 +327,6 @@ export default function DemoAnalyticsPage({
                     </div>
                 </main>
             </div>
-        </AppLayout>
+        </DemoPageLayout>
     );
 }

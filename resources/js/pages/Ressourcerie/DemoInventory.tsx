@@ -1,6 +1,6 @@
 import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
-import AppLayout from '@/layouts/app-layout';
+import DemoPageLayout from '@/layouts/app/demo-page-layout';
 import type { BreadcrumbItem } from '@/types';
 
 interface InventoryItem {
@@ -70,7 +70,7 @@ export default function DemoInventoryPage({ partnerName, partnerRole, partnerAva
     ];
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <DemoPageLayout breadcrumbs={breadcrumbs}>
             <Head title="Inventory Management - Partner Hub" />
 
             <div className="flex min-h-screen">
@@ -274,6 +274,6 @@ export default function DemoInventoryPage({ partnerName, partnerRole, partnerAva
                     </div>
                 </main>
             </div>
-        </AppLayout>
+        </DemoPageLayout>
     );
 }
