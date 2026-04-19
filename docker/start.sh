@@ -18,6 +18,7 @@ chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Clear caches before starting
+rm -rf /var/www/html/node_modules/.vite 2>/dev/null || true
 php artisan config:clear || echo "Config clear failed"
 php artisan route:clear || echo "Route clear failed"
 php artisan view:clear || echo "View clear failed"
