@@ -49,11 +49,11 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 const navItems = [
-    { icon: 'dashboard', label: 'Overview', active: false, href: '/demo/ressourcerie/dashboard' },
-    { icon: 'inventory_2', label: 'Inventory', active: false, href: '/demo/ressourcerie/inventory' },
-    { icon: 'group', label: 'Team', active: false, href: '/demo/ressourcerie/team' },
-    { icon: 'analytics', label: 'Analytics', active: true, href: '/demo/ressourcerie/analytics' },
-    { icon: 'settings', label: 'Settings', active: false, href: '/demo/ressourcerie/settings' },
+    { label: 'Overview', active: false, href: '/demo/ressourcerie/dashboard' },
+    { label: 'Inventory', active: false, href: '/demo/ressourcerie/inventory' },
+    { label: 'Team', active: false, href: '/demo/ressourcerie/team' },
+    { label: 'Analytics', active: true, href: '/demo/ressourcerie/analytics' },
+    { label: 'Settings', active: false, href: '/demo/ressourcerie/settings' },
 ];
 
 export default function DemoAnalyticsPage({

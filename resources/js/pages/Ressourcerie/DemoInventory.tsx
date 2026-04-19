@@ -34,11 +34,11 @@ const breadcrumbs: BreadcrumbItem[] = [
 type FilterType = 'all' | 'in_stock' | 'sold' | 'needs_repair';
 
 const navItems = [
-    { icon: 'dashboard', label: 'Overview', active: false, href: '/demo/ressourcerie/dashboard' },
-    { icon: 'inventory_2', label: 'Inventory', active: true, href: '/demo/ressourcerie/inventory' },
-    { icon: 'group', label: 'Team', active: false, href: '/demo/ressourcerie/team' },
-    { icon: 'analytics', label: 'Analytics', active: false, href: '/demo/ressourcerie/analytics' },
-    { icon: 'settings', label: 'Settings', active: false, href: '/demo/ressourcerie/settings' },
+    { label: 'Overview', active: false, href: '/demo/ressourcerie/dashboard' },
+    { label: 'Inventory', active: true, href: '/demo/ressourcerie/inventory' },
+    { label: 'Team', active: false, href: '/demo/ressourcerie/team' },
+    { label: 'Analytics', active: false, href: '/demo/ressourcerie/analytics' },
+    { label: 'Settings', active: false, href: '/demo/ressourcerie/settings' },
 ];
 
 export default function DemoInventoryPage({ partnerName, partnerRole, partnerAvatar, items }: Props) {
@@ -98,12 +98,6 @@ export default function DemoInventoryPage({ partnerName, partnerRole, partnerAva
                                 }`}
                                 href={item.href}
                             >
-                                <span
-                                    className="material-symbols-outlined text-xl"
-                                    style={item.active ? { fontVariationSettings: "'FILL' 1" } : undefined}
-                                >
-                                    {item.icon}
-                                </span>
                                 {item.label}
                             </a>
                         ))}

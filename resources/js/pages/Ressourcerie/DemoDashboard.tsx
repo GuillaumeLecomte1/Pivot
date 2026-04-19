@@ -1,5 +1,7 @@
 import { Head, router } from '@inertiajs/react';
 import { useState } from 'react';
+import { DemoSidebar, SidebarTrigger } from '@/components/demo-sidebar';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import type { BreadcrumbItem } from '@/types';
 
 interface ActivityItem {
@@ -41,11 +43,11 @@ export default function DemoRessourcerieDashboard({ ressourcerieName, partnerNam
     const [searchQuery, setSearchQuery] = useState('');
 
     const navItems = [
-        { icon: 'dashboard', label: 'Overview', active: true, href: '/demo/ressourcerie/dashboard' },
-        { icon: 'inventory_2', label: 'Inventory', active: false, href: '/demo/ressourcerie/inventory' },
-        { icon: 'group', label: 'Team', active: false, href: '/demo/ressourcerie/team' },
-        { icon: 'analytics', label: 'Analytics', active: false, href: '/demo/ressourcerie/analytics' },
-        { icon: 'settings', label: 'Settings', active: false, href: '/demo/ressourcerie/settings' },
+        { label: 'Overview', active: true, href: '/demo/ressourcerie/dashboard' },
+        { label: 'Inventory', active: false, href: '/demo/ressourcerie/inventory' },
+        { label: 'Team', active: false, href: '/demo/ressourcerie/team' },
+        { label: 'Analytics', active: false, href: '/demo/ressourcerie/analytics' },
+        { label: 'Settings', active: false, href: '/demo/ressourcerie/settings' },
     ];
 
     const handleLogout = () => {
@@ -53,76 +55,48 @@ export default function DemoRessourcerieDashboard({ ressourcerieName, partnerNam
     };
 
     return (
-        <div className="min-h-screen">
-            <Head title={`${ressourcerieName} - Partner Hub`} />
-
-            {/* Sidebar Navigation */}
-            <aside className="fixed top-0 left-0 z-50 flex h-screen w-64 flex-col gap-2 bg-[#f6f3f2] p-4">
-                    {/* Logo & Branding */}
-                    <div className="mb-6 flex items-center gap-3 px-2 py-4">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#006e2a] to-[#6ed47c] text-white">
-                            <span className="material-symbols-outlined text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-                                recycling
+        <SidebarProvider>
+            <DemoSidebar />
+            <SidebarInset>
+                <Head title={`${ressourcerieName} - Partner Hub`} />
+                <header className="sticky top-0 z-40 flex h-16 w-full items-center gap-4 border-b bg-[#fcf9f8]/80 px-6 backdrop-blur-xl">
+                    <SidebarTrigger />
+                    <div className="flex items-center gap-4">
+                        <h1 className="font-bold font-headline text-[#006e2a] text-xl tracking-tight">{ressourcerieName}</h1>
+                        <div className="group relative hidden md:block">
+                            <span className="-translate-y-1/2 material-symbols-outlined absolute top-1/2 left-3 text-[#6f7a6d] text-sm">
+                                search
                             </span>
-                        </div>
-                        <div>
-                            <h2 className="font-extrabold font-headline text-[#006e2a] text-lg leading-tight">Partner Hub</h2>
-                            <p className="font-medium text-[#3f4a3e] text-xs tracking-wide opacity-70">Circular Economy</p>
+                            <input
+                                className="w-64 rounded-full border-none bg-[#f0edec] px-4 py-2 pl-10 text-sm outline-none transition-all focus:ring-2 focus:ring-[#76dc83]"
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder="Search inventory..."
+                                type="text"
+                                value={searchQuery}
+                            />
                         </div>
                     </div>
-
-                    {/* Navigation */}
-                    <nav className="flex flex-1 flex-col gap-1">
-                        {navItems.map((item) => (
-                            <a
-                                key={item.label}
-                                className={`flex items-center gap-3 px-4 py-3 font-headline font-medium text-sm tracking-wide transition-transform duration-200 ${
-                                    item.active
-                                        ? 'rounded-lg bg-gradient-to-br from-[#006e2a] to-[#6ed47c] text-white shadow-sm'
-                                        : 'rounded-lg text-[#1c1b1b] hover:translate-x-1 hover:bg-[#f0edec]'
-                                }`}
-                                href={item.href}
-                            >
-                                <span
-                                    className="material-symbols-outlined text-xl"
-                                    style={item.active ? { fontVariationSettings: "'FILL' 1" } : undefined}
-                                >
-                                    {item.icon}
-                                </span>
-                                {item.label}
-                            </a>
-                        ))}
-                    </nav>
-
-                    {/* Bottom Actions */}
-                    <div className="mt-auto flex flex-col gap-1 border-[#becaba]/10 border-t pt-6">
-                        <button
-                            type="button"
-                            className="mb-4 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#006e2a] to-[#6ed47c] px-4 py-3 font-semibold text-sm text-white shadow-md transition-all hover:opacity-90"
-                        >
-                            <span className="material-symbols-outlined text-sm">add</span>
-                            List New Item
+                    <div className="ml-auto flex items-center gap-4">
+                        <button type="button" className="rounded-full p-2 text-[#3f4a3e] transition-colors hover:bg-[#f0edec]">
+                            <span className="material-symbols-outlined">notifications</span>
                         </button>
-                        <button
-                            type="button"
-                            className="flex items-center gap-3 rounded-lg px-4 py-3 font-headline font-medium text-[#1c1b1b] text-sm tracking-wide transition-transform duration-200 hover:translate-x-1 hover:bg-[#f0edec]"
-                        >
-                            <span className="material-symbols-outlined text-xl">contact_support</span>
-                            Support
-                        </button>
-                        <button
-                            type="button"
-                            onClick={handleLogout}
-                            className="flex items-center gap-3 rounded-lg px-4 py-3 font-headline font-medium text-[#ba1a1a] text-sm tracking-wide transition-transform duration-200 hover:translate-x-1 hover:bg-[#f0edec]"
-                        >
-                            <span className="material-symbols-outlined text-xl">logout</span>
-                            Logout
-                        </button>
+                        <div className="h-8 w-px bg-[#becaba]/20"></div>
+                        <div className="flex items-center gap-3">
+                            <div className="hidden text-right sm:block">
+                                <p className="font-bold font-headline text-[#1c1b1b] text-sm leading-tight">{partnerName}</p>
+                                <p className="text-[#3f4a3e] text-xs opacity-70">{partnerRole}</p>
+                            </div>
+                            <img
+                                alt={`${partnerName} profile`}
+                                className="h-10 w-10 rounded-full border-2 border-[#6ed47c] object-cover"
+                                src={partnerAvatar}
+                            />
+                        </div>
                     </div>
-                </aside>
+                </header>
 
-                {/* Main Content Area */}
-                <main className="ml-64 min-h-screen">
+                {/* Main Content */}
+                <div className="flex-1 p-6">
                     {/* Top Navigation Bar */}
                     <header className="sticky top-0 z-40 flex w-full items-center justify-between bg-[#fcf9f8]/80 px-8 py-4 backdrop-blur-xl">
                         <div className="flex items-center gap-8">
@@ -329,7 +303,8 @@ export default function DemoRessourcerieDashboard({ ressourcerieName, partnerNam
                             </div>
                         </section>
                     </div>
-                </main>
-        </div>
+                </div>
+            </SidebarInset>
+        </SidebarProvider>
     );
 }
